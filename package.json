@@ -1,0 +1,38 @@
+{
+  "name": "dual-builder-stack-proof-of-concept",
+  "version": "1.0.0",
+  "private": true,
+  "description": "dual-builder-stack-proof-of-concept",
+  "author": "rogermparent",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@vanilla-extract/css": "^1.10.0",
+    "@vanilla-extract/webpack-plugin": "^2.2.0",
+    "gatsby": "^5.7.0",
+    "gatsby-plugin-image": "^3.7.0",
+    "gatsby-plugin-manifest": "^5.7.0",
+    "gatsby-plugin-sharp": "^5.7.0",
+    "gatsby-plugin-sitemap": "^6.7.0",
+    "gatsby-plugin-vanilla-extract": "^4.0.1",
+    "gatsby-source-filesystem": "^5.7.0",
+    "gatsby-transformer-sharp": "^5.7.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.14.0",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "typescript": "^4.9.5"
+  }
+}
