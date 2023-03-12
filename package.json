@@ -1,8 +1,8 @@
 {
-  "name": "dual-builder-stack-proof-of-concept",
+  "name": "gatsby-recipe-book",
   "version": "1.0.0",
   "private": true,
-  "description": "dual-builder-stack-proof-of-concept",
+  "description": "gatsby-recipe-book",
   "author": "rogermparent",
   "keywords": [
     "gatsby"
