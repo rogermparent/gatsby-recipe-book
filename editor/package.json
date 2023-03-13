@@ -1,0 +1,21 @@
+{
+  "name": "editor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "typecheck": "tsc --noEmit"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "gatsby": "^5.7.0",
+    "gatsby-source-filesystem": "^5.7.0",
+    "gatsby-transformer-json": "^5.7.0"
+  }
+}
