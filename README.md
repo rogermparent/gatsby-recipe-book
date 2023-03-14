@@ -1,7 +1,6 @@
 # Proof of Concept: Gatsby Dual Builder Stack
 
-  
-This repo demonstrates a theoretical website structure that provides a rich editing experience for a specific kind of website.
+This repo demonstrates a specific way to use Gatsby to add a rich local editing experience to simple file-based websites.
 
 https://user-images.githubusercontent.com/9111807/224888021-1c6ea8b6-6a49-4f8e-98e9-9dd58bd15ecb.mp4
 
