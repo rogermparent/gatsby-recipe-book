@@ -1,49 +1,29 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby Minimal TypeScript Starter
-</h1>
+# Proof of Concept: Gatsby Dual Builder Stack
 
-## 🚀 Quick start
+This repo demonstrates a theoretical website structure that provides a rich editing experience for a specific kind of website.
 
-1.  **Create a Gatsby site.**
+Edits are done in a local environment with the `editor` app, and then the same data is fed into the `builder` app to generate a static website, sharing as many resources as possible but eschewing the editor bits that the public doesn't need.
+Shared resources are stored in a `core` app, which should be utilized as much as possible to keep the two environments as close as possible.
 
-    Use the Gatsby CLI to create a new site, specifying the minimal TypeScript starter.
+# What is it?
 
-    ```shell
-    # create a new Gatsby site using the minimal TypeScript starter
-    npm init gatsby -- -ts
-    ```
+The project in this case is a hyper-minimal microblog (think Twitter) that allows users to make posts that have a title and text. Only the absolute bare minimum of styling is in place because this repo is focused on the dual-builder stack itself.
 
-2.  **Start developing.**
+# How to use
 
-    Navigate into your new site’s directory and start it up.
+Most of the interactions with this project should be through npm scripts on the root package, which are directed toward the relevant subpackage.
 
-    ```shell
-    cd my-gatsby-site/
-    npm run develop
-    ```
+- `npm run editor`/`npm run develop`: Run the editor server at http://localhost:8000 (or specify a host with `-H`)
 
-3.  **Open the code and start customizing!**
+- `npm run build`: Build the non-editor version of the site into `builder/public`
 
-    Your site is now running at http://localhost:8000!
+- `npm run serve`: Serve the non-editor version of the site at http://localhost:9000
 
-    Edit `src/pages/index.tsx` to see your site update in real-time!
+Most of the other scripts you would expect out of a Gatsby project are here as well, but the prior three are the core ones intended to be used.
 
-4.  **Learn more**
+# Hacks
 
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-    - [Tutorials](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-    - [Guides](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
+This project depends on some hacks to make the project work either in whole or in part.
 
-## 🚀 Quick start (Netlify)
-
-Deploy this starter with one click on [Netlify](https://app.netlify.com/signup):
-
-[<img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify" />](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-minimal-ts)
+- `trailingSlash` is set to `never` because of a bug where pages can't be re-created after being deleted. (fixed in [a PR](https://github.com/gatsbyjs/gatsby/pull/37745))
+- The `gatsby-config` and `gatsby-node` from `core` are imported relatively and re-exported instead of using a Gatsby Theme. This is due to a limitation where Gatsby themes in monorepos can't use Typescript, as well as the fact we don't need all the features of Gatsby Themes here as all the subrepos are tightly coupled as a given.
