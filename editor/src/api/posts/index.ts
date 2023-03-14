@@ -1,9 +1,12 @@
 import { GatsbyFunctionRequest, GatsbyFunctionResponse } from "gatsby";
 import path from "path";
 import fs from "fs/promises";
+import format from "date-fns/format";
+import kebabCase from "lodash/kebabCase";
 
 interface ContactBody {
-  message: string;
+  title: string;
+  content: string;
 }
 
 const contentDirectory = path.resolve(
@@ -23,7 +26,9 @@ export default async function handler(
   const { method } = req;
   if (method === "POST") {
     const { body } = req;
-    const filename = new Date().toISOString();
+
+    const filename =
+      format(new Date(), "yyyy-mm-dd-hh-mm-ss") + "-" + kebabCase(body.title);
     const fullFilename = path.join(contentDirectory, filename + ".json");
     try {
       console.log("Writing", fullFilename);

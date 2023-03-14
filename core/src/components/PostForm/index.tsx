@@ -7,7 +7,6 @@ import {
   useForm,
   UseFormRegisterReturn,
 } from "react-hook-form";
-import SiteLayout from "core/src/components/SiteLayout";
 
 export const FieldWrapper = ({
   name,
@@ -33,7 +32,27 @@ export const FieldWrapper = ({
   );
 };
 
-export const StringField = ({
+export const InputField = ({
+  label,
+  registration,
+  errors,
+  type,
+}: {
+  label?: string;
+  registration: UseFormRegisterReturn;
+  errors: FieldErrors;
+  type?: string;
+}) => {
+  const { name } = registration;
+  const fieldErrors = errors[name];
+  return (
+    <FieldWrapper name={name} label={label} errors={fieldErrors}>
+      <input type={type} id={name} {...registration} />
+    </FieldWrapper>
+  );
+};
+
+export const TextareaField = ({
   label,
   registration,
   errors,
@@ -41,12 +60,13 @@ export const StringField = ({
   label?: string;
   registration: UseFormRegisterReturn;
   errors: FieldErrors;
+  type?: string;
 }) => {
   const { name } = registration;
   const fieldErrors = errors[name];
   return (
     <FieldWrapper name={name} label={label} errors={fieldErrors}>
-      <input id={name} {...registration} />
+      <textarea id={name} {...registration} />
     </FieldWrapper>
   );
 };
@@ -59,7 +79,8 @@ export interface PostData {
 export const PostForm: React.FC<{
   defaultValues?: PostData;
   onSubmit: (data: PostData) => void;
-}> = ({ defaultValues, onSubmit }) => {
+  submitText: string;
+}> = ({ defaultValues, onSubmit, submitText }) => {
   const {
     register,
     handleSubmit,
@@ -67,18 +88,21 @@ export const PostForm: React.FC<{
   } = useForm({ defaultValues });
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <StringField
+      <InputField
         label="Title"
         errors={errors}
         registration={register("title", { required: true })}
       />
-      <StringField
+      <TextareaField
         label="Content"
         errors={errors}
         registration={register("content")}
+        type="text"
       />
 
-      <input type="submit" />
+      <div>
+        <button type="submit">{submitText}</button>
+      </div>
     </form>
   );
 };

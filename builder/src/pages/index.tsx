@@ -4,7 +4,7 @@ import type { HeadFC, PageProps } from "gatsby";
 const IndexPage: React.FC<PageProps> = () => {
   return (
     <main>
-      <h1>Index</h1>
+      <h2>Index</h2>
     </main>
   );
 };

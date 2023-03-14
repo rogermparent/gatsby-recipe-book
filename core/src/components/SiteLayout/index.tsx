@@ -1,13 +1,16 @@
 import React, { ReactNode } from "react";
 import { HeadFC, Link } from "gatsby";
+import "./styles.css";
 
 const IndexPage: React.FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <>
       <header>
-        <Link to="/">Index</Link>
-        <Link to="/create">Create</Link>
+        <h1>
+          <Link to="/">Gatsby Dual Renderer Proof-of-Concept</Link>
+        </h1>
       </header>
+      <hr />
       <main>{children}</main>
     </>
   );

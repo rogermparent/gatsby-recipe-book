@@ -1,5 +1,5 @@
 import React from "react";
-import { graphql, HeadFC, PageProps } from "gatsby";
+import { graphql, HeadFC, navigate, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
 import { PostForm } from "core/src/components/PostForm";
 
@@ -28,12 +28,29 @@ const EditPage: React.FC<PageProps<Queries.PostEditQuery>> = ({ data }) => {
       body: JSON.stringify(data, undefined, 2),
     });
     console.log("Submitted!");
+    navigate("/");
   };
 
   return (
     <SiteLayout>
-      <h1>Edit Post</h1>
-      <PostForm onSubmit={onSubmit} defaultValues={{ title, content }} />
+      <h2>Edit Post</h2>
+      <PostForm
+        submitText="Edit Post"
+        onSubmit={onSubmit}
+        defaultValues={{ title, content }}
+      />
+      <button
+        onClick={async () => {
+          console.log("Deleting", data);
+          await fetch(`/api/posts/${filename}`, {
+            method: "DELETE",
+          });
+          console.log("Deleted!");
+          navigate("/");
+        }}
+      >
+        Delete
+      </button>
     </SiteLayout>
   );
 };

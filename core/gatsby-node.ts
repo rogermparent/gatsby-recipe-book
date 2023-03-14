@@ -40,8 +40,13 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = ({
       if (fileNode) {
         const { name } = fileNode as Node & { name: string };
         if (name) {
-          const slug = format(new Date(name), "yyyy-mm-dd-hh-mm-ss");
-          const fields = { title, content, filename: name, date: name, slug };
+          const fields = {
+            title,
+            content,
+            filename: name,
+            date: name,
+            slug: name,
+          };
 
           const postNode = {
             ...fields,
