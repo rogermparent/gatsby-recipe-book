@@ -1,5 +1,7 @@
 # Proof of Concept: Gatsby Dual Builder Stack
 
+https://user-images.githubusercontent.com/9111807/224888021-1c6ea8b6-6a49-4f8e-98e9-9dd58bd15ecb.mp4
+
 This repo demonstrates a theoretical website structure that provides a rich editing experience for a specific kind of website.
 
 Edits are done in a local environment with the `editor` app, and then the same data is fed into the `builder` app to generate a static website, sharing as many resources as possible but eschewing the editor bits that the public doesn't need.
