@@ -1,5 +1,4 @@
 import type { GatsbyNode, Node } from "gatsby";
-import format from "date-fns/format";
 
 export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] =
   ({ actions: { createTypes }, schema }) => {
