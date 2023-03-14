@@ -2,6 +2,7 @@ import React from "react";
 import { graphql, HeadFC, Link, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
 import { PostForm } from "core/src/components/PostForm";
+import { PostList } from "core/src/components/PostList";
 
 export const query = graphql`
   query PostsIndex {
@@ -38,18 +39,7 @@ const IndexPage: React.FC<PageProps<Queries.PostsIndexQuery>> = ({ data }) => {
       <h2>New post</h2>
       <PostForm onSubmit={onSubmit} submitText="Create Post" />
       <h2>Posts</h2>
-      <ul>
-        {data.allPost.nodes.map(({ slug, title, content }) => {
-          return (
-            <li>
-              <h3>
-                <Link to={`/post/${slug}`}>{title}</Link>
-              </h3>
-              <p>{content}</p>
-            </li>
-          );
-        })}
-      </ul>
+      <PostList posts={data.allPost.nodes} />
     </SiteLayout>
   );
 };

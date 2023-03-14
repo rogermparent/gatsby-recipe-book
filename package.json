@@ -13,7 +13,8 @@
     "editor": "npm run develop -w editor",
     "start": "npm run start -w editor",
     "build": "npm run build -w builder",
-    "develop-builder": "npm run build -w builder",
+    "clean-builder": "npm run clean -w builder",
+    "develop-builder": "npm run develop -w builder",
     "serve": "npm run serve -w builder"
   },
   "dependencies": {

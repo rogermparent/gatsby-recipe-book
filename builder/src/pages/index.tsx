@@ -1,11 +1,26 @@
-import * as React from "react";
-import type { HeadFC, PageProps } from "gatsby";
+import React from "react";
+import { graphql, HeadFC, PageProps } from "gatsby";
+import SiteLayout from "core/src/components/SiteLayout";
+import { PostList } from "core/src/components/PostList";
 
-const IndexPage: React.FC<PageProps> = () => {
+export const query = graphql`
+  query PostsIndex {
+    allPost(sort: { date: DESC }) {
+      nodes {
+        slug
+        title
+        content
+      }
+    }
+  }
+`;
+
+const IndexPage: React.FC<PageProps<Queries.PostsIndexQuery>> = ({ data }) => {
   return (
-    <main>
-      <h2>Index</h2>
-    </main>
+    <SiteLayout>
+      <h2>Posts</h2>
+      <PostList posts={data.allPost.nodes} />
+    </SiteLayout>
   );
 };
 

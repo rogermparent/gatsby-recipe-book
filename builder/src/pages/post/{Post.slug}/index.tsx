@@ -1,5 +1,5 @@
 import * as React from "react";
-import { graphql, HeadFC, Link, PageProps } from "gatsby";
+import { graphql, HeadFC, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
 import { Post } from "core/src/components/Post";
 
@@ -19,9 +19,6 @@ const PostPage: React.FC<PageProps<Queries.PostPageQuery>> = ({ data }) => {
   return (
     <SiteLayout>
       <Post title={title} content={content} />
-      <p>
-        <Link to="edit">Edit this page</Link>
-      </p>
     </SiteLayout>
   );
 };
