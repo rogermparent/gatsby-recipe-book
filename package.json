@@ -8,13 +8,13 @@
     "gatsby"
   ],
   "scripts": {
-    "clean": "npm run clean -w editor",
+    "clean": "npm run clean -w editor -w website",
     "develop": "npm run develop -w editor",
     "editor": "npm run develop -w editor",
     "start": "npm run start -w editor",
     "build": "npm run build -w website",
-    "clean-builder": "npm run clean -w website",
-    "develop-builder": "npm run develop -w website",
+    "clean-website": "npm run clean -w website",
+    "develop-website": "npm run develop -w website",
     "serve": "npm run serve -w website",
     "prepare": "husky install"
   },
