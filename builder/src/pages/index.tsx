@@ -15,14 +15,12 @@ export const query = graphql`
   }
 `;
 
-const IndexPage: React.FC<PageProps<Queries.PostsIndexQuery>> = ({ data }) => {
-  return (
-    <SiteLayout>
-      <h2>Posts</h2>
-      <PostList posts={data.allPost.nodes} />
-    </SiteLayout>
-  );
-};
+const IndexPage: React.FC<PageProps<Queries.PostsIndexQuery>> = ({ data }) => (
+  <SiteLayout>
+    <h2>Posts</h2>
+    <PostList posts={data.allPost.nodes} />
+  </SiteLayout>
+);
 
 export default IndexPage;
 

@@ -58,7 +58,7 @@ export default async function handler(
   if (method) {
     const methodHandler = handlers[method];
     if (methodHandler) {
-      const fullFilename = path.join(contentDirectory, id + ".json");
+      const fullFilename = path.join(contentDirectory, `${id}.json`);
       return methodHandler(req, res, fullFilename);
     }
   }

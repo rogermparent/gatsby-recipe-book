@@ -27,9 +27,10 @@ export default async function handler(
   if (method === "POST") {
     const { body } = req;
 
-    const filename =
-      format(new Date(), "yyyy-mm-dd-hh-mm-ss") + "-" + kebabCase(body.title);
-    const fullFilename = path.join(contentDirectory, filename + ".json");
+    const filename = `${format(new Date(), "yyyy-mm-dd-hh-mm-ss")}-${kebabCase(
+      body.title
+    )}`;
+    const fullFilename = path.join(contentDirectory, `${filename}.json`);
     try {
       console.log("Writing", fullFilename);
       const fileContent = JSON.stringify(body, undefined, 2);

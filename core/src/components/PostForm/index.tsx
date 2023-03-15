@@ -7,18 +7,22 @@ import {
   useForm,
   UseFormRegisterReturn,
 } from "react-hook-form";
+import { PostInput } from "../../types";
 
-export const FieldWrapper = ({
+export function FieldWrapper({
   name,
   label,
   errors,
   children,
 }: {
   name: string;
-  errors?: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
+  errors?:
+    | FieldError
+    | Merge<FieldError, FieldErrorsImpl<PostInput>>
+    | undefined;
   label?: string;
   children?: ReactNode;
-}) => {
+}) {
   return (
     <label htmlFor={name}>
       {errors && (
@@ -30,9 +34,9 @@ export const FieldWrapper = ({
       {children}
     </label>
   );
-};
+}
 
-export const InputField = ({
+export function InputField({
   label,
   registration,
   errors,
@@ -42,7 +46,7 @@ export const InputField = ({
   registration: UseFormRegisterReturn;
   errors: FieldErrors;
   type?: string;
-}) => {
+}) {
   const { name } = registration;
   const fieldErrors = errors[name];
   return (
@@ -50,9 +54,9 @@ export const InputField = ({
       <input type={type} id={name} {...registration} />
     </FieldWrapper>
   );
-};
+}
 
-export const TextareaField = ({
+export function TextareaField({
   label,
   registration,
   errors,
@@ -61,7 +65,7 @@ export const TextareaField = ({
   registration: UseFormRegisterReturn;
   errors: FieldErrors;
   type?: string;
-}) => {
+}) {
   const { name } = registration;
   const fieldErrors = errors[name];
   return (
@@ -69,7 +73,7 @@ export const TextareaField = ({
       <textarea id={name} {...registration} />
     </FieldWrapper>
   );
-};
+}
 
 export interface PostData {
   title: string;

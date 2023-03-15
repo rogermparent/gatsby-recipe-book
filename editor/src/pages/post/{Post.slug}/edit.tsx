@@ -2,6 +2,7 @@ import React from "react";
 import { graphql, HeadFC, navigate, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
 import { PostForm } from "core/src/components/PostForm";
+import { PostInput } from "core/src/types";
 
 export const query = graphql`
   query PostEdit($id: String!) {
@@ -17,7 +18,7 @@ const EditPage: React.FC<PageProps<Queries.PostEditQuery>> = ({ data }) => {
   const {
     post: { title, content, filename },
   } = data;
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: PostInput) => {
     console.log("Submitting", data);
     await fetch(`/api/posts/${filename}`, {
       method: "PUT",

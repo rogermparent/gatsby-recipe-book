@@ -2,6 +2,7 @@ import * as React from "react";
 import { graphql, HeadFC, Link, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
 import { Post } from "core/src/components/Post";
+import { PostInput } from "core/src/types";
 
 export const query = graphql`
   query PostPage($id: String!) {
@@ -12,10 +13,10 @@ export const query = graphql`
   }
 `;
 
-const PostPage: React.FC<PageProps<Queries.PostPageQuery>> = ({ data }) => {
-  const {
-    post: { title, content },
-  } = data;
+const PostPage: React.FC<PageProps<Queries.PostPageQuery>> = ({
+  data: { post },
+}) => {
+  const { title, content } = post as PostInput;
   return (
     <SiteLayout>
       <Post title={title} content={content} />
@@ -32,4 +33,6 @@ export const Head: HeadFC<Queries.PostPageQuery> = ({
   data: {
     post: { title },
   },
-}) => <title>{title}</title>;
+}) => {
+  return <title>{title}</title>;
+};

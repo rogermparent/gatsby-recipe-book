@@ -13,14 +13,15 @@ export const query = graphql`
 `;
 
 const PostPage: React.FC<PageProps<Queries.PostPageQuery>> = ({ data }) => {
-  const {
-    post: { title, content },
-  } = data;
-  return (
-    <SiteLayout>
-      <Post title={title} content={content} />
-    </SiteLayout>
-  );
+  const { post } = data;
+  if (post) {
+    const { title, content } = post;
+    return (
+      <SiteLayout>
+        <Post title={title} content={content} />
+      </SiteLayout>
+    );
+  }
 };
 
 export default PostPage;

@@ -1,8 +1,9 @@
 import React from "react";
-import { graphql, HeadFC, Link, PageProps } from "gatsby";
+import { graphql, HeadFC, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
 import { PostForm } from "core/src/components/PostForm";
 import { PostList } from "core/src/components/PostList";
+import { PostInput } from "core/src/types";
 
 export const query = graphql`
   query PostsIndex {
@@ -16,7 +17,7 @@ export const query = graphql`
   }
 `;
 
-const createPost = async (data: any) => {
+const createPost = async (data: PostInput) => {
   console.log("Submitting", data);
   await fetch("/api/posts", {
     method: "POST",
@@ -30,7 +31,7 @@ const createPost = async (data: any) => {
 };
 
 const IndexPage: React.FC<PageProps<Queries.PostsIndexQuery>> = ({ data }) => {
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: PostInput) => {
     createPost(data);
   };
 

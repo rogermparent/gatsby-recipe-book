@@ -6,8 +6,8 @@ const rootPath = path.resolve(__dirname, "..");
 const config: () => GatsbyConfig = () => ({
   trailingSlash: "never",
   siteMetadata: {
-    title: `Dual Builder Stack Proof-of-Concept`,
-    siteUrl: `https://www.yourdomain.tld`,
+    title: "Dual Builder Stack Proof-of-Concept",
+    siteUrl: "https://www.yourdomain.tld",
   },
   graphqlTypegen: true,
   plugins: [

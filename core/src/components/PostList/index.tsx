@@ -1,15 +1,13 @@
 import React from "react";
 import { Link } from "gatsby";
 
-export const PostListItem = ({
-  slug,
-  title,
-  content,
-}: {
+interface PostItem {
   slug: string;
   title: string;
   content?: string;
-}) => {
+}
+
+export function PostListItem({ slug, title, content }: PostItem) {
   return (
     <li>
       <h3>
@@ -18,12 +16,14 @@ export const PostListItem = ({
       {content && <p>{content}</p>}
     </li>
   );
-};
+}
 
-export const PostList = ({ posts }) => (
-  <ul>
-    {posts.map(({ slug, title, content }) => (
-      <PostListItem slug={slug} title={title} content={content} key={slug} />
-    ))}
-  </ul>
-);
+export function PostList({ posts }: { posts: PostItem[] }) {
+  return (
+    <ul>
+      {posts.map(({ slug, title, content }) => (
+        <PostListItem slug={slug} title={title} content={content} key={slug} />
+      ))}
+    </ul>
+  );
+}
