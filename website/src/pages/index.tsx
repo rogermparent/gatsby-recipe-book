@@ -1,7 +1,7 @@
 import React from "react";
 import { graphql, HeadFC, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
-import { PostList } from "core/src/components/PostList";
+import { PostList } from "core/src/components/Post/List";
 
 export const query = graphql`
   query PostsIndex {

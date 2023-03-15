@@ -1,8 +1,8 @@
 import React from "react";
 import { graphql, HeadFC, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
-import { PostForm } from "core/src/components/PostForm";
-import { PostList } from "core/src/components/PostList";
+import { PostForm } from "core/src/components/Post/Form";
+import { PostList } from "core/src/components/Post/List";
 import { PostInput } from "core/src/types";
 
 export const query = graphql`

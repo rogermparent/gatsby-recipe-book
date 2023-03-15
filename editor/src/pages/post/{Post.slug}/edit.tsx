@@ -1,7 +1,7 @@
 import React from "react";
 import { graphql, HeadFC, navigate, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
-import { PostForm } from "core/src/components/PostForm";
+import { PostForm } from "core/src/components/Post/Form";
 import { PostInput } from "core/src/types";
 
 export const query = graphql`
