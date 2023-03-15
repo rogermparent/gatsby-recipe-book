@@ -12,10 +12,10 @@
     "develop": "npm run develop -w editor",
     "editor": "npm run develop -w editor",
     "start": "npm run start -w editor",
-    "build": "npm run build -w builder",
-    "clean-builder": "npm run clean -w builder",
-    "develop-builder": "npm run develop -w builder",
-    "serve": "npm run serve -w builder",
+    "build": "npm run build -w website",
+    "clean-builder": "npm run clean -w website",
+    "develop-builder": "npm run develop -w website",
+    "serve": "npm run serve -w website",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -52,7 +52,7 @@
   },
   "workspaces": [
     "editor",
-    "builder",
+    "website",
     "core"
   ]
 }

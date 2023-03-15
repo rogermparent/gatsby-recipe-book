@@ -4,7 +4,7 @@ This repo demonstrates a specific way to use Gatsby to add a rich local editing 
 
 https://user-images.githubusercontent.com/9111807/224888021-1c6ea8b6-6a49-4f8e-98e9-9dd58bd15ecb.mp4
 
-Edits are done in a local environment with the `editor` app, and then the same data is fed into the `builder` app to generate a static website, sharing as many resources as possible but eschewing the editor bits that the public doesn't need.
+Edits are done in a local environment with the `editor` app, and then the same data is fed into the `website` app to generate a static website, sharing as many resources as possible but eschewing the editor bits that the public doesn't need.
 Shared resources are stored in a `core` app, which should be utilized as much as possible to keep the two environments as close as possible.
 
 # What is it?
@@ -17,7 +17,7 @@ Most of the interactions with this project should be through npm scripts on the 
 
 - `npm run editor`/`npm run develop`: Run the editor server at http://localhost:8000 (or specify a host with `-H`)
 
-- `npm run build`: Build the non-editor version of the site into `builder/public`
+- `npm run build`: Build the non-editor version of the site into `website/public`
 
 - `npm run serve`: Serve the non-editor version of the site at http://localhost:9000
 
