@@ -38,12 +38,13 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = ({
       const fileNode = getNode(parent);
       if (fileNode) {
         const { name } = fileNode as Node & { name: string };
+        const parsedDate = new Date(Number(name));
         if (name) {
           const fields = {
             title,
             content,
             filename: name,
-            date: name,
+            date: parsedDate.toISOString(),
             slug: name,
           };
 

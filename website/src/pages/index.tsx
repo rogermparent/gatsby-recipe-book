@@ -8,8 +8,7 @@ export const query = graphql`
     allPost(sort: { date: DESC }) {
       nodes {
         slug
-        title
-        content
+        ...PostData
       }
     }
   }

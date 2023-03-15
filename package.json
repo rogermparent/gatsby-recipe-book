@@ -19,6 +19,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@sindresorhus/slugify": "^2.2.0",
     "date-fns": "^2.29.3",
     "gatsby": "^5.7.0",
     "gatsby-plugin-image": "^3.7.0",

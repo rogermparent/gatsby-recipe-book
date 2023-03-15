@@ -6,8 +6,7 @@ import { Post } from "core/src/components/Post";
 export const query = graphql`
   query PostPage($id: String!) {
     post(id: { eq: $id }) {
-      title
-      content
+      ...PostData
     }
   }
 `;
@@ -15,10 +14,10 @@ export const query = graphql`
 const PostPage: React.FC<PageProps<Queries.PostPageQuery>> = ({ data }) => {
   const { post } = data;
   if (post) {
-    const { title, content } = post;
+    const { title, content, date } = post;
     return (
       <SiteLayout>
-        <Post title={title} content={content} />
+        <Post title={title} content={content} date={date} />
       </SiteLayout>
     );
   }

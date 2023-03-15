@@ -8,8 +8,7 @@ export const query = graphql`
   query PostEdit($id: String!) {
     post(id: { eq: $id }) {
       filename
-      title
-      content
+      ...PostData
     }
   }
 `;
