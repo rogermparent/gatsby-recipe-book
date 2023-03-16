@@ -13,7 +13,7 @@ const contentDirectory = path.resolve(
   "..",
   "..",
   "content",
-  "posts"
+  "recipes"
 );
 
 interface Handler {
