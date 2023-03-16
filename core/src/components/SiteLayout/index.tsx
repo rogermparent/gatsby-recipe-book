@@ -6,7 +6,7 @@ const IndexPage: React.FC<{ children: ReactNode }> = ({ children }) => (
   <>
     <header>
       <h1>
-        <Link to="/">Gatsby Dual Renderer Proof-of-Concept</Link>
+        <Link to="/">Gatsby Recipe Book</Link>
       </h1>
     </header>
     <hr />
