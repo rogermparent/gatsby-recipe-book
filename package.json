@@ -21,6 +21,7 @@
   "dependencies": {
     "@sindresorhus/slugify": "^2.2.0",
     "date-fns": "^2.29.3",
+    "fraction.js": "^4.2.0",
     "gatsby": "^5.7.0",
     "gatsby-plugin-image": "^3.7.0",
     "gatsby-plugin-manifest": "^5.7.0",

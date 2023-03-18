@@ -14,19 +14,24 @@ export interface JSONRecipeNutrition {
   calories: string;
 }
 
+export interface JSONRecipeAuthor {
+  name?: string;
+  url?: string;
+}
+
 export interface JSONRecipe {
   name: string;
-  author?: string;
+  author?: JSONRecipeAuthor[];
   datePublished?: string;
   description?: string;
   prepTime?: number;
   cookTime?: number;
   totalTime?: number;
-  keywords?: string;
+  keywords?: string[];
   servings?: string;
   servingSize?: string;
-  category?: string;
-  cuisine?: string;
+  category?: string[];
+  cuisine?: string[];
   nutrition?: JSONRecipeNutrition[];
   ingredients?: JSONRecipeIngredient[];
   instructions?: JSONRecipeInstruction[];

@@ -1,21 +1,164 @@
-import * as React from "react";
+import React from "react";
+import { ChangeEvent, ReactNode, Reducer, useMemo, useReducer } from "react";
+import Fraction from "fraction.js";
+import { FieldWrapper } from "../Form";
 
-export function Post({
+export const Ingredient = ({
+  ingredient,
+  quantity,
+  unit,
+  multiplier,
+  note,
+}: Queries.RecipeIngredientDisplayDataFragment & { multiplier?: Fraction }) => {
+  const parsedQuantity = useMemo(
+    () => quantity && new Fraction(quantity),
+    [quantity]
+  );
+  const multipliedQuantity =
+    parsedQuantity && multiplier && !multiplier.equals(1)
+      ? parsedQuantity.mul(multiplier)
+      : parsedQuantity;
+  return (
+    <li>
+      <div>
+        <label>
+          <input type="checkbox" />{" "}
+          {multipliedQuantity && (
+            <span>{multipliedQuantity.toFraction(true)}</span>
+          )}{" "}
+          {unit && <span>{unit}</span>} <span>{ingredient}</span>
+          {note && (
+            <span>
+              , <span>{note}</span>
+            </span>
+          )}
+        </label>
+      </div>
+    </li>
+  );
+};
+
+export const Instruction = ({
+  name,
+  text,
+}: Queries.RecipeInstructionDisplayDataFragment) => (
+  <li>
+    {name && <h3>{name}</h3>}
+    {text}
+  </li>
+);
+
+const fractionInputReducer: Reducer<
+  { fraction?: Fraction; input?: string },
+  string
+> = (state, input) => {
+  if (input === state.input) {
+    return state;
+  }
+  if (!input || input === "1") {
+    return { fraction: undefined, input };
+  }
+  try {
+    const fraction = new Fraction(input);
+    return { fraction, input };
+  } catch (e) {
+    return state;
+  }
+};
+
+const InfoCard: React.FC<{ title?: string; children: ReactNode }> = ({
   title,
-  content,
-  date,
+  children,
+}) => (
+  <div>
+    {title && <div>{title}</div>}
+    <div>{children}</div>
+  </div>
+);
+
+export const Ingredients = ({
+  ingredients,
+  multiplier,
 }: {
-  title: string;
-  content?: string;
-  date: string;
-}) {
+  ingredients?: Queries.RecipeDisplayDataFragment["ingredients"];
+  multiplier?: Fraction;
+}) => {
+  return (
+    <>
+      {ingredients && (
+        <div>
+          <h2>Ingredients</h2>
+          <ul>
+            {ingredients.map(({ ingredient, quantity, unit, note }, i) => (
+              <Ingredient
+                key={i}
+                ingredient={ingredient}
+                quantity={quantity}
+                unit={unit}
+                multiplier={multiplier}
+                note={note}
+              />
+            ))}
+          </ul>
+        </div>
+      )}
+    </>
+  );
+};
+
+export const Recipe = ({
+  name,
+  ingredients,
+  instructions,
+  prepTime,
+  cookTime,
+  totalTime,
+  servings,
+  servingSize,
+}: Queries.RecipeDisplayDataFragment) => {
+  const [{ fraction: multiplier }, setMultiplier] = useReducer(
+    fractionInputReducer,
+    {}
+  );
+
+  const multipliedServings =
+    multiplier && servings
+      ? multiplier.mul(servings).toFraction(true)
+      : servings;
   return (
     <div>
-      <h2>{title}</h2>
-      {content && <p>{content}</p>}
-      <p>
-        <i>{date}</i>
-      </p>
+      <h1>{name}</h1>
+      <div>
+        {prepTime && <InfoCard title="Prep Time">{prepTime}</InfoCard>}
+        {cookTime && <InfoCard title="Cook Time">{cookTime}</InfoCard>}
+        {totalTime && <InfoCard title="Total Time">{totalTime}</InfoCard>}
+        {multipliedServings && (
+          <InfoCard title="Servings">
+            <span>{multipliedServings}</span> <span>{servingSize}</span>
+          </InfoCard>
+        )}
+        <InfoCard>
+          <FieldWrapper label="Multiply" name="multiplier">
+            <input
+              id="multiplier"
+              onInput={(e: ChangeEvent<HTMLInputElement>) => {
+                setMultiplier(e.target.value);
+              }}
+            />
+          </FieldWrapper>
+        </InfoCard>
+      </div>
+      <Ingredients ingredients={ingredients} multiplier={multiplier} />
+      {instructions && (
+        <div>
+          <h2>Instructions</h2>
+          <ol>
+            {instructions.map(({ name, text }, i) => (
+              <Instruction key={i} name={name} text={text} />
+            ))}
+          </ol>
+        </div>
+      )}
     </div>
   );
-}
+};

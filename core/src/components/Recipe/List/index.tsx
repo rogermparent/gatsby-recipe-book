@@ -1,35 +1,32 @@
 import React from "react";
 import { Link } from "gatsby";
 
-interface PostItem {
+interface RecipeItem {
   slug: string;
-  title: string;
-  date: string;
-  content?: string;
+  name: string;
+  publishDate?: string;
 }
 
-export function PostListItem({ slug, title, content, date }: PostItem) {
+export function RecipeListItem({ slug, name, publishDate }: RecipeItem) {
   return (
     <li>
-      <div>{date}</div>
+      <div>{publishDate}</div>
       <h3>
-        <Link to={`/post/${slug}`}>{title}</Link>
+        <Link to={`/recipe/${slug}`}>{name}</Link>
       </h3>
-      {content && <p>{content}</p>}
     </li>
   );
 }
 
-export function PostList({ posts }: { posts: PostItem[] }) {
+export function RecipeList({ recipes }: { recipes: readonly RecipeItem[] }) {
   return (
     <ul>
-      {posts.map(({ slug, title, content, date }) => (
-        <PostListItem
+      {recipes.map(({ slug, name, publishDate }) => (
+        <RecipeListItem
           key={slug}
           slug={slug}
-          title={title}
-          content={content}
-          date={date}
+          name={name}
+          publishDate={publishDate}
         />
       ))}
     </ul>

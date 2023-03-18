@@ -1,110 +1,155 @@
-import React, { ReactNode } from "react";
+/* eslint-disable @typescript-eslint/ban-types */
+import React from "react";
+import { useForm, UseFormReturn } from "react-hook-form";
 import {
-  FieldError,
-  FieldErrors,
-  FieldErrorsImpl,
-  Merge,
-  useForm,
-  UseFormRegisterReturn,
-} from "react-hook-form";
-import { PostInput } from "../../types";
+  AuthorListField,
+  IngredientListField,
+  InputField,
+  InstructionListField,
+  StringListField,
+  TextareaField,
+} from "../../Form";
 
-export function FieldWrapper({
-  name,
-  label,
-  errors,
-  children,
-}: {
-  name: string;
-  errors?:
-    | FieldError
-    | Merge<FieldError, FieldErrorsImpl<PostInput>>
-    | undefined;
-  label?: string;
-  children?: ReactNode;
-}) {
-  return (
-    <label htmlFor={name}>
-      {errors && (
-        <div>
-          {errors.message ? errors.message.toString() : errors.type?.toString()}
-        </div>
-      )}
-      {label && <div>{label}</div>}
-      {children}
-    </label>
-  );
+export type FormRecipe = Queries.RecipeEditorDataFragment & {
+  category?: readonly String[] | null;
+  cuisine?: readonly String[] | null;
+};
+
+export interface NewRecipeFormValues {
+  slug: string;
+  recipe: FormRecipe;
 }
 
-export function InputField({
-  label,
-  registration,
-  errors,
-  type,
-}: {
-  label?: string;
-  registration: UseFormRegisterReturn;
-  errors: FieldErrors;
-  type?: string;
-}) {
-  const { name } = registration;
-  const fieldErrors = errors[name];
-  return (
-    <FieldWrapper name={name} label={label} errors={fieldErrors}>
-      <input type={type} id={name} {...registration} />
-    </FieldWrapper>
-  );
+export interface ExistingRecipeFormValues {
+  recipe: FormRecipe;
 }
 
-export function TextareaField({
-  label,
-  registration,
-  errors,
-}: {
-  label?: string;
-  registration: UseFormRegisterReturn;
-  errors: FieldErrors;
-  type?: string;
-}) {
-  const { name } = registration;
-  const fieldErrors = errors[name];
-  return (
-    <FieldWrapper name={name} label={label} errors={fieldErrors}>
-      <textarea id={name} {...registration} />
-    </FieldWrapper>
-  );
-}
+export interface RecipeFormValues
+  extends NewRecipeFormValues,
+    ExistingRecipeFormValues {}
 
-export interface PostData {
-  title: string;
-  content?: string;
-}
+export const buildPlaceholderStrings = (
+  strings: readonly string[] | null
+): readonly string[] | null =>
+  strings && strings.map((value) => new String(value) as string);
 
-export const PostForm: React.FC<{
-  defaultValues?: PostData;
-  onSubmit: (data: PostData) => void;
-  submitText: string;
-}> = ({ defaultValues, onSubmit, submitText }) => {
-  const {
+export const initializeFormState: (
+  recipe: Queries.RecipeEditorDataFragment
+) => RecipeFormValues = (recipe) =>
+  ({
+    recipe: {
+      ...recipe,
+      cuisine: buildPlaceholderStrings(recipe.cuisine),
+      category: buildPlaceholderStrings(recipe.category),
+    },
+  } as RecipeFormValues);
+
+export const RecipeFields: React.FC<{
+  form: UseFormReturn<RecipeFormValues>;
+}> = ({
+  form: {
     register,
-    handleSubmit,
+    control,
     formState: { errors },
-  } = useForm({ defaultValues });
+  },
+}) => {
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <>
       <InputField
-        label="Title"
+        label="Name"
         errors={errors}
-        registration={register("title", { required: true })}
+        registration={register("recipe.name", { required: true })}
       />
       <TextareaField
-        label="Content"
+        label="Description"
         errors={errors}
-        registration={register("content")}
-        type="text"
+        registration={register("recipe.description")}
       />
+      <AuthorListField
+        label="Author"
+        errors={errors}
+        register={register}
+        control={control}
+        name="recipe.author"
+      />
+      <InputField
+        label="Date Published"
+        type="date"
+        errors={errors}
+        registration={register("recipe.datePublished")}
+      />
+      <InputField
+        type="number"
+        label="Prep Time (minutes)"
+        errors={errors}
+        registration={register("recipe.prepTime")}
+      />
+      <InputField
+        type="number"
+        label="Cook Time (minutes)"
+        errors={errors}
+        registration={register("recipe.cookTime")}
+      />
+      <InputField
+        type="number"
+        label="Total Time (minutes)"
+        errors={errors}
+        registration={register("recipe.totalTime")}
+      />
+      <InputField
+        label="Servings"
+        type="number"
+        errors={errors}
+        registration={register("recipe.servings")}
+      />
+      <InputField
+        label="Serving Size"
+        errors={errors}
+        registration={register("recipe.servingSize")}
+      />
+      <StringListField
+        label="Category"
+        errors={errors}
+        register={register}
+        control={control}
+        name="recipe.category"
+      />
+      <StringListField
+        label="Cuisine"
+        errors={errors}
+        register={register}
+        control={control}
+        name="recipe.cuisine"
+      />
+      <IngredientListField
+        label="Ingredients"
+        errors={errors}
+        register={register}
+        control={control}
+        name="recipe.ingredients"
+      />
+      <InstructionListField
+        label="Instructions"
+        errors={errors}
+        register={register}
+        control={control}
+        name="recipe.instructions"
+      />
+    </>
+  );
+};
 
+export const RecipeForm: React.FC<{
+  defaultValues?: RecipeFormValues;
+  onSubmit: (data: RecipeFormValues) => void;
+  submitText: string;
+}> = ({ defaultValues, onSubmit, submitText }) => {
+  const form = useForm({ defaultValues });
+  const { handleSubmit } = form;
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div>
+        <RecipeFields form={form} />
         <button type="submit">{submitText}</button>
       </div>
     </form>

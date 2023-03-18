@@ -7,6 +7,10 @@ textarea {
   width: 100%;
 }
 
+input[type="checkbox"] {
+  width: auto;
+}
+
 textarea {
   height: 5rem;
 }

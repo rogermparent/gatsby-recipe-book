@@ -1,3 +1,5 @@
+import slugify from "@sindresorhus/slugify";
+
 export const createSchemaCustomization = ({
   actions: { createTypes, createFieldExtension },
   schema,
@@ -11,20 +13,21 @@ export const createSchemaCustomization = ({
         ingredients: "[RecipeIngredient!]!",
         ingredientsCount: "Int!",
         instructions: "[RecipeInstruction!]!",
-        author: "String",
+        author: "[RecipeAuthor]",
         datePublished: { type: "String", extensions: { dateformat: {} } },
         description: "String",
-        prepMinutes: "Int",
-        cookMinutes: "Int",
-        totalMinutes: "Int",
-        prepTime: "String",
-        cookTime: "String",
-        totalTime: "String",
-        keywords: "String",
+        prepTime: "Int",
+        cookTime: "Int",
+        totalTime: "Int",
+        prepTimeString: "String",
+        cookTimeString: "String",
+        totalTimeString: "String",
+        keywords: "[String!]",
         servings: "Int",
         servingSize: "String",
-        category: "String",
-        cuisine: "String",
+        category: "[String!]",
+        cuisine: "[String!]",
+        nutrition: "RecipeNutrition",
       },
       interfaces: ["Node"],
       extensions: {
@@ -48,6 +51,24 @@ export const createSchemaCustomization = ({
         },
       },
       interfaces: ["Node"],
+      extensions: {
+        infer: false,
+      },
+    }),
+    schema.buildObjectType({
+      name: "RecipeAuthor",
+      fields: {
+        name: "String",
+      },
+      extensions: {
+        infer: false,
+      },
+    }),
+    schema.buildObjectType({
+      name: "RecipeNutrition",
+      fields: {
+        calories: "String",
+      },
       extensions: {
         infer: false,
       },
@@ -122,44 +143,114 @@ export const createSchemaCustomization = ({
   });
 };
 
+const formatDuration = (minutesNumber) => {
+  if (typeof minutesNumber !== "number") return null;
+  const hours = Math.floor(minutesNumber / 60);
+  const minutes = minutesNumber % 60;
+  return [hours > 0 && `${hours}h`, minutes > 0 && `${minutes}m`]
+    .filter(Boolean)
+    .join(" ");
+};
+
 export const onCreateNode = ({
   node,
   getNode,
   createNodeId,
+  createContentDigest,
   actions: { createNode, createParentChildLink },
 }) => {
   if (node.internal.type === "RecipesJson") {
     const {
-      title,
-      content,
       internal: { contentDigest },
       parent,
-      id,
     } = node;
+
     if (parent) {
       const fileNode = getNode(parent);
-      if (fileNode) {
-        const { name } = fileNode;
-        if (name) {
-          const fields = {
-            title,
-            content,
-            filename: name,
-            slug: name,
-          };
+      const { name: slug } = fileNode;
+      const {
+        name,
+        description,
+        ingredients = [],
+        instructions = [],
+        author,
+        category,
+        cuisine,
+        datePublished,
+        keywords,
+        nutrition,
+        cookTime,
+        prepTime,
+        totalTime,
+        servings,
+        servingSize,
+      } = node;
 
-          const postNode = {
-            ...fields,
-            id: createNodeId(`${id} >>> Post`),
-            internal: {
-              type: "Post",
-              contentDigest,
-            },
-          };
+      const processedIngredients = ingredients.map((ingredient) => ({
+        ...ingredient,
+        slug: slugify(ingredient.ingredient),
+      }));
 
-          createNode(postNode);
-          createParentChildLink({ parent: node, child: postNode });
-        }
+      const idSeed = `Recipe >>> ${slug}`;
+      const fields = {
+        name,
+        slug,
+        ingredients: processedIngredients,
+        ingredientsCount: ingredients.length,
+        description,
+        instructions,
+        author,
+        category,
+        cuisine,
+        datePublished,
+        keywords,
+        nutrition,
+        cookTimeString: formatDuration(cookTime),
+        cookTime,
+        prepTimeString: formatDuration(prepTime),
+        prepTime,
+        totalTimeString: formatDuration(totalTime),
+        totalTime,
+        servings,
+        servingSize,
+      };
+      const recipeNode = {
+        ...fields,
+        id: createNodeId(idSeed),
+        parent,
+        children: [],
+        internal: {
+          type: "Recipe",
+          contentDigest,
+        },
+      };
+      createNode(recipeNode);
+      createParentChildLink({
+        parent: fileNode,
+        child: recipeNode,
+      });
+
+      for (const ingredient of processedIngredients) {
+        const idSeed = `RecipeIngredient >>> ${slug} >>> ${ingredient.slug}`;
+        const fields = {
+          ingredient: ingredient.ingredient,
+          ingredientSlug: ingredient.slug,
+          recipeSlug: recipeNode.slug,
+        };
+        const recipeIngredientNode = {
+          ...fields,
+          id: createNodeId(idSeed),
+          parent: recipeNode.id,
+          internal: {
+            type: "IngredientLink",
+            contentDigest: createContentDigest(fields),
+          },
+        };
+        createNode(recipeIngredientNode);
+        createParentChildLink({
+          parent: recipeNode,
+          child: recipeIngredientNode,
+        });
       }
     }
   }

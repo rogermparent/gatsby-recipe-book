@@ -45,6 +45,17 @@ const handlers: Record<string, Handler> = {
       res.json({ status: "Failure", fullFilename });
     }
   },
+  async POST(req, res, fullFilename) {
+    const { body } = req;
+    try {
+      console.log("Writing", fullFilename);
+      const fileContent = JSON.stringify(body, undefined, 2);
+      await fs.writeFile(fullFilename, fileContent);
+      res.json({ status: "Success", fullFilename });
+    } catch (e) {
+      res.json({ status: "Failure", fullFilename });
+    }
+  },
 };
 
 export default async function handler(

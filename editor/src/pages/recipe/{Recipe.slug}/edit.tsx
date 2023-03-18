@@ -1,60 +1,98 @@
 import React from "react";
-import { graphql, HeadFC, navigate, PageProps } from "gatsby";
+import { graphql, HeadFC, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
-import { PostForm } from "core/src/components/Post/Form";
-import { PostInput } from "core/src/types";
+import {
+  RecipeForm,
+  initializeFormState,
+} from "core/src/components/Recipe/Form";
+import { deleteRecipe } from "../../../calls/recipe/delete";
+import { updateRecipe } from "../../../calls/recipe/update";
 
 export const query = graphql`
-  query PostEdit($id: String!) {
-    post(id: { eq: $id }) {
-      filename
-      ...PostData
+  query RecipeEdit($id: String!) {
+    recipe(id: { eq: $id }) {
+      slug
+      ...RecipeEditorData
     }
+  }
+
+  fragment RecipeEditorData on Recipe {
+    name
+    author {
+      ...RecipeAuthorEditorData
+    }
+    datePublished
+    description
+    prepTime
+    cookTime
+    totalTime
+    keywords
+    servings
+    servingSize
+    category
+    cuisine
+    nutrition {
+      ...RecipeNutritionEditorData
+    }
+    ingredients {
+      ...RecipeIngredientEditorData
+    }
+    instructions {
+      ...RecipeInstructionEditorData
+    }
+  }
+
+  fragment RecipeAuthorEditorData on RecipeAuthor {
+    name
+  }
+
+  fragment RecipeIngredientEditorData on RecipeIngredient {
+    unit
+    quantity
+    ingredient
+    note
+  }
+
+  fragment RecipeInstructionEditorData on RecipeInstruction {
+    name
+    text
+  }
+
+  fragment RecipeNutritionEditorData on RecipeNutrition {
+    calories
   }
 `;
 
-const EditPage: React.FC<PageProps<Queries.PostEditQuery>> = ({ data }) => {
-  const {
-    post: { title, content, filename },
-  } = data;
-  const onSubmit = async (data: PostInput) => {
-    console.log("Submitting", data);
-    await fetch(`/api/posts/${filename}`, {
-      method: "PUT",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data, undefined, 2),
-    });
-    console.log("Submitted!");
-    navigate("/");
-  };
+const EditPage: React.FC<PageProps<Queries.RecipeEditQuery>> = ({ data }) => {
+  const { recipe: recipeData } = data;
 
-  return (
-    <SiteLayout>
-      <h2>Edit Post</h2>
-      <PostForm
-        submitText="Edit Post"
-        onSubmit={onSubmit}
-        defaultValues={{ title, content }}
-      />
-      <button
-        onClick={async () => {
-          console.log("Deleting", data);
-          await fetch(`/api/posts/${filename}`, {
-            method: "DELETE",
-          });
-          console.log("Deleted!");
-          navigate("/");
-        }}
-      >
-        Delete
-      </button>
-    </SiteLayout>
-  );
+  if (recipeData) {
+    const { slug, ...recipe } = recipeData;
+    return (
+      <SiteLayout>
+        <h2>Edit Recipe</h2>
+        <RecipeForm
+          submitText="Edit Recipe"
+          defaultValues={initializeFormState(recipe)}
+          onSubmit={(data) => {
+            const { recipe } = data;
+            updateRecipe(recipe, slug);
+          }}
+        />
+        <button
+          onClick={() => {
+            deleteRecipe(slug);
+          }}
+        >
+          Delete
+        </button>
+      </SiteLayout>
+    );
+  } else {
+    return null;
+  }
 };
 
 export default EditPage;
 
-export const Head: HeadFC = () => <title>Edit a Post</title>;
+export const Head: HeadFC = () => <title>Edit a Recipe</title>;
