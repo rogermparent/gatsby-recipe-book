@@ -1,9 +1,19 @@
-import slugify from "@sindresorhus/slugify";
-
 export const createSchemaCustomization = ({
   actions: { createTypes, createFieldExtension },
   schema,
 }) => {
+  const buildLinkType = (name) =>
+    schema.buildObjectType({
+      name,
+      fields: {
+        value: "String!",
+      },
+      interfaces: ["Node"],
+      extensions: {
+        infer: false,
+      },
+    });
+
   createTypes([
     schema.buildObjectType({
       name: "Recipe",
@@ -34,16 +44,9 @@ export const createSchemaCustomization = ({
         infer: false,
       },
     }),
-    schema.buildObjectType({
-      name: "IngredientLink",
-      fields: {
-        ingredient: "String!",
-      },
-      interfaces: ["Node"],
-      extensions: {
-        infer: false,
-      },
-    }),
+    buildLinkType("IngredientLink"),
+    buildLinkType("CategoryLink"),
+    buildLinkType("CuisineLink"),
     schema.buildObjectType({
       name: "RecipeAuthor",
       fields: {
@@ -175,16 +178,11 @@ export const onCreateNode = ({
         servingSize,
       } = node;
 
-      const processedIngredients = ingredients.map((ingredient) => ({
-        ...ingredient,
-        slug: slugify(ingredient.ingredient),
-      }));
-
       const idSeed = `Recipe >>> ${slug}`;
       const fields = {
         name,
         slug,
-        ingredients: processedIngredients,
+        ingredients,
         ingredientsCount: ingredients.length,
         description,
         instructions,
@@ -219,72 +217,43 @@ export const onCreateNode = ({
         child: recipeNode,
       });
 
-      for (const ingredient of processedIngredients) {
-        const idSeed = `RecipeIngredient >>> ${slug} >>> ${ingredient.slug}`;
-        const fields = {
-          ingredient: ingredient.ingredient,
-        };
-        const recipeIngredientNode = {
-          ...fields,
-          id: createNodeId(idSeed),
-          parent: recipeNode.id,
-          internal: {
-            type: "IngredientLink",
-            contentDigest: createContentDigest(fields),
-          },
-        };
-        createNode(recipeIngredientNode);
-        createParentChildLink({
-          parent: recipeNode,
-          child: recipeIngredientNode,
-        });
-      }
-
-      if (cuisine) {
-        for (const cuisineItem of cuisine) {
-          const idSeed = `RecipeCuisine >>> ${slug} >>> ${cuisineItem}`;
-          const fields = {
-            cuisine: cuisineItem,
-          };
-          const recipeCuisineNode = {
-            ...fields,
-            id: createNodeId(idSeed),
-            parent: recipeNode.id,
-            internal: {
-              type: "CuisineLink",
-              contentDigest: createContentDigest(fields),
-            },
-          };
-          createNode(recipeCuisineNode);
-          createParentChildLink({
-            parent: recipeNode,
-            child: recipeCuisineNode,
-          });
+      const createTaxonomyLinkNodes = ({ terms, type }) => {
+        if (terms) {
+          for (const value of terms) {
+            const idSeed = `${type} >>> ${slug} >>> ${value}`;
+            const fields = {
+              value,
+            };
+            const recipeIngredientNode = {
+              ...fields,
+              id: createNodeId(idSeed),
+              parent: recipeNode.id,
+              internal: {
+                type,
+                contentDigest: createContentDigest(fields),
+              },
+            };
+            createNode(recipeIngredientNode);
+            createParentChildLink({
+              parent: recipeNode,
+              child: recipeIngredientNode,
+            });
+          }
         }
-      }
+      };
 
-      if (category) {
-        for (const categoryItem of category) {
-          const idSeed = `RecipeCategory >>> ${slug} >>> ${categoryItem}`;
-          const fields = {
-            category: categoryItem,
-          };
-          const recipeCategoryNode = {
-            ...fields,
-            id: createNodeId(idSeed),
-            parent: recipeNode.id,
-            internal: {
-              type: "CategoryLink",
-              contentDigest: createContentDigest(fields),
-            },
-          };
-          createNode(recipeCategoryNode);
-          createParentChildLink({
-            parent: recipeNode,
-            child: recipeCategoryNode,
-          });
-        }
-      }
+      createTaxonomyLinkNodes({
+        terms: ingredients?.map(({ ingredient }) => ingredient),
+        type: "IngredientLink",
+      });
+      createTaxonomyLinkNodes({
+        terms: category,
+        type: "CategoryLink",
+      });
+      createTaxonomyLinkNodes({
+        terms: cuisine,
+        type: "CuisineLink",
+      });
     }
   }
 };

@@ -6,11 +6,11 @@ import { GroupList, RecipeGroup } from "core/src/components/GroupList";
 export const query = graphql`
   query CategoryIndex {
     allCategoryLink {
-      group(field: { category: SELECT }, limit: 1) {
+      group(field: { value: SELECT }, limit: 1) {
         totalCount
         fieldValue
         nodes {
-          gatsbyPath(filePath: "/category/{CategoryLink.category}")
+          gatsbyPath(filePath: "/category/{CategoryLink.value}")
         }
       }
     }

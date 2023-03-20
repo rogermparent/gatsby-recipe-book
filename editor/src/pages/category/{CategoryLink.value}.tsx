@@ -4,8 +4,8 @@ import SiteLayout from "core/src/components/SiteLayout";
 import { RecipeList } from "core/src/components/Recipe/List";
 
 export const query = graphql`
-  query CuisinePage($cuisine: String!) {
-    allCuisineLink(filter: { cuisine: { eq: $cuisine } }) {
+  query CategoryPage($value: String!) {
+    allCategoryLink(filter: { value: { eq: $value } }) {
       nodes {
         parent {
           ...RecipeListItem
@@ -15,19 +15,19 @@ export const query = graphql`
   }
 `;
 
-interface CuisineContext {
-  cuisine: string;
+interface CategoryContext {
+  value: string;
 }
 
-const CuisinePage: React.FC<
-  PageProps<Queries.CuisinePageQuery, CuisineContext>
-> = ({ data, pageContext: { cuisine } }) => {
+const CategoryPage: React.FC<
+  PageProps<Queries.CategoryPageQuery, CategoryContext>
+> = ({ data, pageContext: { value } }) => {
   if (data) {
     return (
       <SiteLayout>
-        <h2>Recipes with cuisine: {cuisine}</h2>
+        <h2>Recipes with category: {value}</h2>
         <RecipeList
-          recipes={data.allCuisineLink.nodes.map(
+          recipes={data.allCategoryLink.nodes.map(
             ({ parent }) => parent as Queries.RecipeListItemFragment
           )}
         />
@@ -37,10 +37,10 @@ const CuisinePage: React.FC<
   return null;
 };
 
-export default CuisinePage;
+export default CategoryPage;
 
-export const Head: HeadFC<Queries.CuisinePageQuery, CuisineContext> = ({
-  pageContext: { cuisine },
+export const Head: HeadFC<Queries.CategoryPageQuery, CategoryContext> = ({
+  pageContext: { value },
 }) => {
-  return <title>{cuisine}</title>;
+  return <title>{value}</title>;
 };
