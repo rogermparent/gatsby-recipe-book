@@ -1,32 +1,34 @@
 import React from "react";
 import { Link } from "gatsby";
 
-interface RecipeItem {
-  slug: string;
-  name: string;
-  publishDate?: string;
-}
-
-export function RecipeListItem({ slug, name, publishDate }: RecipeItem) {
+export function RecipeListItem({
+  pagePath,
+  name,
+  datePublished,
+}: Queries.RecipeListItemFragment) {
   return (
     <li>
-      <div>{publishDate}</div>
       <h3>
-        <Link to={`/recipe/${slug}`}>{name}</Link>
+        <Link to={pagePath}>{name}</Link>
       </h3>
+      <div>{datePublished}</div>
     </li>
   );
 }
 
-export function RecipeList({ recipes }: { recipes: readonly RecipeItem[] }) {
+export function RecipeList({
+  recipes,
+}: {
+  recipes: readonly Queries.RecipeListItemFragment[];
+}) {
   return (
     <ul>
-      {recipes.map(({ slug, name, publishDate }) => (
+      {recipes.map(({ pagePath, name, datePublished }) => (
         <RecipeListItem
-          key={slug}
-          slug={slug}
+          key={pagePath}
+          pagePath={pagePath}
           name={name}
-          publishDate={publishDate}
+          datePublished={datePublished}
         />
       ))}
     </ul>

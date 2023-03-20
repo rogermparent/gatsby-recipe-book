@@ -8,6 +8,9 @@ const IndexPage: React.FC<{ children: ReactNode }> = ({ children }) => (
       <h1>
         <Link to="/">Gatsby Recipe Book</Link>
       </h1>
+      <Link to="/">Index</Link> <Link to="/ingredients">Ingredients</Link>{" "}
+      <Link to="/categories">Categories</Link>{" "}
+      <Link to="/cuisines">Cuisines</Link>
     </header>
     <hr />
     <main>{children}</main>

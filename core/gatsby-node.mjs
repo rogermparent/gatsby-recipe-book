@@ -25,8 +25,8 @@ export const createSchemaCustomization = ({
         keywords: "[String!]",
         servings: "Int",
         servingSize: "String",
-        category: "[String!]",
-        cuisine: "[String!]",
+        category: "[String!]!",
+        cuisine: "[String!]!",
         nutrition: "RecipeNutrition",
       },
       interfaces: ["Node"],
@@ -38,17 +38,6 @@ export const createSchemaCustomization = ({
       name: "IngredientLink",
       fields: {
         ingredient: "String!",
-        ingredientSlug: "String!",
-        recipeSlug: "String!",
-        recipe: {
-          type: "Recipe",
-          extensions: {
-            link: {
-              by: "slug",
-              from: "recipeSlug",
-            },
-          },
-        },
       },
       interfaces: ["Node"],
       extensions: {
@@ -174,8 +163,8 @@ export const onCreateNode = ({
         ingredients = [],
         instructions = [],
         author,
-        category,
-        cuisine,
+        category = [],
+        cuisine = [],
         datePublished,
         keywords,
         nutrition,
@@ -234,8 +223,6 @@ export const onCreateNode = ({
         const idSeed = `RecipeIngredient >>> ${slug} >>> ${ingredient.slug}`;
         const fields = {
           ingredient: ingredient.ingredient,
-          ingredientSlug: ingredient.slug,
-          recipeSlug: recipeNode.slug,
         };
         const recipeIngredientNode = {
           ...fields,
@@ -251,6 +238,52 @@ export const onCreateNode = ({
           parent: recipeNode,
           child: recipeIngredientNode,
         });
+      }
+
+      if (cuisine) {
+        for (const cuisineItem of cuisine) {
+          const idSeed = `RecipeCuisine >>> ${slug} >>> ${cuisineItem}`;
+          const fields = {
+            cuisine: cuisineItem,
+          };
+          const recipeCuisineNode = {
+            ...fields,
+            id: createNodeId(idSeed),
+            parent: recipeNode.id,
+            internal: {
+              type: "CuisineLink",
+              contentDigest: createContentDigest(fields),
+            },
+          };
+          createNode(recipeCuisineNode);
+          createParentChildLink({
+            parent: recipeNode,
+            child: recipeCuisineNode,
+          });
+        }
+      }
+
+      if (category) {
+        for (const categoryItem of category) {
+          const idSeed = `RecipeCategory >>> ${slug} >>> ${categoryItem}`;
+          const fields = {
+            category: categoryItem,
+          };
+          const recipeCategoryNode = {
+            ...fields,
+            id: createNodeId(idSeed),
+            parent: recipeNode.id,
+            internal: {
+              type: "CategoryLink",
+              contentDigest: createContentDigest(fields),
+            },
+          };
+          createNode(recipeCategoryNode);
+          createParentChildLink({
+            parent: recipeNode,
+            child: recipeCategoryNode,
+          });
+        }
       }
     }
   }

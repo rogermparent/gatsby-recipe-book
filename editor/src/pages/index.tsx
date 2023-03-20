@@ -7,10 +7,15 @@ export const query = graphql`
   query RecipesIndex {
     allRecipe(sort: { datePublished: DESC }) {
       nodes {
-        slug
-        name
+        ...RecipeListItem
       }
     }
+  }
+
+  fragment RecipeListItem on Recipe {
+    pagePath: gatsbyPath(filePath: "/recipe/{Recipe.slug}")
+    name
+    datePublished(formatString: "YYYY-MM-DD")
   }
 `;
 
