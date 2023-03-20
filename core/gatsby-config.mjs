@@ -27,6 +27,7 @@ const config = () => {
         options: {
           name: "recipes",
           path: path.join(corePath, "..", "content", "recipes"),
+          ignore: [`**/.*`],
         },
         __key: "recipes",
       },
