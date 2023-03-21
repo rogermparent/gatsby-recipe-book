@@ -2,6 +2,14 @@
 import React from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
 import {
+  CategorySelectorDataList,
+  DEFAULT_CATEGORY_SELECTOR_ID,
+} from "../../CategorySelector";
+import {
+  CuisineSelectorDataList,
+  DEFAULT_CUISINE_SELECTOR_ID,
+} from "../../CuisineSelector";
+import {
   AuthorListField,
   IngredientListField,
   InputField,
@@ -9,6 +17,7 @@ import {
   StringListField,
   TextareaField,
 } from "../../Form";
+import { IngredientSelectorDataList } from "../../IngredientSelector";
 
 export type FormRecipe = Queries.RecipeEditorDataFragment & {
   category?: readonly String[] | null;
@@ -55,6 +64,9 @@ export const RecipeFields: React.FC<{
 }) => {
   return (
     <>
+      <IngredientSelectorDataList />
+      <CategorySelectorDataList />
+      <CuisineSelectorDataList />
       <InputField
         label="Name"
         errors={errors}
@@ -112,6 +124,7 @@ export const RecipeFields: React.FC<{
         errors={errors}
         register={register}
         control={control}
+        list={DEFAULT_CATEGORY_SELECTOR_ID}
         name="recipe.category"
       />
       <StringListField
@@ -119,6 +132,7 @@ export const RecipeFields: React.FC<{
         errors={errors}
         register={register}
         control={control}
+        list={DEFAULT_CUISINE_SELECTOR_ID}
         name="recipe.cuisine"
       />
       <IngredientListField

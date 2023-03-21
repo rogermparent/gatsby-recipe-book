@@ -9,6 +9,7 @@ import {
   UseFormRegister,
   UseFormRegisterReturn,
 } from "react-hook-form";
+import { DEFAULT_INGREDIENT_SELECTOR_ID } from "../IngredientSelector";
 import { RecipeFormValues } from "../Recipe/Form";
 
 export interface CommonFieldProps<T extends FieldValues = RecipeFormValues> {
@@ -64,13 +65,15 @@ export function InputField({
   registration,
   errors,
   type,
+  list,
 }: FieldProps & {
   type?: string;
+  list?: string;
 }) {
   const { name } = registration;
   return (
     <FieldWrapper name={name} label={label} errors={errors}>
-      <input type={type} id={name} {...registration} />
+      <input type={type} id={name} list={list} {...registration} />
     </FieldWrapper>
   );
 }
@@ -169,6 +172,7 @@ export function IngredientListField({
                 errors={errors}
               />
               <InputField
+                list={DEFAULT_INGREDIENT_SELECTOR_ID}
                 label="Ingredient"
                 registration={register(
                   `${fieldName}.ingredient` as "recipe.ingredients.0.ingredient"
@@ -291,7 +295,8 @@ export function StringListField({
   errors,
   label,
   name,
-}: FieldArrayProps<RecipeFormValues, StringFields>) {
+  list,
+}: FieldArrayProps<RecipeFormValues, StringFields> & { list?: string }) {
   const { fields, remove, move, append } = useFieldArray({
     control,
     name,
@@ -303,7 +308,7 @@ export function StringListField({
           const fieldName = `${name}.${index}` as FieldPath<RecipeFormValues>;
           return (
             <li key={field.id}>
-              <input {...register(fieldName)} />
+              <input list={list} {...register(fieldName)} />
               <div>
                 <button
                   type="button"
