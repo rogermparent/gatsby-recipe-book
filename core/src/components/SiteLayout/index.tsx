@@ -1,20 +1,26 @@
 import React, { ReactNode } from "react";
 import { HeadFC, Link } from "gatsby";
-import "./styles.css";
+import * as styles from "./styles.css";
+
+const HeaderLink = ({ to, children }: { to: string; children: ReactNode }) => (
+  <Link to={to} className={styles.homeLink}>
+    {children}
+  </Link>
+);
 
 const IndexPage: React.FC<{ children: ReactNode }> = ({ children }) => (
-  <>
-    <header>
-      <h1>
-        <Link to="/">Gatsby Recipe Book</Link>
-      </h1>
-      <Link to="/">Index</Link> <Link to="/ingredients">Ingredients</Link>{" "}
-      <Link to="/categories">Categories</Link>{" "}
-      <Link to="/cuisines">Cuisines</Link>
+  <div className={styles.wrapper}>
+    <header className={styles.header}>
+      <Link to="/" className={styles.mainHeading}>
+        Gatsby Recipe Book
+      </Link>
+      <HeaderLink to="/">Index</HeaderLink>
+      <HeaderLink to="/ingredients">Ingredients</HeaderLink>
+      <HeaderLink to="/categories">Categories</HeaderLink>
+      <HeaderLink to="/cuisines">Cuisines</HeaderLink>
     </header>
-    <hr />
-    <main>{children}</main>
-  </>
+    <main className={styles.main}>{children}</main>
+  </div>
 );
 
 export default IndexPage;

@@ -224,7 +224,7 @@ export const onCreateNode = ({
             const fields = {
               value,
             };
-            const recipeIngredientNode = {
+            const taxonomyTermNode = {
               ...fields,
               id: createNodeId(idSeed),
               parent: recipeNode.id,
@@ -233,10 +233,10 @@ export const onCreateNode = ({
                 contentDigest: createContentDigest(fields),
               },
             };
-            createNode(recipeIngredientNode);
+            createNode(taxonomyTermNode);
             createParentChildLink({
               parent: recipeNode,
-              child: recipeIngredientNode,
+              child: taxonomyTermNode,
             });
           }
         }

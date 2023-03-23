@@ -12,6 +12,7 @@ const config = () => {
     },
     graphqlTypegen: true,
     plugins: [
+      "gatsby-plugin-vanilla-extract",
       "gatsby-plugin-image",
       "gatsby-plugin-sitemap",
       {

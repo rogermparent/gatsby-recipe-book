@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "gatsby";
+import * as styles from "./styles.css";
 
 export function RecipeListItem({
   pagePath,
@@ -8,10 +9,12 @@ export function RecipeListItem({
 }: Queries.RecipeListItemFragment) {
   return (
     <li>
-      <h3>
-        <Link to={pagePath}>{name}</Link>
-      </h3>
-      <div>{datePublished}</div>
+      <div className={styles.recipeItem}>
+        <Link to={pagePath as string}>
+          <h3 className={styles.heading}>{name}</h3>
+        </Link>
+        <div className={styles.date}>{datePublished}</div>
+      </div>
     </li>
   );
 }
@@ -22,7 +25,7 @@ export function RecipeList({
   recipes: readonly Queries.RecipeListItemFragment[];
 }) {
   return (
-    <ul>
+    <ul className={styles.recipeList}>
       {recipes.map(({ pagePath, name, datePublished }) => (
         <RecipeListItem
           key={pagePath}
