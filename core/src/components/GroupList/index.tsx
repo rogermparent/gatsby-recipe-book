@@ -2,18 +2,17 @@ import React from "react";
 import { Link } from "gatsby";
 
 export interface RecipeGroup {
-  fieldValue: string;
   totalCount: number;
-  nodes: [{ gatsbyPath: string }];
+  nodes: [{ gatsbyPath: string; value: string }];
 }
 
 export const GroupList = ({ group }: { group: readonly RecipeGroup[] }) => {
   return (
     <ul>
-      {group.map(({ totalCount, fieldValue, nodes: [{ gatsbyPath }] }) => (
-        <li key={fieldValue}>
+      {group.map(({ totalCount, nodes: [{ gatsbyPath, value }] }) => (
+        <li key={value}>
           <Link to={gatsbyPath as string}>
-            {fieldValue} ({totalCount})
+            {value} ({totalCount})
           </Link>
         </li>
       ))}

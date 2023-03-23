@@ -12,7 +12,7 @@ export const CuisineSelectorDataList = ({
   const data = useStaticQuery(graphql`
     query CuisinesSelector {
       cuisines: allCuisineLink {
-        group(field: { value: SELECT }, limit: 1) {
+        group(field: { slug: SELECT }, limit: 1) {
           value: fieldValue
           usageCount: totalCount
         }

@@ -4,8 +4,8 @@ import SiteLayout from "core/src/components/SiteLayout";
 import { RecipeList } from "core/src/components/Recipe/List";
 
 export const query = graphql`
-  query CategoryPage($value: String!) {
-    allCategoryLink(filter: { value: { eq: $value } }) {
+  query CategoryPage($slug: String!) {
+    allCategoryLink(filter: { slug: { eq: $slug } }) {
       nodes {
         parent {
           ...RecipeListItem
@@ -16,16 +16,16 @@ export const query = graphql`
 `;
 
 interface CategoryContext {
-  value: string;
+  slug: string;
 }
 
 const CategoryPage: React.FC<
   PageProps<Queries.CategoryPageQuery, CategoryContext>
-> = ({ data, pageContext: { value } }) => {
+> = ({ data, pageContext: { slug } }) => {
   if (data) {
     return (
       <SiteLayout>
-        <h2>Recipes with category: {value}</h2>
+        <h2>Recipes with category: {slug}</h2>
         <RecipeList
           recipes={data.allCategoryLink.nodes.map(
             ({ parent }) => parent as Queries.RecipeListItemFragment
@@ -40,7 +40,7 @@ const CategoryPage: React.FC<
 export default CategoryPage;
 
 export const Head: HeadFC<Queries.CategoryPageQuery, CategoryContext> = ({
-  pageContext: { value },
+  pageContext: { slug },
 }) => {
-  return <title>{value}</title>;
+  return <title>{slug}</title>;
 };

@@ -12,7 +12,7 @@ export const CategorySelectorDataList = ({
   const data = useStaticQuery(graphql`
     query CategoriesSelector {
       categories: allCategoryLink {
-        group(field: { value: SELECT }, limit: 1) {
+        group(field: { slug: SELECT }, limit: 1) {
           value: fieldValue
           usageCount: totalCount
         }

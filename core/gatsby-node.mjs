@@ -1,3 +1,5 @@
+import slugify from "@sindresorhus/slugify";
+
 export const createSchemaCustomization = ({
   actions: { createTypes, createFieldExtension },
   schema,
@@ -7,6 +9,7 @@ export const createSchemaCustomization = ({
       name,
       fields: {
         value: "String!",
+        slug: "String!",
       },
       interfaces: ["Node"],
       extensions: {
@@ -221,8 +224,10 @@ export const onCreateNode = ({
         if (terms) {
           for (const value of terms) {
             const idSeed = `${type} >>> ${slug} >>> ${value}`;
+            const ingredientSlug = slugify(value);
             const fields = {
               value,
+              slug: ingredientSlug,
             };
             const taxonomyTermNode = {
               ...fields,
