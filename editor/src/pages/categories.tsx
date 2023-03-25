@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { graphql, HeadFC, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
 import { GroupList, RecipeGroup } from "core/src/components/GroupList";

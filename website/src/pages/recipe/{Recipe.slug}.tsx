@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { graphql, HeadFC, Link, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
 import { Recipe } from "core/src/components/Recipe";
@@ -97,7 +97,6 @@ const RecipePage: React.FC<PageProps<Queries.RecipePageQuery>> = ({
           ingredients={ingredients}
           instructions={instructions}
         />
-        <Link to="edit">Edit</Link>
       </SiteLayout>
     );
   }

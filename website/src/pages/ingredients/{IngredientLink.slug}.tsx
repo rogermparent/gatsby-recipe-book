@@ -1,10 +1,13 @@
-import * as React from "react";
+import React from "react";
 import { graphql, HeadFC, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
-import { RecipeList } from "core/src/components/Recipe/List";
+import { RecipeListItem } from "core/src/components/Recipe/List";
 
 export const query = graphql`
   query IngredientPage($slug: String!) {
+    ingredientLink(slug: { eq: $slug }) {
+      ingredientName: value
+    }
     allIngredientLink(filter: { slug: { eq: $slug } }) {
       nodes {
         parent {
@@ -15,22 +18,27 @@ export const query = graphql`
   }
 `;
 
-interface IngredientContext {
-  slug: string;
-}
-
-const IngredientPage: React.FC<
-  PageProps<Queries.IngredientPageQuery, IngredientContext>
-> = ({ data, pageContext: { slug } }) => {
+const IngredientPage: React.FC<PageProps<Queries.IngredientPageQuery>> = ({
+  data,
+}) => {
   if (data) {
+    const ingredientName = data?.ingredientLink?.ingredientName;
     return (
       <SiteLayout>
-        <h2>Recipes with ingredient: {slug}</h2>
-        <RecipeList
-          recipes={data.allIngredientLink.nodes.map(
-            ({ parent }) => parent as Queries.RecipeListItemFragment
-          )}
-        />
+        <h2>Recipes with ingredient: {ingredientName}</h2>
+        {data.allIngredientLink.nodes.map(({ parent }) => {
+          const { pagePath, datePublished, name } =
+            parent as Queries.RecipeListItemFragment;
+          return (
+            <div key={pagePath}>
+              <RecipeListItem
+                name={name}
+                pagePath={pagePath}
+                datePublished={datePublished}
+              />
+            </div>
+          );
+        })}
       </SiteLayout>
     );
   }
@@ -39,8 +47,6 @@ const IngredientPage: React.FC<
 
 export default IngredientPage;
 
-export const Head: HeadFC<Queries.IngredientPageQuery, IngredientContext> = ({
-  pageContext: { slug: ingredient },
-}) => {
-  return <title>{ingredient}</title>;
+export const Head: HeadFC<Queries.IngredientPageQuery> = ({ data }) => {
+  return <title>{data?.ingredientLink?.ingredientName}</title>;
 };

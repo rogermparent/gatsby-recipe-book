@@ -12,7 +12,7 @@ export const IngredientSelectorDataList = ({
   const data = useStaticQuery(graphql`
     query IngredientsSelector {
       ingredients: allIngredientLink {
-        group(field: { slug: SELECT }, limit: 1) {
+        group(field: { value: SELECT }, limit: 1) {
           value: fieldValue
           usageCount: totalCount
         }

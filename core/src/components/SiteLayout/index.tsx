@@ -14,10 +14,11 @@ const IndexPage: React.FC<{ children: ReactNode }> = ({ children }) => (
       <Link to="/" className={styles.mainHeading}>
         Gatsby Recipe Book
       </Link>
-      <HeaderLink to="/">Index</HeaderLink>
-      <HeaderLink to="/ingredients">Ingredients</HeaderLink>
-      <HeaderLink to="/categories">Categories</HeaderLink>
-      <HeaderLink to="/cuisines">Cuisines</HeaderLink>
+      <nav className={styles.primaryNav}>
+        <HeaderLink to="/ingredients">Ingredients</HeaderLink>
+        <HeaderLink to="/categories">Categories</HeaderLink>
+        <HeaderLink to="/cuisines">Cuisines</HeaderLink>
+      </nav>
     </header>
     <main className={styles.main}>{children}</main>
   </div>

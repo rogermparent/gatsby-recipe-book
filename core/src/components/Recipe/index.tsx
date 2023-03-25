@@ -2,6 +2,7 @@ import React from "react";
 import { ChangeEvent, ReactNode, Reducer, useMemo, useReducer } from "react";
 import Fraction from "fraction.js";
 import { FieldWrapper } from "../Form";
+import * as styles from "./styles.css";
 
 export const Ingredient = ({
   ingredient,
@@ -19,7 +20,7 @@ export const Ingredient = ({
       ? parsedQuantity.mul(multiplier)
       : parsedQuantity;
   return (
-    <li>
+    <li className={styles.ingredientsListItem}>
       <div>
         <label>
           <input type="checkbox" />{" "}
@@ -42,7 +43,7 @@ export const Instruction = ({
   name,
   text,
 }: Queries.RecipeInstructionDisplayDataFragment) => (
-  <li>
+  <li className={styles.instructionsListItem}>
     {name && <h3>{name}</h3>}
     {text}
   </li>
@@ -66,13 +67,16 @@ const fractionInputReducer: Reducer<
   }
 };
 
-const InfoCard: React.FC<{ title?: string; children: ReactNode }> = ({
-  title,
-  children,
-}) => (
-  <div>
-    {title && <div>{title}</div>}
-    <div>{children}</div>
+const InfoCard: React.FC<{
+  title?: string;
+  children: ReactNode;
+  className?: string;
+}> = ({ title, children, className = styles.infoCardWrapper }) => (
+  <div className={className}>
+    <div className={styles.infoCard}>
+      {title && <div className={styles.infoCardTitle}>{title}</div>}
+      <div className={styles.infoCardBody}>{children}</div>
+    </div>
   </div>
 );
 
@@ -86,9 +90,9 @@ export const Ingredients = ({
   return (
     <>
       {ingredients && (
-        <div>
-          <h2>Ingredients</h2>
-          <ul>
+        <div className={styles.ingredientsSection}>
+          <h2 className={styles.ingredientsHeading}>Ingredients</h2>
+          <ul className={styles.ingredientsList}>
             {ingredients.map(({ ingredient, quantity, unit, note }, i) => (
               <Ingredient
                 key={i}
@@ -115,6 +119,7 @@ export const Recipe = ({
   totalTime,
   servings,
   servingSize,
+  description,
 }: Queries.RecipeDisplayDataFragment) => {
   const [{ fraction: multiplier }, setMultiplier] = useReducer(
     fractionInputReducer,
@@ -126,33 +131,43 @@ export const Recipe = ({
       ? multiplier.mul(servings).toFraction(true)
       : servings;
   return (
-    <div>
-      <h1>{name}</h1>
-      <div>
-        {prepTime && <InfoCard title="Prep Time">{prepTime}</InfoCard>}
-        {cookTime && <InfoCard title="Cook Time">{cookTime}</InfoCard>}
-        {totalTime && <InfoCard title="Total Time">{totalTime}</InfoCard>}
-        {multipliedServings && (
-          <InfoCard title="Servings">
-            <span>{multipliedServings}</span> <span>{servingSize}</span>
-          </InfoCard>
-        )}
-        <InfoCard>
-          <FieldWrapper label="Multiply" name="multiplier">
+    <div className={styles.container}>
+      <h1 className={styles.title}>{name}</h1>
+      {description && <p className={styles.description}>{description}</p>}
+
+      <div className={styles.infoCards}>
+        <div className={styles.infoCardGroup}>
+          {prepTime && <InfoCard title="Prep Time">{prepTime}</InfoCard>}
+          {cookTime && <InfoCard title="Cook Time">{cookTime}</InfoCard>}
+          {totalTime && <InfoCard title="Total Time">{totalTime}</InfoCard>}
+        </div>
+        <div className={styles.infoCardGroup}>
+          {multipliedServings && (
+            <InfoCard title="Servings">
+              <span>{multipliedServings}</span> <span>{servingSize}</span>
+            </InfoCard>
+          )}
+
+          <FieldWrapper
+            label="Multiply"
+            name="multiplier"
+            className={styles.multiplier}
+          >
             <input
+              className={styles.multiplyInput}
               id="multiplier"
               onInput={(e: ChangeEvent<HTMLInputElement>) => {
                 setMultiplier(e.target.value);
               }}
             />
           </FieldWrapper>
-        </InfoCard>
+        </div>
       </div>
       <Ingredients ingredients={ingredients} multiplier={multiplier} />
       {instructions && (
-        <div>
-          <h2>Instructions</h2>
-          <ol>
+        <div className={styles.instructionsSection}>
+          <h2 className={styles.instructionsHeading}>Instructions</h2>
+          <ol className={styles.instructionsList}>
             {instructions.map(({ name, text }, i) => (
               <Instruction key={i} name={name} text={text} />
             ))}

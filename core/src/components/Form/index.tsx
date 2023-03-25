@@ -11,6 +11,7 @@ import {
 } from "react-hook-form";
 import { DEFAULT_INGREDIENT_SELECTOR_ID } from "../IngredientSelector";
 import { RecipeFormValues } from "../Recipe/Form";
+import * as styles from "./styles.css";
 
 export interface CommonFieldProps<T extends FieldValues = RecipeFormValues> {
   label?: string;
@@ -36,15 +37,17 @@ export function FieldWrapper({
   label,
   errors,
   children,
+  className,
 }: {
   name: string;
   errors?: FieldErrors | undefined;
   label?: string;
   children?: ReactNode;
+  className?: string;
 }): JSX.Element {
   const fieldErrors = errors?.[name];
   return (
-    <div>
+    <div className={className}>
       <label htmlFor={name}>
         {fieldErrors && (
           <div>
@@ -73,7 +76,13 @@ export function InputField({
   const { name } = registration;
   return (
     <FieldWrapper name={name} label={label} errors={errors}>
-      <input type={type} id={name} list={list} {...registration} />
+      <input
+        type={type}
+        id={name}
+        list={list}
+        className={styles.inputField}
+        {...registration}
+      />
     </FieldWrapper>
   );
 }
@@ -308,7 +317,11 @@ export function StringListField({
           const fieldName = `${name}.${index}` as FieldPath<RecipeFormValues>;
           return (
             <li key={field.id}>
-              <input list={list} {...register(fieldName)} />
+              <input
+                list={list}
+                className={styles.inputField}
+                {...register(fieldName)}
+              />
               <div>
                 <button
                   type="button"
@@ -345,7 +358,7 @@ export function TextareaField({ label, registration, errors }: FieldProps) {
   const { name } = registration;
   return (
     <FieldWrapper name={name} label={label} errors={errors}>
-      <textarea id={name} {...registration} />
+      <textarea id={name} className={styles.textarea} {...registration} />
     </FieldWrapper>
   );
 }

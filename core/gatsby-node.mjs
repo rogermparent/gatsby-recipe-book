@@ -223,11 +223,11 @@ export const onCreateNode = ({
       const createTaxonomyLinkNodes = ({ terms, type }) => {
         if (terms) {
           for (const value of terms) {
-            const idSeed = `${type} >>> ${slug} >>> ${value}`;
-            const ingredientSlug = slugify(value);
+            const termSlug = slugify(value);
+            const idSeed = `${type} >>> ${termSlug} >>> ${value}`;
             const fields = {
               value,
-              slug: ingredientSlug,
+              slug: termSlug,
             };
             const taxonomyTermNode = {
               ...fields,
