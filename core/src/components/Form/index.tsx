@@ -8,6 +8,7 @@ import {
   useFieldArray,
   UseFormRegister,
   UseFormRegisterReturn,
+  UseFormSetValue,
 } from "react-hook-form";
 import { DEFAULT_INGREDIENT_SELECTOR_ID } from "../IngredientSelector";
 import { RecipeFormValues } from "../Recipe/Form";
@@ -100,25 +101,31 @@ export function ImageField({
   name,
   errors,
   originalData,
+  isDirty,
+  setValue,
 }: SelfRegisteringFieldProps & {
   originalData?: Queries.RecipeImageEditorDataFragment | null;
-}) {
+  isDirty: boolean | undefined;
+  setValue: UseFormSetValue<RecipeFormValues>;
+}): JSX.Element {
   const [imagePreviewURL, setImagePreviewURL] = useState<string | undefined>();
   const imageData =
     originalData?.childImageSharp && getImage(originalData.childImageSharp);
   return (
     <FieldWrapper label={label} errors={errors} name={name}>
       {imagePreviewURL ? (
-        <div>
-          <img src={imagePreviewURL} />
+        <div className={styles.editorImageContainer}>
+          <img src={imagePreviewURL} className={styles.editorPreviewImage} />
         </div>
-      ) : (
-        imageData && (
-          <div>
-            <GatsbyImage image={imageData} alt="" />
-          </div>
-        )
-      )}
+      ) : !isDirty && imageData ? (
+        <div className={styles.editorImageContainer}>
+          <GatsbyImage
+            image={imageData}
+            alt=""
+            className={styles.defaultEditorPreviewImage}
+          />
+        </div>
+      ) : null}
       <input
         type="file"
         {...register(name, {
@@ -134,6 +141,15 @@ export function ImageField({
           },
         })}
       />
+      <button
+        type="button"
+        onClick={() => {
+          setValue(name, null);
+          setImagePreviewURL(undefined);
+        }}
+      >
+        Clear
+      </button>
     </FieldWrapper>
   );
 }

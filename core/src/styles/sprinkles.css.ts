@@ -118,6 +118,8 @@ const minHeight = {
 };
 
 const tailwindMaxWidth = {
+  0: "0rem",
+  none: "none",
   xs: "20rem",
   sm: "24rem",
   md: "28rem",
@@ -129,7 +131,16 @@ const tailwindMaxWidth = {
   "5xl": "64rem",
   "6xl": "72rem",
   "7xl": "80rem",
+  full: "100%",
+  min: "min-content",
+  max: "max-content",
+  fit: "fit-content",
   prose: "65ch",
+  "screen-sm": "640px",
+  "screen-md": "768px",
+  "screen-lg": "1024px",
+  "screen-xl": "1280px",
+  "screen-2xl": "1536px",
 };
 
 const tailwindMinWidth = {

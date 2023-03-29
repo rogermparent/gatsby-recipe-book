@@ -22,6 +22,7 @@ import {
 import { IngredientSelectorDataList } from "../../IngredientSelector";
 
 export type FormRecipe = Queries.RecipeEditorDataFragment & {
+  image?: string | null;
   category?: readonly String[] | null;
   cuisine?: readonly String[] | null;
 };
@@ -57,7 +58,8 @@ export const RecipeFields: React.FC<{
   form: {
     register,
     control,
-    formState: { errors },
+    setValue,
+    formState: { errors, dirtyFields },
   },
   originalData,
 }) => {
@@ -72,6 +74,8 @@ export const RecipeFields: React.FC<{
         register={register}
         name="image"
         originalData={originalData?.image}
+        setValue={setValue}
+        isDirty={Boolean(dirtyFields.image)}
       />
       <InputField
         label="Name"

@@ -20,3 +20,15 @@ export const fieldLabelWrapper = sprinkles({
 export const fieldLabelHeading = sprinkles({
   paddingY: 1,
 });
+
+export const editorImageContainer = sprinkles({
+  maxWidth: "full",
+});
+
+export const editorPreviewImage = sprinkles({
+  maxWidth: "full",
+});
+
+export const defaultEditorPreviewImage = sprinkles({
+  maxWidth: "full",
+});
