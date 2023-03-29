@@ -15,5 +15,13 @@
     "@vanilla-extract/webpack-plugin": "^2.2.0",
     "gatsby-plugin-vanilla-extract": "^4.0.1",
     "gatsby-source-filesystem": "^5.7.0"
+  },
+  "devDependencies": {
+    "@testing-library/cypress": "^9.0.0",
+    "@testing-library/react": "^14.0.0",
+    "axe-core": "^4.6.3",
+    "cypress": "^12.9.0",
+    "cypress-axe": "^1.4.0",
+    "start-server-and-test": "^2.0.0"
   }
 }

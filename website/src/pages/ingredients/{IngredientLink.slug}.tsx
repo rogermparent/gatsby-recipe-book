@@ -3,6 +3,7 @@ import { graphql, HeadFC, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
 import { RecipeListItem } from "core/src/components/Recipe/List";
 import PageTitle from "core/src/components/PageTitle";
+import { Metadata } from "core/src/components/Metadata";
 
 export const query = graphql`
   query IngredientPage($slug: String!) {
@@ -48,6 +49,6 @@ const IngredientPage: React.FC<PageProps<Queries.IngredientPageQuery>> = ({
 
 export default IngredientPage;
 
-export const Head: HeadFC<Queries.IngredientPageQuery> = ({ data }) => {
-  return <title>{data?.ingredientLink?.ingredientName}</title>;
-};
+export const Head: HeadFC<Queries.IngredientPageQuery> = ({ data }) => (
+  <Metadata title={data?.ingredientLink?.ingredientName} />
+);

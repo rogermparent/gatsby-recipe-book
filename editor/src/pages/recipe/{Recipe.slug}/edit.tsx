@@ -8,7 +8,7 @@ import {
 import { deleteRecipe } from "../../../calls/recipe/delete";
 import { updateRecipe } from "../../../calls/recipe/update";
 import PageTitle from "core/src/components/PageTitle";
-import { get } from "lodash";
+import { Metadata } from "core/src/components/Metadata";
 
 export const query = graphql`
   query RecipeEdit($id: String!) {
@@ -150,4 +150,4 @@ const EditPage: React.FC<PageProps<Queries.RecipeEditQuery>> = ({ data }) => {
 
 export default EditPage;
 
-export const Head: HeadFC = () => <title>Edit a Recipe</title>;
+export const Head: HeadFC = () => <Metadata title="Edit a Recipe" />;

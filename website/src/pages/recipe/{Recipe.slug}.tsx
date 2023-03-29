@@ -1,7 +1,9 @@
 import React from "react";
-import { graphql, HeadFC, PageProps } from "gatsby";
+import { graphql, HeadFC, Link, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
 import { Recipe } from "core/src/components/Recipe";
+import * as editorStyles from "core/src/components/Recipe/Page/editor.css";
+import { Metadata } from "core/src/components/Metadata";
 
 export const query = graphql`
   query RecipePage($id: String!) {
@@ -12,6 +14,15 @@ export const query = graphql`
 
   fragment RecipeDisplayData on Recipe {
     name
+    image {
+      childImageSharp {
+        gatsbyImageData(
+          width: 600
+          placeholder: BLURRED
+          formats: [AUTO, WEBP, AVIF]
+        )
+      }
+    }
     author {
       ...RecipeAuthorDisplayData
     }
@@ -77,6 +88,7 @@ const RecipePage: React.FC<PageProps<Queries.RecipePageQuery>> = ({
       nutrition,
       ingredients,
       instructions,
+      image,
     } = recipe;
     return (
       <SiteLayout>
@@ -96,7 +108,13 @@ const RecipePage: React.FC<PageProps<Queries.RecipePageQuery>> = ({
           nutrition={nutrition}
           ingredients={ingredients}
           instructions={instructions}
+          image={image}
         />
+        <div className={editorStyles.actions}>
+          <Link to="edit" className={editorStyles.editLink}>
+            Edit
+          </Link>
+        </div>
       </SiteLayout>
     );
   }
@@ -105,6 +123,6 @@ const RecipePage: React.FC<PageProps<Queries.RecipePageQuery>> = ({
 
 export default RecipePage;
 
-export const Head: HeadFC<Queries.RecipePageQuery> = ({ data: { recipe } }) => {
-  return <title>{recipe?.name}</title>;
-};
+export const Head: HeadFC<Queries.RecipePageQuery> = ({ data: { recipe } }) => (
+  <Metadata title={recipe?.name} />
+);

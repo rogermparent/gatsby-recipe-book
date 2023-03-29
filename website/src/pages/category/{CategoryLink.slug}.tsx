@@ -3,6 +3,7 @@ import { graphql, HeadFC, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
 import { RecipeList } from "core/src/components/Recipe/List";
 import PageTitle from "core/src/components/PageTitle";
+import { Metadata } from "core/src/components/Metadata";
 
 export const query = graphql`
   query CategoryPage($slug: String!) {
@@ -41,6 +42,6 @@ const CategoryPage: React.FC<PageProps<Queries.CategoryPageQuery>> = ({
 
 export default CategoryPage;
 
-export const Head: HeadFC<Queries.CategoryPageQuery> = ({ data }) => {
-  return <title>{data?.categoryLink?.value}</title>;
-};
+export const Head: HeadFC<Queries.CategoryPageQuery> = ({ data }) => (
+  <Metadata title={data?.categoryLink?.value} />
+);

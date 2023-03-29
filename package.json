@@ -42,12 +42,15 @@
     "tailwindcss": "^3.2.7"
   },
   "devDependencies": {
+    "@testing-library/cypress": "^9.0.0",
+    "@testing-library/react": "^14.0.0",
     "@types/lodash": "^4.14.191",
     "@types/node": "^18.14.0",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.55.0",
     "@typescript-eslint/parser": "^5.55.0",
+    "cypress": "^12.9.0",
     "eslint": "^8.36.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.27.5",
@@ -57,6 +60,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^13.2.0",
     "prettier": "^2.8.4",
+    "start-server-and-test": "^2.0.0",
     "typescript": "^5.0.2"
   },
   "workspaces": [

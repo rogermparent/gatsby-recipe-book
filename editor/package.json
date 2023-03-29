@@ -9,7 +9,9 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "cy:open": "cypress open",
+    "test:e2e": "start-server-and-test develop http://localhost:8000 cy:open"
   },
   "author": "",
   "license": "MIT",
@@ -17,5 +19,13 @@
     "gatsby": "^5.7.0",
     "gatsby-source-filesystem": "^5.7.0",
     "gatsby-transformer-json": "^5.7.0"
+  },
+  "devDependencies": {
+    "@testing-library/cypress": "^9.0.0",
+    "@testing-library/react": "^14.0.0",
+    "axe-core": "^4.6.3",
+    "cypress": "^12.9.0",
+    "cypress-axe": "^1.4.0",
+    "start-server-and-test": "^2.0.0"
   }
 }

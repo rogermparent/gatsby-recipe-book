@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, HeadFC, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
+import { Metadata } from "core/src/components/Metadata";
 
 const NotFoundPage: React.FC<PageProps> = () => (
   <SiteLayout>
@@ -24,4 +25,4 @@ const NotFoundPage: React.FC<PageProps> = () => (
 
 export default NotFoundPage;
 
-export const Head: HeadFC = () => <title>Not found</title>;
+export const Head: HeadFC = () => <Metadata title="Page not Found" />;

@@ -3,6 +3,7 @@ import { graphql, HeadFC, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
 import { RecipeList } from "core/src/components/Recipe/List";
 import PageTitle from "core/src/components/PageTitle";
+import { Metadata } from "core/src/components/Metadata";
 
 export const query = graphql`
   query CuisinePage($slug: String!) {
@@ -45,6 +46,4 @@ export default CuisinePage;
 
 export const Head: HeadFC<Queries.CuisinePageQuery, CuisineContext> = ({
   pageContext: { slug },
-}) => {
-  return <title>{slug}</title>;
-};
+}) => <Metadata title={slug} />;

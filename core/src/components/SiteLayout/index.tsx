@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { HeadFC, Link } from "gatsby";
+import { Link } from "gatsby";
 import * as styles from "./styles.css";
 
 const HeaderLink = ({ to, children }: { to: string; children: ReactNode }) => (
@@ -25,5 +25,3 @@ const IndexPage: React.FC<{ children: ReactNode }> = ({ children }) => (
 );
 
 export default IndexPage;
-
-export const Head: HeadFC = () => <title>Home Page</title>;

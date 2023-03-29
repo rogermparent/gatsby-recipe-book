@@ -3,6 +3,7 @@ import { graphql, HeadFC, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
 import { GroupList, RecipeGroup } from "core/src/components/GroupList";
 import PageTitle from "core/src/components/PageTitle";
+import { Metadata } from "core/src/components/Metadata";
 
 export const query = graphql`
   query IngredientIndex {
@@ -32,6 +33,6 @@ const IngredientIndex: React.FC<PageProps<Queries.IngredientIndexQuery>> = ({
 
 export default IngredientIndex;
 
-export const Head: HeadFC<Queries.IngredientIndexQuery> = () => {
-  return <title>Ingredients</title>;
-};
+export const Head: HeadFC<Queries.IngredientIndexQuery> = () => (
+  <Metadata title="Ingredients" />
+);

@@ -9,6 +9,7 @@ import { createRecipe } from "../../calls/recipe/create";
 import { useForm } from "react-hook-form";
 import { processRecipe } from "../../calls/recipe/process";
 import PageTitle from "core/src/components/PageTitle";
+import { Metadata } from "core/src/components/Metadata";
 
 const EditPage: React.FC<PageProps> = () => {
   const form = useForm<RecipeFormValues>({});
@@ -30,4 +31,4 @@ const EditPage: React.FC<PageProps> = () => {
 
 export default EditPage;
 
-export const Head: HeadFC = () => <title>Edit a Recipe</title>;
+export const Head: HeadFC = () => <Metadata title="Edit a Recipe" />;
