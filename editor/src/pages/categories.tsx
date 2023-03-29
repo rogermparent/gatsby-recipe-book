@@ -2,6 +2,7 @@ import React from "react";
 import { graphql, HeadFC, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
 import { GroupList, RecipeGroup } from "core/src/components/GroupList";
+import PageTitle from "core/src/components/PageTitle";
 
 export const query = graphql`
   query CategoryIndex {
@@ -23,7 +24,7 @@ const CategoryIndex: React.FC<PageProps<Queries.CategoryIndexQuery>> = ({
 }) => {
   return (
     <SiteLayout>
-      <h2>Categories</h2>
+      <PageTitle>Categories</PageTitle>
       <GroupList group={data?.allCategoryLink?.group as RecipeGroup[]} />
     </SiteLayout>
   );

@@ -23,6 +23,7 @@ export const createSchemaCustomization = ({
       fields: {
         slug: "String!",
         name: "String!",
+        image: { type: "File", extensions: { link: { by: "base" } } },
         ingredients: "[RecipeIngredient!]!",
         ingredientsCount: "Int!",
         instructions: "[RecipeInstruction!]!",
@@ -164,6 +165,7 @@ export const onCreateNode = ({
       const fileNode = getNode(parent);
       const { name: slug } = fileNode;
       const {
+        image,
         name,
         description,
         ingredients = [],
@@ -183,6 +185,7 @@ export const onCreateNode = ({
 
       const idSeed = `Recipe >>> ${slug}`;
       const fields = {
+        image,
         name,
         slug,
         ingredients,

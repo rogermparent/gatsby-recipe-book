@@ -26,6 +26,15 @@ const config = () => {
       {
         resolve: "gatsby-source-filesystem",
         options: {
+          name: "uploads",
+          path: path.join(corePath, "..", "content", "uploads"),
+          ignore: [`**/.*`],
+        },
+        __key: "uploads",
+      },
+      {
+        resolve: "gatsby-source-filesystem",
+        options: {
           name: "recipes",
           path: path.join(corePath, "..", "content", "recipes"),
           ignore: [`**/.*`],

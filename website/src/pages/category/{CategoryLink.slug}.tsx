@@ -2,6 +2,7 @@ import React from "react";
 import { graphql, HeadFC, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
 import { RecipeList } from "core/src/components/Recipe/List";
+import PageTitle from "core/src/components/PageTitle";
 
 export const query = graphql`
   query CategoryPage($slug: String!) {
@@ -24,7 +25,9 @@ const CategoryPage: React.FC<PageProps<Queries.CategoryPageQuery>> = ({
   if (data) {
     return (
       <SiteLayout>
-        <h2>Recipes with category: {data?.categoryLink?.value}</h2>
+        <PageTitle>
+          Recipes with category: {data?.categoryLink?.value}
+        </PageTitle>
         <RecipeList
           recipes={data.allCategoryLink.nodes.map(
             ({ parent }) => parent as Queries.RecipeListItemFragment

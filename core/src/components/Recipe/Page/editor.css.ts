@@ -9,7 +9,6 @@ export const actions = sprinkles({
 
 export const editLink = sprinkles({
   display: { default: "block", print: "none" },
-  color: { darkMode: "primaryDark", lightMode: "primaryLight" },
   padding: 2,
   fontSize: "lg",
 });

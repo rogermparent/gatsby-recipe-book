@@ -1,5 +1,5 @@
 import React from "react";
-import { graphql, HeadFC, Link, PageProps } from "gatsby";
+import { graphql, HeadFC, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
 import { Recipe } from "core/src/components/Recipe";
 

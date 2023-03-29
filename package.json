@@ -11,6 +11,7 @@
     "clean": "npm run clean -w editor -w website",
     "develop": "npm run develop -w editor",
     "editor": "npm run develop -w editor",
+    "editor-public": "npm run -w editor -- develop -H 0.0.0.0",
     "start": "npm run start -w editor",
     "build": "npm run build -w website",
     "clean-website": "npm run clean -w website",

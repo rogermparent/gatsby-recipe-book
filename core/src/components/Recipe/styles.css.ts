@@ -1,7 +1,10 @@
 import { style } from "@vanilla-extract/css";
 import { sprinkles } from "../../styles/sprinkles.css";
 
-export const container = sprinkles({});
+export const container = sprinkles({
+  maxWidth: "2xl",
+  marginX: "auto",
+});
 
 export const title = sprinkles({
   fontFamily: "sans",
@@ -61,12 +64,7 @@ export const infoCard = sprinkles({
 
 export const infoCardTitle = sprinkles({ fontWeight: "bold" });
 
-export const infoCardBody = sprinkles({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  flexGrow: 1,
-});
+export const infoCardBody = sprinkles({});
 
 export const multiplyInput = sprinkles({
   width: 14,
@@ -75,6 +73,7 @@ export const multiplyInput = sprinkles({
 });
 
 export const multiplier = sprinkles({
+  fontSize: "sm",
   padding: 1,
   display: { print: "none" },
   fontWeight: "semibold",
@@ -82,12 +81,18 @@ export const multiplier = sprinkles({
 
 export const description = sprinkles({ margin: 2, fontSize: "sm" });
 
+export const ingredientsSection = sprinkles({
+  flexShrink: 0,
+});
+
 export const ingredientsList = sprinkles({
+  padding: 1,
   paddingLeft: 2,
   marginY: 1,
   listStyle: "none",
 });
 export const instructionsList = sprinkles({
+  padding: 1,
   marginY: 1,
   paddingLeft: 8,
 });
@@ -97,4 +102,18 @@ export const ingredientsListItem = sprinkles({
 });
 export const instructionsListItem = sprinkles({
   paddingY: { default: 1, print: 0.5 },
+});
+
+export const ingredientsAndInstructions = sprinkles({
+  display: "flex",
+  flexDirection: {
+    default: "column",
+  },
+  flexWrap: "nowrap",
+});
+
+export const primaryImage = sprinkles({
+  marginX: "auto",
+  maxWidth: "xl",
+  display: { default: "block", print: "none" },
 });

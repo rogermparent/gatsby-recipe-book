@@ -3,6 +3,7 @@ import { ChangeEvent, ReactNode, Reducer, useMemo, useReducer } from "react";
 import Fraction from "fraction.js";
 import { FieldWrapper } from "../Form";
 import * as styles from "./styles.css";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 export const Ingredient = ({
   ingredient,
@@ -120,6 +121,7 @@ export const Recipe = ({
   servings,
   servingSize,
   description,
+  image,
 }: Queries.RecipeDisplayDataFragment) => {
   const [{ fraction: multiplier }, setMultiplier] = useReducer(
     fractionInputReducer,
@@ -130,11 +132,15 @@ export const Recipe = ({
     multiplier && servings
       ? multiplier.mul(servings).toFraction(true)
       : servings;
+
+  const imageData = image?.childImageSharp && getImage(image.childImageSharp);
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>{name}</h1>
       {description && <p className={styles.description}>{description}</p>}
-
+      {imageData && (
+        <GatsbyImage image={imageData} alt="" className={styles.primaryImage} />
+      )}
       <div className={styles.infoCards}>
         <div className={styles.infoCardGroup}>
           {prepTime && <InfoCard title="Prep Time">{prepTime}</InfoCard>}
@@ -144,15 +150,13 @@ export const Recipe = ({
         <div className={styles.infoCardGroup}>
           {multipliedServings && (
             <InfoCard title="Servings">
-              <span>{multipliedServings}</span> <span>{servingSize}</span>
+              <span>{multipliedServings}</span>{" "}
+              {servingSize && <span>{servingSize}</span>}
             </InfoCard>
           )}
 
-          <FieldWrapper
-            label="Multiply"
-            name="multiplier"
-            className={styles.multiplier}
-          >
+          <label htmlFor="multiplier" className={styles.multiplier}>
+            <div className={styles.multiplierHeading}>Multiply</div>
             <input
               className={styles.multiplyInput}
               id="multiplier"
@@ -160,20 +164,22 @@ export const Recipe = ({
                 setMultiplier(e.target.value);
               }}
             />
-          </FieldWrapper>
+          </label>
         </div>
       </div>
-      <Ingredients ingredients={ingredients} multiplier={multiplier} />
-      {instructions && (
-        <div className={styles.instructionsSection}>
-          <h2 className={styles.instructionsHeading}>Instructions</h2>
-          <ol className={styles.instructionsList}>
-            {instructions.map(({ name, text }, i) => (
-              <Instruction key={i} name={name} text={text} />
-            ))}
-          </ol>
-        </div>
-      )}
+      <div className={styles.ingredientsAndInstructions}>
+        <Ingredients ingredients={ingredients} multiplier={multiplier} />
+        {instructions && (
+          <div className={styles.instructionsSection}>
+            <h2 className={styles.instructionsHeading}>Instructions</h2>
+            <ol className={styles.instructionsList}>
+              {instructions.map(({ name, text }, i) => (
+                <Instruction key={i} name={name} text={text} />
+              ))}
+            </ol>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

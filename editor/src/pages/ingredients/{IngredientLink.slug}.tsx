@@ -2,6 +2,7 @@ import React from "react";
 import { graphql, HeadFC, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
 import { RecipeListItem } from "core/src/components/Recipe/List";
+import PageTitle from "core/src/components/PageTitle";
 
 export const query = graphql`
   query IngredientPage($slug: String!) {
@@ -25,7 +26,7 @@ const IngredientPage: React.FC<PageProps<Queries.IngredientPageQuery>> = ({
     const ingredientName = data?.ingredientLink?.ingredientName;
     return (
       <SiteLayout>
-        <h2>Recipes with ingredient: {ingredientName}</h2>
+        <PageTitle>Recipes with ingredient: {ingredientName}</PageTitle>
         {data.allIngredientLink.nodes.map(({ parent }) => {
           const { pagePath, datePublished, name } =
             parent as Queries.RecipeListItemFragment;

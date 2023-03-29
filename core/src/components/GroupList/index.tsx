@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "gatsby";
+import * as styles from "./styles.css";
 
 export interface RecipeGroup {
   totalCount: number;
@@ -8,10 +9,10 @@ export interface RecipeGroup {
 
 export const GroupList = ({ group }: { group: readonly RecipeGroup[] }) => {
   return (
-    <ul>
+    <ul className={styles.list}>
       {group.map(({ totalCount, nodes: [{ gatsbyPath, value }] }) => (
-        <li key={value}>
-          <Link to={gatsbyPath as string}>
+        <li key={value} className={styles.item}>
+          <Link to={gatsbyPath as string} className={styles.itemLink}>
             {value} ({totalCount})
           </Link>
         </li>

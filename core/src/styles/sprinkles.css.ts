@@ -8,13 +8,34 @@ const borders = {
   default: "1px solid",
 };
 
-const colors = {
-  primaryDark: tailwindColors.amber[200],
-  backgroundDark: tailwindColors.slate[900],
-  altBackgroundDark: tailwindColors.gray[800],
-  primaryLight: tailwindColors.slate[900],
-  backgroundLight: tailwindColors.fuchsia[100],
-  altBackgroundLight: tailwindColors.gray[400],
+const solarized = {
+  base03: "#002b36",
+  base02: "#073642",
+  base01: "#586e75",
+  base00: "#657b83",
+  base0: "#839496",
+  base1: "#93a1a1",
+  base2: "#eee8d5",
+  base3: "#fdf6e3",
+  yellow: "#b58900",
+  orange: "#cb4b16",
+  red: "#dc322f",
+  magenta: "#d33682",
+  violet: "#6c71c4",
+  blue: "#268bd2",
+  cyan: "#2aa198",
+  green: "#859900",
+};
+
+export const colors = {
+  ...solarized,
+  black: "#000",
+  bodyDark: solarized.base1,
+  backgroundDark: solarized.base02,
+  altBackgroundDark: solarized.base03,
+  bodyLight: solarized.base01,
+  backgroundLight: solarized.base2,
+  altBackgroundLight: solarized.base3,
 };
 
 const tailwindSpacing = {
@@ -87,6 +108,15 @@ const tailwindSpacing = {
   fit: "fit-content",
 };
 
+const minHeight = {
+  0: "0px",
+  full: "100%",
+  screen: "100vh",
+  min: "min-content",
+  max: "max-content",
+  fit: "fit-content",
+};
+
 const tailwindMaxWidth = {
   xs: "20rem",
   sm: "24rem",
@@ -123,6 +153,7 @@ const responsiveProperties = defineProperties({
   defaultCondition: "default",
   responsiveArray: ["default", "sm", "md", "lg", "xl", "2xl"],
   properties: {
+    selectors: { links: { "& a": {} } },
     resize: ["both", "vertical", "horizontal", "none"],
     position: ["relative", "absolute", "sticky"],
     display: ["none", "flex", "block", "inline", "inline-block"],
@@ -140,7 +171,7 @@ const responsiveProperties = defineProperties({
     width: tailwindSpacing,
     height: tailwindSpacing,
     minWidth: tailwindMinWidth,
-    minHeight: tailwindSpacing,
+    minHeight,
     maxWidth: tailwindMaxWidth,
     maxHeight: tailwindSpacing,
     marginTop: tailwindSpacing,
@@ -193,10 +224,13 @@ const responsiveProperties = defineProperties({
   },
 });
 
-const colorProperties = defineProperties({
+export const colorProperties = defineProperties({
   conditions: {
     lightMode: {},
     darkMode: { "@media": "(prefers-color-scheme: dark)" },
+    print: { "@media": "print" },
+    hover: { selector: "&:hover" },
+    visited: { selector: "&:visited" },
   },
   defaultCondition: "lightMode",
   properties: {

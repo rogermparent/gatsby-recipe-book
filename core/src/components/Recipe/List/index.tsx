@@ -10,10 +10,10 @@ export function RecipeListItem({
   return (
     <li>
       <div className={styles.recipeItem}>
-        <Link to={pagePath as string}>
+        <Link to={pagePath as string} className={styles.itemLink}>
           <h3 className={styles.heading}>{name}</h3>
         </Link>
-        <div className={styles.date}>{datePublished}</div>
+        {datePublished && <div className={styles.date}>{datePublished}</div>}
       </div>
     </li>
   );

@@ -13,6 +13,15 @@ export const query = graphql`
 
   fragment RecipeDisplayData on Recipe {
     name
+    image {
+      childImageSharp {
+        gatsbyImageData(
+          width: 600
+          placeholder: BLURRED
+          formats: [AUTO, WEBP, AVIF]
+        )
+      }
+    }
     author {
       ...RecipeAuthorDisplayData
     }
@@ -78,6 +87,7 @@ const RecipePage: React.FC<PageProps<Queries.RecipePageQuery>> = ({
       nutrition,
       ingredients,
       instructions,
+      image,
     } = recipe;
     return (
       <SiteLayout>
@@ -97,6 +107,7 @@ const RecipePage: React.FC<PageProps<Queries.RecipePageQuery>> = ({
           nutrition={nutrition}
           ingredients={ingredients}
           instructions={instructions}
+          image={image}
         />
         <div className={editorStyles.actions}>
           <Link to="edit" className={editorStyles.editLink}>

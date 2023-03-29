@@ -1,10 +1,7 @@
 import { GatsbyFunctionRequest, GatsbyFunctionResponse } from "gatsby";
 import path from "path";
 import fs from "fs/promises";
-
-interface ContactBody {
-  message: string;
-}
+import setValue from "lodash/set";
 
 const contentDirectory = path.resolve(
   __dirname,
@@ -12,24 +9,69 @@ const contentDirectory = path.resolve(
   "..",
   "..",
   "..",
-  "content",
-  "recipes"
+  "content"
 );
+const recipesDirectory = path.resolve(contentDirectory, "recipes");
+
+const uploadsDirectory = path.resolve(contentDirectory, "uploads");
+
+interface GatsbyFunctionRequestWithFiles extends GatsbyFunctionRequest {
+  files?: FileEntry[];
+}
 
 interface Handler {
   (
-    req: GatsbyFunctionRequest<ContactBody>,
+    req: GatsbyFunctionRequestWithFiles,
     res: GatsbyFunctionResponse,
     filename: string
   ): Promise<void>;
 }
 
+interface ReconstitutedFormValues {
+  [key: string]: string | number | ReconstitutedFormValues;
+}
+
+const handleField = (
+  acc: ReconstitutedFormValues,
+  key: string,
+  value: string
+) => value && setValue(acc, key, value);
+
+interface FileEntry {
+  originalname: string;
+  fieldname: string;
+  buffer: Buffer;
+}
+
+const processFormData = (
+  body: Record<string, string>,
+  files: FileEntry[] | undefined
+) => {
+  const acc = {} as ReconstitutedFormValues;
+  if (body) {
+    for (const [key, value] of Object.entries(body as Record<string, string>)) {
+      handleField(acc, key, value);
+    }
+  }
+  if (files) {
+    for (const file of files) {
+      const { fieldname, originalname, buffer } = file;
+      const uploadFilePath = path.join(uploadsDirectory, originalname);
+      console.log("Writing upload file", uploadFilePath);
+      fs.writeFile(uploadFilePath, buffer);
+      setValue(acc, fieldname, originalname);
+    }
+  }
+  return acc;
+};
+
 const handlers: Record<string, Handler> = {
   async PUT(req, res, fullFilename) {
-    const { body } = req;
+    const { body, files } = req;
     try {
       console.log("Updating", fullFilename);
-      const fileContent = JSON.stringify(body, undefined, 2);
+      const data = processFormData(body, files);
+      const fileContent = JSON.stringify(data, undefined, 2);
       await fs.writeFile(fullFilename, fileContent);
       res.json({ status: "Success", fullFilename });
     } catch (e) {
@@ -46,10 +88,11 @@ const handlers: Record<string, Handler> = {
     }
   },
   async POST(req, res, fullFilename) {
-    const { body } = req;
+    const { body, files } = req;
     try {
       console.log("Writing", fullFilename);
-      const fileContent = JSON.stringify(body, undefined, 2);
+      const data = processFormData(body, files);
+      const fileContent = JSON.stringify(data, undefined, 2);
       await fs.writeFile(fullFilename, fileContent);
       res.json({ status: "Success", fullFilename });
     } catch (e) {
@@ -59,7 +102,7 @@ const handlers: Record<string, Handler> = {
 };
 
 export default async function handler(
-  req: GatsbyFunctionRequest<ContactBody>,
+  req: GatsbyFunctionRequestWithFiles,
   res: GatsbyFunctionResponse
 ) {
   const {
@@ -69,7 +112,7 @@ export default async function handler(
   if (method) {
     const methodHandler = handlers[method];
     if (methodHandler) {
-      const fullFilename = path.join(contentDirectory, `${id}.json`);
+      const fullFilename = path.join(recipesDirectory, `${id}.json`);
       return methodHandler(req, res, fullFilename);
     }
   }

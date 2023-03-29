@@ -1,5 +1,5 @@
-import { globalStyle } from "@vanilla-extract/css";
-import { sprinkles } from "../../styles/sprinkles.css";
+import { globalStyle, style } from "@vanilla-extract/css";
+import { colors, sprinkles } from "../../styles/sprinkles.css";
 
 globalStyle("*", {
   boxSizing: "border-box",
@@ -7,8 +7,22 @@ globalStyle("*", {
 
 globalStyle("body, html", { padding: 0, margin: 0 });
 
+globalStyle("a", {
+  color: colors.blue,
+});
+
+globalStyle("a:visited", {
+  color: colors.violet,
+});
+
+globalStyle("a:hover", {
+  color: colors.cyan,
+});
+
 export const wrapper = sprinkles({
-  color: { lightMode: "primaryLight", darkMode: "primaryDark" },
+  height: "full",
+  minHeight: { default: "screen", print: "fit" },
+  color: { lightMode: "bodyLight", darkMode: "bodyDark", print: "black" },
   background: { lightMode: "backgroundLight", darkMode: "backgroundDark" },
 });
 
@@ -24,7 +38,6 @@ export const mainHeading = sprinkles({
   fontWeight: "bold",
   fontSize: "3xl",
   textAlign: ["center", "left"],
-  color: { darkMode: "primaryDark", lightMode: "primaryLight" },
 });
 
 export const header = sprinkles({
@@ -39,5 +52,4 @@ export const homeLink = sprinkles({
   padding: 2,
   fontWeight: "bold",
   display: "inline-block",
-  color: { darkMode: "primaryDark", lightMode: "primaryLight" },
 });

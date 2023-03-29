@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useState } from "react";
 import {
   Control,
   FieldArrayPath,
@@ -12,13 +12,20 @@ import {
 import { DEFAULT_INGREDIENT_SELECTOR_ID } from "../IngredientSelector";
 import { RecipeFormValues } from "../Recipe/Form";
 import * as styles from "./styles.css";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 export interface CommonFieldProps<T extends FieldValues = RecipeFormValues> {
   label?: string;
   errors?: FieldErrors<T> | undefined;
 }
 
-export interface FieldProps<T extends FieldValues = RecipeFormValues>
+interface SelfRegisteringFieldProps<T extends FieldValues = RecipeFormValues>
+  extends CommonFieldProps<T> {
+  register: UseFormRegister<T>;
+  name: keyof T;
+}
+
+export interface RegisteredFieldProps<T extends FieldValues = RecipeFormValues>
   extends CommonFieldProps<T> {
   registration: UseFormRegisterReturn;
 }
@@ -48,7 +55,7 @@ export function FieldWrapper({
   const fieldErrors = errors?.[name];
   return (
     <div className={className}>
-      <label htmlFor={name}>
+      <label htmlFor={name} className={styles.fieldLabelWrapper}>
         {fieldErrors && (
           <div>
             {fieldErrors.message
@@ -56,7 +63,7 @@ export function FieldWrapper({
               : fieldErrors.type?.toString()}
           </div>
         )}
-        {label && <div>{label}</div>}
+        {label && <div className={styles.fieldLabelHeading}>{label}</div>}
         {children}
       </label>
     </div>
@@ -69,7 +76,7 @@ export function InputField({
   errors,
   type,
   list,
-}: FieldProps & {
+}: RegisteredFieldProps & {
   type?: string;
   list?: string;
 }) {
@@ -87,13 +94,57 @@ export function InputField({
   );
 }
 
+export function ImageField({
+  label,
+  register,
+  name,
+  errors,
+  originalData,
+}: SelfRegisteringFieldProps & {
+  originalData?: Queries.RecipeImageEditorDataFragment | null;
+}) {
+  const [imagePreviewURL, setImagePreviewURL] = useState<string | undefined>();
+  const imageData =
+    originalData?.childImageSharp && getImage(originalData.childImageSharp);
+  return (
+    <FieldWrapper label={label} errors={errors} name={name}>
+      {imagePreviewURL ? (
+        <div>
+          <img src={imagePreviewURL} />
+        </div>
+      ) : (
+        imageData && (
+          <div>
+            <GatsbyImage image={imageData} alt="" />
+          </div>
+        )
+      )}
+      <input
+        type="file"
+        {...register(name, {
+          onChange: (e) => {
+            const newFile = e.target.files[0];
+            if (newFile) {
+              const oldPreviewURL = imagePreviewURL;
+              setImagePreviewURL(URL.createObjectURL(newFile));
+              if (oldPreviewURL) {
+                URL.revokeObjectURL(oldPreviewURL);
+              }
+            }
+          },
+        })}
+      />
+    </FieldWrapper>
+  );
+}
+
 export function AuthorListField({
   control,
   register,
   errors,
   label,
   name,
-}: FieldArrayProps<RecipeFormValues, "recipe.author"> & { label: string }) {
+}: FieldArrayProps<RecipeFormValues, "author"> & { label: string }) {
   const { fields, remove, move, append } = useFieldArray({ control, name });
   return (
     <FieldWrapper name={name} label={label} errors={errors}>
@@ -154,10 +205,10 @@ export function IngredientListField({
   errors,
   label,
   name,
-}: FieldArrayProps & { name: "recipe.ingredients" }) {
+}: FieldArrayProps & { name: "ingredients" }) {
   const { fields, remove, move, append } = useFieldArray<
     RecipeFormValues,
-    "recipe.ingredients"
+    "ingredients"
   >({ control, name });
   return (
     <FieldWrapper name={name} label={label} errors={errors}>
@@ -169,14 +220,14 @@ export function IngredientListField({
               <InputField
                 label="Quantity"
                 registration={register(
-                  `${fieldName}.quantity` as "recipe.ingredients.0.quantity"
+                  `${fieldName}.quantity` as "ingredients.0.quantity"
                 )}
                 errors={errors}
               />
               <InputField
                 label="Unit"
                 registration={register(
-                  `${fieldName}.unit` as "recipe.ingredients.0.unit"
+                  `${fieldName}.unit` as "ingredients.0.unit"
                 )}
                 errors={errors}
               />
@@ -184,14 +235,14 @@ export function IngredientListField({
                 list={DEFAULT_INGREDIENT_SELECTOR_ID}
                 label="Ingredient"
                 registration={register(
-                  `${fieldName}.ingredient` as "recipe.ingredients.0.ingredient"
+                  `${fieldName}.ingredient` as "ingredients.0.ingredient"
                 )}
                 errors={errors}
               />
               <InputField
                 label="Note"
                 registration={register(
-                  `${fieldName}.note` as "recipe.ingredients.0.note"
+                  `${fieldName}.note` as "ingredients.0.note"
                 )}
                 errors={errors}
               />
@@ -236,7 +287,7 @@ export function InstructionListField({
   errors,
   label,
   name,
-}: FieldArrayProps<RecipeFormValues, "recipe.instructions">) {
+}: FieldArrayProps<RecipeFormValues, "instructions">) {
   const { fields, remove, move, append } = useFieldArray({ control, name });
   return (
     <FieldWrapper name={name} label={label} errors={errors}>
@@ -248,14 +299,14 @@ export function InstructionListField({
               <InputField
                 label="Name"
                 registration={register(
-                  `${fieldName}.name` as "recipe.instructions.0.name"
+                  `${fieldName}.name` as "instructions.0.name"
                 )}
                 errors={errors}
               />
               <TextareaField
                 label="Text"
                 registration={register(
-                  `${fieldName}.text` as "recipe.instructions.0.text"
+                  `${fieldName}.text` as "instructions.0.text"
                 )}
                 errors={errors}
               />
@@ -296,7 +347,7 @@ export function InstructionListField({
   );
 }
 
-type StringFields = "recipe.category" | "recipe.cuisine";
+type StringFields = "category" | "cuisine";
 
 export function StringListField({
   control,
@@ -354,11 +405,15 @@ export function StringListField({
   );
 }
 
-export function TextareaField({ label, registration, errors }: FieldProps) {
+export function TextareaField({
+  label,
+  registration,
+  errors,
+}: RegisteredFieldProps) {
   const { name } = registration;
   return (
     <FieldWrapper name={name} label={label} errors={errors}>
-      <textarea id={name} className={styles.textarea} {...registration} />
+      <textarea id={name} className={styles.inputField} {...registration} />
     </FieldWrapper>
   );
 }
