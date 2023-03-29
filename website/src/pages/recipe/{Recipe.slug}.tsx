@@ -2,7 +2,6 @@ import React from "react";
 import { graphql, HeadFC, Link, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
 import { Recipe } from "core/src/components/Recipe";
-import * as editorStyles from "core/src/components/Recipe/Page/editor.css";
 import { Metadata } from "core/src/components/Metadata";
 
 export const query = graphql`
@@ -110,11 +109,6 @@ const RecipePage: React.FC<PageProps<Queries.RecipePageQuery>> = ({
           instructions={instructions}
           image={image}
         />
-        <div className={editorStyles.actions}>
-          <Link to="edit" className={editorStyles.editLink}>
-            Edit
-          </Link>
-        </div>
       </SiteLayout>
     );
   }
