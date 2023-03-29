@@ -31,11 +31,11 @@ export const colors = {
   ...solarized,
   black: "#000",
   bodyDark: solarized.base1,
-  backgroundDark: solarized.base02,
-  altBackgroundDark: solarized.base03,
+  backgroundDark: solarized.base03,
+  altBackgroundDark: solarized.base02,
   bodyLight: solarized.base01,
-  backgroundLight: solarized.base2,
-  altBackgroundLight: solarized.base3,
+  backgroundLight: solarized.base3,
+  altBackgroundLight: solarized.base2,
 };
 
 const tailwindSpacing = {

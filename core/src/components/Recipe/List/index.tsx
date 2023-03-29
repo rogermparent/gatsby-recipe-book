@@ -11,7 +11,7 @@ export function RecipeListItem({
     <li>
       <div className={styles.recipeItem}>
         <Link to={pagePath as string} className={styles.itemLink}>
-          <h3 className={styles.heading}>{name}</h3>
+          <div className={styles.heading}>{name}</div>
         </Link>
         {datePublished && <div className={styles.date}>{datePublished}</div>}
       </div>

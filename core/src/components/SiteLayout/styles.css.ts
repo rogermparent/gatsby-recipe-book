@@ -8,15 +8,15 @@ globalStyle("*", {
 globalStyle("body, html", { padding: 0, margin: 0 });
 
 globalStyle("a", {
-  color: colors.blue,
+  color: colors.cyan,
 });
 
 globalStyle("a:visited", {
-  color: colors.violet,
+  color: colors.blue,
 });
 
 globalStyle("a:hover", {
-  color: colors.cyan,
+  color: colors.green,
 });
 
 export const wrapper = sprinkles({
