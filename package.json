@@ -8,15 +8,15 @@
     "gatsby"
   ],
   "scripts": {
-    "clean": "npm run clean -w editor -w website",
-    "develop": "npm run develop -w editor",
-    "editor": "npm run develop -w editor",
-    "editor-public": "npm run -w editor -- develop -H 0.0.0.0",
-    "start": "npm run start -w editor",
-    "build": "npm run build -w website",
-    "clean-website": "npm run clean -w website",
-    "develop-website": "npm run develop -w website",
-    "serve": "npm run serve -w website",
+    "clean": "npm -w editor -w website run clean",
+    "develop": "npm -w editor run develop",
+    "editor": "npm -w editor run develop",
+    "editor-public": "npm -w editor run -- develop -H 0.0.0.0",
+    "start": "npm -w editor run start",
+    "build": "npm -w website run build",
+    "clean-website": "npm -w website run clean",
+    "develop-website": "npm -w website run develop",
+    "serve": "npm -w website run serve",
     "prepare": "husky install"
   },
   "dependencies": {

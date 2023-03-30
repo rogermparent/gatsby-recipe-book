@@ -3,12 +3,14 @@ import { graphql, HeadFC, navigate, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
 import {
   RecipeForm,
+  RecipeFormValues,
   initializeFormState,
 } from "core/src/components/Recipe/Form";
 import { deleteRecipe } from "../../../calls/recipe/delete";
 import { updateRecipe } from "../../../calls/recipe/update";
 import PageTitle from "core/src/components/PageTitle";
 import { Metadata } from "core/src/components/Metadata";
+import { buildFormData } from "../../../calls/recipe/process";
 
 export const query = graphql`
   query RecipeEdit($id: String!) {
@@ -80,33 +82,6 @@ export const query = graphql`
   }
 `;
 
-type FormLeafValue = string | number | FileList;
-type FormObjectValue = Record<string, FormLeafValue>;
-type SingleFormValue = FormLeafValue | FormObjectValue;
-type FormValue = SingleFormValue | SingleFormValue[];
-
-const handleEntry: (
-  formData: FormData,
-  entry: [string, FormValue],
-  currentPath?: string
-) => void = (formData, [key, value], currentPath) => {
-  if (value) {
-    const newPath = currentPath ? `${currentPath}.${key}` : key;
-    if (value instanceof FileList) {
-      const file = value[0];
-      if (file) {
-        formData.append(newPath, file);
-      }
-    } else if (typeof value === "object") {
-      for (const entry of Object.entries(value)) {
-        handleEntry(formData, entry, newPath);
-      }
-    } else {
-      formData.append(newPath, String(value));
-    }
-  }
-};
-
 const EditPage: React.FC<PageProps<Queries.RecipeEditQuery>> = ({ data }) => {
   const { recipe: recipeData } = data;
 
@@ -119,20 +94,11 @@ const EditPage: React.FC<PageProps<Queries.RecipeEditQuery>> = ({ data }) => {
           originalData={recipe}
           submitText="Edit Recipe"
           defaultValues={initializeFormState(recipe)}
-          onSubmit={(data, event) => {
-            if (event) {
-              const formData = new FormData();
-              const entries = Object.entries(data);
-
-              for (const entry of entries) {
-                handleEntry(formData, entry);
-              }
-
-              updateRecipe(formData, slug).then(() => {
-                navigate(pagePath as string);
-              });
-            }
-          }}
+          onSubmit={(data) =>
+            updateRecipe(buildFormData(data), slug).then(() => {
+              navigate(pagePath as string);
+            })
+          }
         />
         <button
           onClick={() => {

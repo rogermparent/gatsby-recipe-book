@@ -2,8 +2,9 @@ import { GatsbyFunctionRequest, GatsbyFunctionResponse } from "gatsby";
 import path from "path";
 import fs from "fs/promises";
 import setValue from "lodash/set";
+import { getContentDirectory } from "core/getContentDirectory.mjs";
 
-const contentDirectory = path.resolve("content");
+const contentDirectory = getContentDirectory();
 const recipesDirectory = path.resolve(contentDirectory, "recipes");
 const uploadsDirectory = path.resolve(contentDirectory, "uploads");
 
@@ -23,11 +24,20 @@ interface ReconstitutedFormValues {
   [key: string]: string | number | ReconstitutedFormValues;
 }
 
+const fieldHandlers: Record<string, (input: string) => string | number> = {
+  servings: Number,
+  prepTime: Number,
+  cookTime: Number,
+  totalTime: Number,
+};
+
 const handleField = (
   acc: ReconstitutedFormValues,
   key: string,
   value: string
-) => value && setValue(acc, key, value);
+) =>
+  value &&
+  setValue(acc, key, fieldHandlers[key] ? fieldHandlers[key](value) : value);
 
 interface FileEntry {
   originalname: string;

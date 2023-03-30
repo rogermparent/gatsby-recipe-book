@@ -8,4 +8,9 @@ describe("Accessibility tests", () => {
   it("Has no detectable accessibility violations on load", () => {
     cy.checkA11y();
   });
+  it("Navigates to Best Ever Meat Loaf and checks for accessibility violations", () => {
+    cy.findByText(/Best Ever Meat Loaf/i)
+      .click()
+      .checkA11y();
+  });
 });

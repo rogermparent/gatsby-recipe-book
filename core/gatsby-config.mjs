@@ -1,7 +1,10 @@
 import path from "path";
 import url from "url";
+import { getContentDirectory } from "./getContentDirectory.mjs";
 
 export const corePath = url.fileURLToPath(new URL(".", import.meta.url));
+
+const contentDirectory = getContentDirectory();
 
 const config = () => {
   return {
@@ -27,7 +30,7 @@ const config = () => {
         resolve: "gatsby-source-filesystem",
         options: {
           name: "uploads",
-          path: path.resolve("content", "uploads"),
+          path: path.resolve(contentDirectory, "uploads"),
           ignore: [`**/.*`],
         },
         __key: "uploads",
@@ -36,7 +39,7 @@ const config = () => {
         resolve: "gatsby-source-filesystem",
         options: {
           name: "recipes",
-          path: path.resolve("content", "recipes"),
+          path: path.resolve(contentDirectory, "recipes"),
           ignore: [`**/.*`],
         },
         __key: "recipes",

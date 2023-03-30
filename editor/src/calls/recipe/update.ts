@@ -1,5 +1,3 @@
-import { navigate } from "gatsby";
-
 export const updateRecipe = async (data: FormData, slug: string) => {
   console.log("Submitting", data);
   await fetch(`/api/recipes/${slug}`, {
@@ -7,5 +5,4 @@ export const updateRecipe = async (data: FormData, slug: string) => {
     body: data,
   });
   console.log("Submitted!");
-  // navigate("/");
 };

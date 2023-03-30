@@ -1,18 +1,8 @@
-import { navigate } from "gatsby";
-
-export const createRecipe = async (
-  data: Queries.RecipeEditorDataFragment,
-  slug: string
-) => {
+export const createRecipe = async (data: FormData, slug: string) => {
   console.log("Submitting", data);
   await fetch(`/api/recipes/${slug}`, {
     method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data, undefined, 2),
+    body: data,
   });
   console.log("Submitted!");
-  navigate("/");
 };

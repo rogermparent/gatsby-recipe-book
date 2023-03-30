@@ -47,7 +47,6 @@ export const initializeFormState: (
     category: buildPlaceholderStrings(recipe.category),
     image: recipe.image?.base || null,
   } as RecipeFormValues;
-  console.log(result);
   return result;
 };
 
