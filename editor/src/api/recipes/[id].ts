@@ -3,16 +3,8 @@ import path from "path";
 import fs from "fs/promises";
 import setValue from "lodash/set";
 
-const contentDirectory = path.resolve(
-  __dirname,
-  "..",
-  "..",
-  "..",
-  "..",
-  "content"
-);
+const contentDirectory = path.resolve("content");
 const recipesDirectory = path.resolve(contentDirectory, "recipes");
-
 const uploadsDirectory = path.resolve(contentDirectory, "uploads");
 
 interface GatsbyFunctionRequestWithFiles extends GatsbyFunctionRequest {
