@@ -10,7 +10,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "typecheck": "tsc --noEmit",
-    "test-develop": "TESTING=true gatsby develop",
+    "test-develop": "CYPRESS_SUPPORT=y gatsby develop",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "test:e2e": "start-server-and-test test-develop http://localhost:8000 cy:open",

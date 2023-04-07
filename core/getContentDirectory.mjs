@@ -1,4 +1,4 @@
 import path from "path";
 
 export const getContentDirectory = () =>
-  process.env.TESTING ? path.resolve("test") : path.resolve("content");
+  process.env.CYPRESS_SUPPORT ? path.resolve("test") : path.resolve("content");
