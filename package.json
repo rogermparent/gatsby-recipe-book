@@ -27,6 +27,7 @@
     "@vanilla-extract/webpack-plugin": "^2.2.0",
     "date-fns": "^2.29.3",
     "fraction.js": "^4.2.0",
+    "fs-extra": "^11.1.1",
     "gatsby": "^5.7.0",
     "gatsby-plugin-image": "^3.7.0",
     "gatsby-plugin-manifest": "^5.7.0",
@@ -63,6 +64,9 @@
     "prettier": "^2.8.4",
     "start-server-and-test": "^2.0.0",
     "typescript": "^5.0.2"
+  },
+  "overrides": {
+    "cypress": "^12.9.0"
   },
   "workspaces": [
     "editor",

@@ -24,7 +24,7 @@ export function RecipeList({
 }: {
   recipes: readonly Queries.RecipeListItemFragment[];
 }) {
-  return (
+  return recipes?.length ? (
     <ul className={styles.recipeList}>
       {recipes.map(({ pagePath, name, datePublished }) => (
         <RecipeListItem
@@ -35,5 +35,7 @@ export function RecipeList({
         />
       ))}
     </ul>
+  ) : (
+    <p>There are no recipes</p>
   );
 }
