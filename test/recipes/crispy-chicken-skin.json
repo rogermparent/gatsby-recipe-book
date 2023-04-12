@@ -1,0 +1,72 @@
+{
+  "name": "Crispy Chicken Skins",
+  "author": [
+    {
+      "name": "Ree Drummond Bio & Top S",
+      "url": ""
+    }
+  ],
+  "datePublished": "2017-10-16",
+  "description": null,
+  "prepTime": null,
+  "cookTime": 10,
+  "totalTime": 50,
+  "keywords": ["Chicken", "Poultry", "Appetizer", "Gluten Free", "Low-Carb"],
+  "servings": 18,
+  "servingSize": "pieces",
+  "category": ["appetizer"],
+  "cuisine": [],
+  "nutrition": {
+    "calories": "282"
+  },
+  "ingredients": [
+    {
+      "unit": "large",
+      "quantity": "6",
+      "ingredient": "skin-on chicken breasts",
+      "note": null
+    },
+    {
+      "unit": "teaspoon",
+      "quantity": "1",
+      "ingredient": "kosher salt",
+      "note": null
+    },
+    {
+      "unit": "teaspoon",
+      "quantity": "1",
+      "ingredient": "lemon pepper",
+      "note": ""
+    },
+    {
+      "unit": "teaspoon",
+      "quantity": "1/2",
+      "ingredient": "dried thyme",
+      "note": ""
+    },
+    {
+      "unit": "teaspoon",
+      "quantity": "1/2",
+      "ingredient": "dried rosemary",
+      "note": null
+    }
+  ],
+  "instructions": [
+    {
+      "name": null,
+      "text": "Preheat the oven to 350 degrees F. Line a baking sheet with parchment paper."
+    },
+    {
+      "name": null,
+      "text": "Gently pull the skin off the chicken breasts (reserve the breast meat for another use), pat dry and cut in thirds lengthwise. Place them skin-side up in a single layer on the prepared baking sheet."
+    },
+    {
+      "name": null,
+      "text": "Mix the salt, pepper, thyme and rosemary together in a small bowl, crushing the spices with a spoon. Sprinkle the chicken skins with some of the spice mix; it makes more than you need, but you can keep it for another day. Cover the skins with a layer of parchment and top with a baking sheet to weigh it down, making sure the top sheet presses down on the skins."
+    },
+    {
+      "name": null,
+      "text": "Bake until the skins are browned and crisp, 35 to 40 minutes. Remove the top baking sheet and parchment and transfer the skins to a plate lined with paper towel to cool and crisp up."
+    }
+  ]
+}

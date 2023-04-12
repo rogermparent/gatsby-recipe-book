@@ -1,0 +1,65 @@
+{
+  "name": "Coconut Flour Peanut Butter Cookies!",
+  "author": [],
+  "datePublished": null,
+  "description": null,
+  "prepTime": null,
+  "cookTime": null,
+  "totalTime": null,
+  "keywords": null,
+  "servings": null,
+  "servingSize": null,
+  "category": [],
+  "cuisine": [],
+  "nutrition": null,
+  "ingredients": [
+    {
+      "unit": "cup",
+      "quantity": "1",
+      "ingredient": "sugar",
+      "note": null
+    },
+    {
+      "unit": "tablespoon",
+      "quantity": "2",
+      "ingredient": "coconut flour",
+      "note": null
+    },
+    {
+      "unit": "teaspoon",
+      "quantity": "1/2",
+      "ingredient": "baking soda",
+      "note": null
+    },
+    {
+      "unit": "cup",
+      "quantity": "1",
+      "ingredient": "peanut butter",
+      "note": null
+    },
+    {
+      "unit": "large",
+      "quantity": "1",
+      "ingredient": "egg",
+      "note": null
+    }
+  ],
+  "instructions": [
+    {
+      "name": null,
+      "text": "Preheat the oven to 180C/350F. Line a large baking tray with parchment paper and set aside."
+    },
+    {
+      "name": null,
+      "text": "In a large mixing bowl, add your dry ingredients and mix well. Add your peanut butter and egg and mix until combined. "
+    },
+    {
+      "name": null,
+      "text": "Using your hands, form 12 balls of dough and place them on the lined baking tray. Press down on each cookie and cross the sides with a fork. Bake the cookies for 10-12 minutes, or until they just begin to go brown around the sides. "
+    },
+    {
+      "name": null,
+      "text": "Remove the cookies from the oven and let cool on the tray completely. "
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "name": "Best Crispy Roasted Potatoes",
+  "ingredients": [
+    {
+      "ingredient": "Salt"
+    },
+    {
+      "quantity": "1/2",
+      "unit": "teaspoon",
+      "ingredient": "baking soda"
+    },
+    {
+      "quantity": "4",
+      "unit": "lb",
+      "ingredient": "potatoes"
+    },
+    {
+      "quantity": "5",
+      "unit": "tablespoon",
+      "ingredient": "bacon fat",
+      "note": "or other flavorful oil"
+    }
+  ],
+  "instructions": [
+    {
+      "text": "Cut potatoes into even chunks, putting them in a water bath if they'll be sitting a while"
+    },
+    {
+      "text": "Boil 2 quarts of water on high, then add salt and baking soda"
+    },
+    {
+      "text": "Add potato chunks, and cook until a fork can pierce with just a bit of resistance- roughly 10 minutes, but this can easily vary."
+    },
+    {
+      "text": "One potatoes are cooked, drain and and let sit in an open bowl to allow steam to escape"
+    },
+    {
+      "text": "Gently melt and/or infuse oil if necessary."
+    },
+    {
+      "text": "Once potatoes are done releasing steam, they should have white splotches from the baking soda. Add your oil, salt, and pepper and mix everything together until potato chunks are coated in oily mash."
+    },
+    {
+      "text": "Put these in a 400F oven for 20 minutes. It won't seem like much is happening until all the water escapes."
+    },
+    {
+      "text": "After 20 minutes, flip each chunk onto an unbrowned side and cook for another 20. Repeat as many times as desired, cooking for at least 45 minutes total."
+    }
+  ]
+}

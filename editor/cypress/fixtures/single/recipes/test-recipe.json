@@ -1,0 +1,32 @@
+{
+  "name": "Test Recipe",
+  "author": [],
+  "datePublished": null,
+  "description": "",
+  "prepTime": null,
+  "cookTime": null,
+  "totalTime": null,
+  "keywords": null,
+  "servings": 1,
+  "servingSize": "cup",
+  "category": [],
+  "cuisine": [],
+  "nutrition": null,
+  "ingredients": [
+    {
+      "unit": "g",
+      "quantity": "105",
+      "ingredient": "First Ingredient"
+    },
+    {
+      "quantity": "2",
+      "ingredient": "Other Ingredient"
+    }
+  ],
+  "instructions": [
+    {
+      "name": "",
+      "text": "Mix everything together in a container"
+    }
+  ]
+}

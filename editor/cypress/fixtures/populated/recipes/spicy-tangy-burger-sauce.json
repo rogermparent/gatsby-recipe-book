@@ -1,0 +1,83 @@
+{
+  "name": "Spicy & Tangy Burger Sauce",
+  "author": [],
+  "datePublished": null,
+  "description": "",
+  "prepTime": null,
+  "cookTime": null,
+  "totalTime": null,
+  "keywords": null,
+  "servings": 1,
+  "servingSize": "cup",
+  "category": [],
+  "cuisine": [],
+  "nutrition": null,
+  "ingredients": [
+    {
+      "unit": "g",
+      "quantity": "105",
+      "ingredient": "mayonnaise",
+      "note": null
+    },
+    {
+      "unit": "g",
+      "quantity": "20",
+      "ingredient": "ketchup",
+      "note": null
+    },
+    {
+      "unit": "g",
+      "quantity": "20",
+      "ingredient": "mustard",
+      "note": null
+    },
+    {
+      "unit": "g",
+      "quantity": "20",
+      "ingredient": "sweet relish",
+      "note": null
+    },
+    {
+      "unit": null,
+      "quantity": "1",
+      "ingredient": "chile in adobo sauce",
+      "note": null
+    },
+    {
+      "unit": "tsp",
+      "quantity": "1/4",
+      "ingredient": "smoked paprika",
+      "note": null
+    },
+    {
+      "unit": "tsp",
+      "quantity": "1/8",
+      "ingredient": "celery salt",
+      "note": null
+    },
+    {
+      "unit": "tsp",
+      "quantity": "1/8",
+      "ingredient": "kosher salt",
+      "note": null
+    },
+    {
+      "unit": "tsp",
+      "quantity": "1/4",
+      "ingredient": "black pepper",
+      "note": null
+    },
+    {
+      "unit": "g",
+      "quantity": "10",
+      "ingredient": "onion",
+      "note": null
+    }
+  ],
+  "instructions": [
+    {
+      "name": "",
+      "text": "Mix everything together in a container"
+    }
+  ]
+}

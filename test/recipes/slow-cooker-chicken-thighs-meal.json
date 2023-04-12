@@ -1,0 +1,74 @@
+{
+  "name": "Slow Cooker Chicken Thighs Meal",
+  "author": [{ "name": "Brandie @ The Country Cook" }],
+  "description": "A whole dinner in one, this Slow Cooker Chicken Thighs Meal is an easy fix-it and forget-it dinner that is hearty, flavorful and great for busy weeknights!",
+  "datePublished": "2022-07-13",
+  "servings": 6,
+  "prepTime": 15,
+  "cookTime": 490,
+  "totalTime": 505,
+  "ingredients": [
+    {
+      "quantity": "2",
+      "unit": "pounds",
+      "ingredient": "boneless skinless chicken thighs"
+    },
+    { "quantity": "2", "unit": "tablespoons", "ingredient": "smoked paprika" },
+    { "quantity": "1", "unit": "teaspoon", "ingredient": "salt" },
+    { "quantity": "1/2", "unit": "teaspoon", "ingredient": "black pepper" },
+    { "quantity": "1", "unit": "tablespoon", "ingredient": "vegetable oil" },
+    { "quantity": "2", "unit": "pound", "ingredient": "baby red potatoes" },
+    { "quantity": "1", "unit": "pound", "ingredient": "baby carrots" },
+    { "quantity": "1", "unit": "medium", "ingredient": "red onion" },
+    { "quantity": "3", "unit": "cloves", "ingredient": "garlic" },
+    { "quantity": "3", "unit": "cups", "ingredient": "chicken broth" },
+    { "quantity": "3", "unit": "teaspoon", "ingredient": "corn starch" },
+    { "quantity": "3", "unit": "teaspoon", "ingredient": "water" }
+  ],
+  "instructions": [
+    {
+      "text": "Trim any excess fat from the chicken thighs and pat dry with paper towels."
+    },
+    {
+      "text": "In a medium bowl combine the chicken thighs with paprika, salt, and pepper until evenly coated. Set aside while preparing the vegetables."
+    },
+    {
+      "text": "Cut all the baby potatoes in half then chop the red onion and mince the garlic."
+    },
+    {
+      "text": "Place the potatoes, carrots, onion, and garlic in the bottom of a 5-6 quart oval slow cooker."
+    },
+    {
+      "text": "Heat a pan over medium-high heat, then add the oil. When the oil is heated, brown the chicken thighs in the pan, about 3-4 minutes per side. Do not overcrowd the chicken or the chicken will steam and not brown. Cook in batches if necessary."
+    },
+    {
+      "text": "Place browned chicken thighs on top of the vegetables then pour in chicken broth."
+    },
+    {
+      "text": "Cook on low for 8 hours, or high for 4 hours."
+    },
+    {
+      "text": "Remove chicken, potatoes, and carrots from the slow cooker onto serving dishes."
+    },
+    {
+      "text": "Mix cornstarch and water together to make a slurry and add to the slow cooker. Turn the slow cooker on high to thicken broth into gravy. Season with salt and pepper to taste."
+    }
+  ],
+  "category": ["Main Course"],
+  "cuisine": ["American"],
+  "keywords": ["Slow Cooker Chicken Thighs Meal"],
+  "nutrition": {
+    "calories": "360 kcal",
+    "carbohydrateContent": "35 g",
+    "proteinContent": "34 g",
+    "fatContent": "9 g",
+    "saturatedFatContent": "2 g",
+    "transFatContent": "0.04 g",
+    "cholesterolContent": "146 mg",
+    "sodiumContent": "1047 mg",
+    "fiberContent": "6 g",
+    "sugarContent": "7 g",
+    "unsaturatedFatContent": "6 g",
+    "servingSize": "1 serving"
+  }
+}

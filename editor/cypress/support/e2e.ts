@@ -8,6 +8,11 @@ declare global {
   namespace Cypress {
     interface Chainable {
       waitForRouteChange(): Chainable;
+      assertRoute(value: string): Chainable<JQuery<HTMLElement>>;
     }
   }
 }
+
+Cypress.Commands.add(`assertRoute`, (route) => {
+  cy.url().should(`equal`, `${window.location.origin}${route}`);
+});

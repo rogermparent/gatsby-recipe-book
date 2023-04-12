@@ -1,0 +1,73 @@
+{
+  "name": "Party Coffee Cake",
+  "author": [{ "name": "Mary Stone" }],
+  "datePublished": "2018-03-10",
+  "description": "This coffee cake is awesome and perfect for parties.",
+  "prepTime": 20,
+  "cookTime": 30,
+  "totalTime": 50,
+  "keywords": ["cake for a party", "coffee"],
+  "servings": 10,
+  "category": ["Dessert", "Cake"],
+  "cuisine": ["American"],
+  "nutrition": {
+    "calories": "270 calories"
+  },
+  "ingredients": [
+    {
+      "quantity": "2",
+      "unit": "cup",
+      "ingredient": "flour"
+    },
+    {
+      "quantity": "3/4",
+      "unit": "cup",
+      "ingredient": "sugar"
+    },
+    {
+      "quantity": "2",
+      "unit": "teaspoon",
+      "ingredient": "baking powder"
+    },
+    {
+      "quantity": "1/2",
+      "unit": "teaspoon",
+      "ingredient": "salt",
+      "note": "Kosher salt preferred"
+    },
+    {
+      "quantity": "0.5",
+      "unit": "cup",
+      "ingredient": "butter",
+      "description": "melted"
+    },
+    { "quantity": "2", "ingredient": "egg" },
+    { "quantity": "3/4", "unit": "cup", "ingredient": "milk" }
+  ],
+  "instructions": [
+    {
+      "name": "Preheat",
+      "text": "Preheat the oven to 350 degrees F. Grease and flour a 9x9 inch pan."
+    },
+    {
+      "name": "Mix dry ingredients",
+      "text": "In a large bowl, combine flour, sugar, baking powder, and salt."
+    },
+    {
+      "name": "Add wet ingredients",
+      "text": "Mix in the butter, eggs, and milk."
+    },
+    {
+      "name": "Spread into pan",
+      "text": "Spread into the prepared pan."
+    },
+    {
+      "name": "Bake",
+      "text": "Bake for 30 to 35 minutes, or until firm."
+    },
+    {
+      "name": "Enjoy",
+      "text": "Allow to cool and enjoy."
+    }
+  ]
+}
