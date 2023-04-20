@@ -1,6 +1,6 @@
 describe("Recipe page", () => {
   it("Should be accessible", () => {
-    cy.task("setFixture", "single");
+    cy.setFixture("single");
     cy.visit("/recipe/test-recipe", {
       timeout: 10000,
     });
@@ -11,8 +11,8 @@ describe("Recipe page", () => {
     cy.checkA11y();
   });
 
-  it("Can go to the recipe creation page", () => {
-    cy.task("setFixture", "single");
+  it("Can go to the recipe edit page", () => {
+    cy.setFixture("single");
     cy.visit("/recipe/test-recipe", {
       timeout: 10000,
     });

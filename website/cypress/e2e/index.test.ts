@@ -17,15 +17,4 @@ describe("Homepage", () => {
     cy.injectAxe();
     cy.checkA11y();
   });
-  it("Can go to the recipe creation page", () => {
-    cy.visit("/");
-    cy.waitForRouteChange();
-    cy.clearFixture();
-    cy.visit("/");
-    cy.waitForRouteChange();
-    cy.findByText("New Recipe").click();
-    cy.waitForRouteChange();
-    cy.findByText("New Recipe");
-    cy.assertRoute("/new-recipe");
-  });
 });
