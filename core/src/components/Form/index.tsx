@@ -1,11 +1,18 @@
-import React, { ReactNode, useState } from "react";
+import React, {
+  KeyboardEventHandler,
+  ReactNode,
+  useCallback,
+  useState,
+} from "react";
 import {
   Control,
   FieldArrayPath,
+  FieldArrayWithId,
   FieldErrors,
   FieldPath,
   FieldValues,
   useFieldArray,
+  UseFieldArrayReturn,
   UseFormRegister,
   UseFormRegisterReturn,
   UseFormSetValue,
@@ -39,6 +46,26 @@ export interface FieldArrayProps<
   register: UseFormRegister<T>;
   control: Control<T>;
 }
+
+const makeEnterHandler: (
+  fieldArray: UseFieldArrayReturn<RecipeFormValues, "ingredients", "id">,
+  i: number
+) => KeyboardEventHandler =
+  ({ fields, append }, i) =>
+  (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (i === fields.length - 1) {
+        append({} as Queries.RecipeIngredientEditorDataFragment);
+      } else {
+        document
+          .querySelector<HTMLInputElement>(
+            `input[name='ingredients.${i + 1}.quantity']`
+          )
+          ?.focus();
+      }
+    }
+  };
 
 export function FieldWrapper({
   name,
@@ -77,9 +104,11 @@ export function InputField({
   errors,
   type,
   list,
+  onKeyDown,
 }: RegisteredFieldProps & {
   type?: string;
   list?: string;
+  onKeyDown?: KeyboardEventHandler;
 }) {
   const { name } = registration;
   return (
@@ -89,6 +118,7 @@ export function InputField({
         id={name}
         list={list}
         className={styles.inputField}
+        onKeyDown={onKeyDown}
         {...registration}
       />
     </FieldWrapper>
@@ -222,46 +252,54 @@ export function IngredientListField({
   label,
   name,
 }: FieldArrayProps & { name: "ingredients" }) {
-  const { fields, remove, move, append } = useFieldArray<
-    RecipeFormValues,
-    "ingredients"
-  >({ control, name });
+  const fieldArray = useFieldArray<RecipeFormValues, "ingredients">({
+    control,
+    name,
+  });
+  const { fields, remove, move, append } = fieldArray;
   return (
     <FieldWrapper name={name} label={label} errors={errors}>
       <ul>
         {fields.map((field, index) => {
           const fieldName = `${name}.${index}`;
+          const highlightNextIngredient = makeEnterHandler(fieldArray, index);
           return (
             <li key={field.id}>
-              <InputField
-                label="Quantity"
-                registration={register(
-                  `${fieldName}.quantity` as "ingredients.0.quantity"
-                )}
-                errors={errors}
-              />
-              <InputField
-                label="Unit"
-                registration={register(
-                  `${fieldName}.unit` as "ingredients.0.unit"
-                )}
-                errors={errors}
-              />
-              <InputField
-                list={DEFAULT_INGREDIENT_SELECTOR_ID}
-                label="Ingredient"
-                registration={register(
-                  `${fieldName}.ingredient` as "ingredients.0.ingredient"
-                )}
-                errors={errors}
-              />
-              <InputField
-                label="Note"
-                registration={register(
-                  `${fieldName}.note` as "ingredients.0.note"
-                )}
-                errors={errors}
-              />
+              <div className={styles.ingredientFields}>
+                <InputField
+                  label="Quantity"
+                  registration={register(
+                    `${fieldName}.quantity` as "ingredients.0.quantity"
+                  )}
+                  errors={errors}
+                  onKeyDown={highlightNextIngredient}
+                />
+                <InputField
+                  label="Unit"
+                  registration={register(
+                    `${fieldName}.unit` as "ingredients.0.unit"
+                  )}
+                  errors={errors}
+                  onKeyDown={highlightNextIngredient}
+                />
+                <InputField
+                  list={DEFAULT_INGREDIENT_SELECTOR_ID}
+                  label="Ingredient"
+                  registration={register(
+                    `${fieldName}.ingredient` as "ingredients.0.ingredient"
+                  )}
+                  errors={errors}
+                  onKeyDown={highlightNextIngredient}
+                />
+                <InputField
+                  label="Note"
+                  registration={register(
+                    `${fieldName}.note` as "ingredients.0.note"
+                  )}
+                  errors={errors}
+                  onKeyDown={highlightNextIngredient}
+                />
+              </div>
               <div>
                 <button
                   type="button"

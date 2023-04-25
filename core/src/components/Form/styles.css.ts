@@ -32,3 +32,9 @@ export const editorPreviewImage = sprinkles({
 export const defaultEditorPreviewImage = sprinkles({
   maxWidth: "full",
 });
+
+export const ingredientFields = sprinkles({
+  display: "flex",
+  flexDirection: "row",
+  flexWrap: "nowrap",
+});
