@@ -1,6 +1,8 @@
 # Gatsby Recipe Book
 
-This project aims to be the best tool for making recipe websites, leveraging cutting-edge web technologies like GatsbyJS in order to bring the best of all worlds to the oft-overlooked field of recipe websites.
+https://user-images.githubusercontent.com/9111807/234390430-f531236f-705b-4d1e-8a13-cc1d0310b3c9.mp4
+
+This project aims to be a powerful tool for making static recipe websites with minimal requirements, leveraging cutting-edge web technologies like GatsbyJS in order to bring the best of all worlds to the oft-overlooked field of recipe websites.
 
 ## Features
 
