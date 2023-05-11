@@ -67,6 +67,9 @@ const processFormData = (
   return acc;
 };
 
+const refreshContent = () =>
+  fetch("http://localhost:8000/__refresh", { method: "POST" });
+
 const handlers: Record<string, Handler> = {
   async PUT(req, res, fullFilename) {
     const { body, files } = req;
@@ -75,6 +78,7 @@ const handlers: Record<string, Handler> = {
       const data = processFormData(body, files);
       const fileContent = JSON.stringify(data, undefined, 2);
       await fs.writeFile(fullFilename, fileContent);
+      refreshContent();
       res.json({ status: "Success", fullFilename });
     } catch (e) {
       res.json({ status: "Failure", fullFilename });
@@ -84,6 +88,7 @@ const handlers: Record<string, Handler> = {
     try {
       console.log("Deleting", fullFilename);
       await fs.unlink(fullFilename);
+      refreshContent();
       res.json({ status: "Success", fullFilename });
     } catch (e) {
       res.json({ status: "Failure", fullFilename });
@@ -96,6 +101,7 @@ const handlers: Record<string, Handler> = {
       const data = processFormData(body, files);
       const fileContent = JSON.stringify(data, undefined, 2);
       await fs.writeFile(fullFilename, fileContent);
+      refreshContent();
       res.json({ status: "Success", fullFilename });
     } catch (e) {
       res.json({ status: "Failure", fullFilename });

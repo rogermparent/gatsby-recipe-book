@@ -1,4 +1,15 @@
 import slugify from "@sindresorhus/slugify";
+import { ensureDir } from "fs-extra";
+import path from "path";
+import { getContentDirectory } from "./getContentDirectory.mjs";
+
+export const onPreInit = async () => {
+  const contentDirectory = getContentDirectory();
+  const recipesDirPromise = ensureDir(path.join(contentDirectory, "recipes"));
+  const uploadsDirPromise = ensureDir(path.join(contentDirectory, "uploads"));
+  await recipesDirPromise;
+  await uploadsDirPromise;
+};
 
 export const createSchemaCustomization = ({
   actions: { createTypes, createFieldExtension },

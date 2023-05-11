@@ -14,8 +14,32 @@ describe("New Recipe Page", () => {
     cy.waitForRouteChange();
 
     // Fill out recipe form
+
+    // Basic fields
     cy.findByLabelText("Slug").type("created-recipe");
     cy.findByLabelText("Name").type("Created Recipe");
+    cy.findAllByLabelText("Quantity").should("have.length", 0);
+
+    cy.findByText("Add Ingredient").click();
+    cy.findAllByLabelText("Quantity").should("have.length", 1);
+    cy.focused().should("have.attr", "name", "ingredients.0.quantity");
+    cy.focused().type("1");
+
+    cy.tab();
+    cy.focused().should("have.attr", "name", "ingredients.0.unit");
+
+    cy.tab();
+    cy.focused().should("have.attr", "name", "ingredients.0.ingredient");
+    cy.focused().type("egg");
+
+    cy.tab();
+    cy.focused().should("have.attr", "name", "ingredients.0.note");
+
+    cy.focused().type("{enter}");
+    cy.findAllByLabelText("Quantity").should("have.length", 2);
+    cy.focused().should("have.attr", "name", "ingredients.1.quantity");
+
+    // Submit
     cy.findByText("Create Recipe").click();
 
     cy.waitForRouteChange();

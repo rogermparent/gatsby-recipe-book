@@ -2,11 +2,13 @@ import "cypress-axe";
 import "@testing-library/cypress/add-commands";
 import "gatsby-cypress";
 import "gatsby-cypress/commands";
+import "cypress-plugin-tab";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
     interface Chainable {
+      tab(): Chainable;
       clearFixture(): Chainable;
       setFixture(value: string): Chainable;
       waitForRouteChange(): Chainable;

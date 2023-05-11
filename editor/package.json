@@ -4,13 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "develop": "gatsby develop",
+    "develop": "ENABLE_GATSBY_REFRESH_ENDPOINT=true gatsby develop",
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "typecheck": "tsc --noEmit",
-    "test-develop": "CYPRESS_SUPPORT=y gatsby develop",
+    "test-develop": "CYPRESS_SUPPORT=y ENABLE_GATSBY_REFRESH_ENDPOINT=true gatsby develop",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "test:e2e": "start-server-and-test test-develop http://localhost:8000 cy:open",
@@ -20,7 +20,7 @@
   "license": "MIT",
   "dependencies": {
     "fs-extra": "^11.1.1",
-    "gatsby": "^5.9.0",
+    "gatsby": "^5.9.1",
     "gatsby-source-filesystem": "^5.9.0",
     "gatsby-transformer-json": "^5.9.0",
     "install": "^0.13.0"
@@ -30,8 +30,9 @@
     "@testing-library/react": "^14.0.0",
     "@types/fs-extra": "^11.0.1",
     "axe-core": "^4.7.0",
-    "cypress": "^12.10.0",
+    "cypress": "^12.12.0",
     "cypress-axe": "^1.4.0",
+    "cypress-plugin-tab": "^1.0.5",
     "start-server-and-test": "^2.0.0"
   }
 }
