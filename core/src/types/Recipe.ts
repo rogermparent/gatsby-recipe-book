@@ -26,7 +26,6 @@ export interface JSONRecipe {
   description?: string;
   prepTime?: number;
   cookTime?: number;
-  totalTime?: number;
   keywords?: string[];
   servings?: string;
   servingSize?: string;

@@ -1,27 +1,28 @@
 import React from "react";
-import { HeadFC, PageProps, navigate } from "gatsby";
+import { HeadFC, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
 import {
   RecipeFields,
-  NewRecipeFormValues,
   RecipeFormValues,
 } from "core/src/components/Recipe/Form";
 import { createRecipe } from "../../calls/recipe/create";
 import { UseFormReturn, useForm } from "react-hook-form";
 import PageTitle from "core/src/components/PageTitle";
 import { Metadata } from "core/src/components/Metadata";
-import { buildFormData } from "../../calls/recipe/process";
-import { InputField } from "core/src/components/Form";
+import { buildFormData, massageFormData } from "../../calls/recipe/process";
+import * as recipeFormStyles from "core/src/components/Recipe/Form/styles.css";
 
-const onSubmit = (data: NewRecipeFormValues) => {
+const onSubmit = async (data: RecipeFormValues) => {
   const { slug, ...recipe } = data;
-  createRecipe(buildFormData(recipe), slug).then(() => {
-    navigate("/");
-  });
+  console.log(buildFormData(recipe));
+  const massagedFields = massageFormData(data);
+  const formData = buildFormData(massagedFields);
+  await createRecipe(formData, slug);
+  window.location.href = `/recipe/${massagedFields.slug}`;
 };
 
 const EditPage: React.FC<PageProps> = () => {
-  const form = useForm<NewRecipeFormValues>({});
+  const form = useForm<RecipeFormValues>({});
   const {
     handleSubmit,
     register,
@@ -31,13 +32,11 @@ const EditPage: React.FC<PageProps> = () => {
     <SiteLayout>
       <PageTitle>New Recipe</PageTitle>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <InputField
-            label="Slug"
-            errors={errors}
-            registration={register("slug", { required: true })}
+        <div className={recipeFormStyles.form}>
+          <RecipeFields
+            form={form as UseFormReturn<RecipeFormValues>}
+            edit={false}
           />
-          <RecipeFields form={form as UseFormReturn<RecipeFormValues>} />
           <button type="submit">Create Recipe</button>
         </div>
       </form>

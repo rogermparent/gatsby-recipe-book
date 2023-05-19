@@ -1,7 +1,6 @@
 import React from "react";
 import { ChangeEvent, ReactNode, Reducer, useMemo, useReducer } from "react";
 import Fraction from "fraction.js";
-import { FieldWrapper } from "../Form";
 import * as styles from "./styles.css";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
@@ -156,7 +155,7 @@ export const Recipe = ({
           )}
 
           <label htmlFor="multiplier" className={styles.multiplier}>
-            <div className={styles.multiplierHeading}>Multiply</div>
+            <div>Multiply</div>
             <input
               className={styles.multiplyInput}
               id="multiplier"
@@ -170,7 +169,7 @@ export const Recipe = ({
       <div className={styles.ingredientsAndInstructions}>
         <Ingredients ingredients={ingredients} multiplier={multiplier} />
         {instructions && (
-          <div className={styles.instructionsSection}>
+          <div>
             <h2 className={styles.instructionsHeading}>Instructions</h2>
             <ol className={styles.instructionsList}>
               {instructions.map(({ name, text }, i) => (

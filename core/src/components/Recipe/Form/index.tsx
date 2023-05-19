@@ -13,25 +13,38 @@ import {
   AuthorListField,
   FieldWrapper,
   ImageField,
-  IngredientListField,
   InputField,
-  InstructionListField,
+  SlugField,
   StringListField,
   TextareaField,
+  VisualFieldWrapper,
 } from "../../Form";
+import { IngredientListField } from "../../Form/Ingredients";
+import { InstructionListField } from "../../Form/Instructions";
 import { IngredientSelectorDataList } from "../../IngredientSelector";
+import * as styles from "./styles.css";
 
-export type FormRecipe = Queries.RecipeEditorDataFragment & {
+export interface RecipeFormIngredient {
+  ingredient: string;
+  quantity?: number | null;
+  unit?: string | null;
+  note?: string | null;
+}
+
+export interface RecipeFormInstruction {
+  name?: string;
+  text?: string;
+}
+
+export type RecipeFormValues = Queries.RecipeEditorDataFragment & {
+  slug: string;
+  copy?: boolean;
   image?: string | null;
   category?: readonly String[] | null;
   cuisine?: readonly String[] | null;
+  ingredients?: readonly RecipeFormIngredient[];
+  instructions?: readonly RecipeFormInstruction[];
 };
-
-export interface NewRecipeFormValues extends FormRecipe {
-  slug: string;
-}
-
-export type RecipeFormValues = NewRecipeFormValues | FormRecipe;
 
 export const buildPlaceholderStrings = (
   strings: readonly string[] | null
@@ -51,17 +64,21 @@ export const initializeFormState: (
 };
 
 export const RecipeFields: React.FC<{
+  edit: boolean;
   form: UseFormReturn<RecipeFormValues>;
   originalData?: Queries.RecipeEditorDataFragment;
 }> = ({
+  edit,
   form: {
     register,
     control,
     setValue,
+    watch,
     formState: { errors, dirtyFields },
   },
   originalData,
 }) => {
+  const [prepTime, cookTime] = watch(["prepTime", "cookTime"]);
   return (
     <>
       <IngredientSelectorDataList />
@@ -79,12 +96,27 @@ export const RecipeFields: React.FC<{
       <InputField
         label="Name"
         errors={errors}
-        registration={register("name", { required: true })}
+        name="name"
+        required={true}
+        register={register}
       />
+      <SlugField
+        label="Slug"
+        errors={errors}
+        name="slug"
+        register={register}
+        control={control}
+      />
+      {edit && (
+        <FieldWrapper label="Copy" name="copy" errors={errors}>
+          <input type="checkbox" id="copy" {...register("copy")} />
+        </FieldWrapper>
+      )}
       <TextareaField
         label="Description"
         errors={errors}
-        registration={register("description")}
+        name="description"
+        register={register}
       />
       <AuthorListField
         label="Author"
@@ -97,36 +129,38 @@ export const RecipeFields: React.FC<{
         label="Date Published"
         type="date"
         errors={errors}
-        registration={register("datePublished")}
+        name="datePublished"
+        register={register}
       />
       <InputField
         type="number"
         label="Prep Time (minutes)"
         errors={errors}
-        registration={register("prepTime")}
+        name="prepTime"
+        register={register}
       />
       <InputField
         type="number"
         label="Cook Time (minutes)"
         errors={errors}
-        registration={register("cookTime")}
+        name="cookTime"
+        register={register}
       />
-      <InputField
-        type="number"
-        label="Total Time (minutes)"
-        errors={errors}
-        registration={register("totalTime")}
-      />
+      <VisualFieldWrapper label="Total Time">
+        {(Number(prepTime) || 0) + (Number(cookTime) || 0)}
+      </VisualFieldWrapper>
       <InputField
         label="Servings"
         type="number"
         errors={errors}
-        registration={register("servings")}
+        name="servings"
+        register={register}
       />
       <InputField
         label="Serving Size"
         errors={errors}
-        registration={register("servingSize")}
+        name="servingSize"
+        register={register}
       />
       <StringListField
         label="Category"
@@ -172,8 +206,8 @@ export const RecipeForm: React.FC<{
   const { handleSubmit } = form;
   return (
     <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
-      <div>
-        <RecipeFields form={form} originalData={originalData} />
+      <div className={styles.form}>
+        <RecipeFields form={form} originalData={originalData} edit={true} />
         <button type="submit">{submitText}</button>
       </div>
     </form>

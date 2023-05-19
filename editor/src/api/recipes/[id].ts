@@ -15,8 +15,7 @@ interface GatsbyFunctionRequestWithFiles extends GatsbyFunctionRequest {
 interface Handler {
   (
     req: GatsbyFunctionRequestWithFiles,
-    res: GatsbyFunctionResponse,
-    filename: string
+    res: GatsbyFunctionResponse
   ): Promise<void>;
 }
 
@@ -24,11 +23,15 @@ interface ReconstitutedFormValues {
   [key: string]: string | number | ReconstitutedFormValues;
 }
 
-const fieldHandlers: Record<string, (input: string) => string | number> = {
+const fieldHandlers: Record<
+  string,
+  (input: string) => string | number | boolean
+> = {
   servings: Number,
   prepTime: Number,
   cookTime: Number,
   totalTime: Number,
+  copy: Boolean,
 };
 
 const handleField = (
@@ -64,47 +67,60 @@ const processFormData = (
       setValue(acc, fieldname, originalname);
     }
   }
-  return acc;
+  const { copy, slug, ...data } = acc;
+  return { copy, slug, data };
 };
 
 const refreshContent = () =>
-  fetch("http://localhost:8000/__refresh", { method: "POST" });
+  fetch("http://localhost:8000/__refresh/gatsby-source-filesystem", {
+    method: "POST",
+  });
 
 const handlers: Record<string, Handler> = {
-  async PUT(req, res, fullFilename) {
+  async PUT(req, res) {
     const { body, files } = req;
+    const { copy, slug, data } = processFormData(body, files);
+    const fullFilename = path.join(recipesDirectory, `${slug}.json`);
     try {
       console.log("Updating", fullFilename);
-      const data = processFormData(body, files);
       const fileContent = JSON.stringify(data, undefined, 2);
+      if (req.body.slug !== req.params.id && !copy) {
+        await fs.unlink(path.join(recipesDirectory, `${req.params.id}.json`));
+      }
       await fs.writeFile(fullFilename, fileContent);
-      refreshContent();
+      await refreshContent();
       res.json({ status: "Success", fullFilename });
     } catch (e) {
       res.json({ status: "Failure", fullFilename });
     }
   },
-  async DELETE(_req, res, fullFilename) {
+  async DELETE(req, res) {
+    const fullFilename = path.join(recipesDirectory, `${req.params.id}.json`);
     try {
       console.log("Deleting", fullFilename);
       await fs.unlink(fullFilename);
-      refreshContent();
+      await refreshContent();
       res.json({ status: "Success", fullFilename });
     } catch (e) {
       res.json({ status: "Failure", fullFilename });
     }
   },
-  async POST(req, res, fullFilename) {
+  async POST(req, res) {
     const { body, files } = req;
+    const { data, slug } = processFormData(body, files);
+    const fullFilename = path.join(recipesDirectory, `${slug}.json`);
     try {
       console.log("Writing", fullFilename);
-      const data = processFormData(body, files);
       const fileContent = JSON.stringify(data, undefined, 2);
       await fs.writeFile(fullFilename, fileContent);
-      refreshContent();
+      await refreshContent();
       res.json({ status: "Success", fullFilename });
     } catch (e) {
-      res.json({ status: "Failure", fullFilename });
+      res.json({
+        status: "Failure",
+        fullFilename,
+        error: e ? (e as Error).message || e : undefined,
+      });
     }
   },
 };
@@ -120,8 +136,7 @@ export default async function handler(
   if (method) {
     const methodHandler = handlers[method];
     if (methodHandler) {
-      const fullFilename = path.join(recipesDirectory, `${id}.json`);
-      return methodHandler(req, res, fullFilename);
+      return methodHandler(req, res);
     }
   }
   res.end();

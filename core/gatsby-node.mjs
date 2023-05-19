@@ -189,10 +189,11 @@ export const onCreateNode = ({
         nutrition,
         cookTime,
         prepTime,
-        totalTime,
         servings,
         servingSize,
       } = node;
+
+      const totalTime = (prepTime || 0) + (cookTime || 0);
 
       const idSeed = `Recipe >>> ${slug}`;
       const fields = {

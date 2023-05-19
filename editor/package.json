@@ -19,17 +19,21 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@vanilla-extract/css": "^1.11.0",
+    "@vanilla-extract/webpack-plugin": "^2.2.0",
     "fs-extra": "^11.1.1",
-    "gatsby": "^5.9.1",
-    "gatsby-source-filesystem": "^5.9.0",
-    "gatsby-transformer-json": "^5.9.0",
-    "install": "^0.13.0"
+    "gatsby": "^5.10.0",
+    "gatsby-plugin-vanilla-extract": "^4.0.1",
+    "gatsby-source-filesystem": "^5.10.0",
+    "gatsby-transformer-json": "^5.10.0",
+    "install": "^0.13.0",
+    "parse-ingredient": "^0.6.0"
   },
   "devDependencies": {
     "@testing-library/cypress": "^9.0.0",
     "@testing-library/react": "^14.0.0",
     "@types/fs-extra": "^11.0.1",
-    "axe-core": "^4.7.0",
+    "axe-core": "^4.7.1",
     "cypress": "^12.12.0",
     "cypress-axe": "^1.4.0",
     "cypress-plugin-tab": "^1.0.5",

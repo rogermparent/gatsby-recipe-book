@@ -5,7 +5,6 @@
   "description": "This coffee cake is awesome and perfect for parties.",
   "prepTime": 20,
   "cookTime": 30,
-  "totalTime": 50,
   "keywords": ["cake for a party", "coffee"],
   "servings": 10,
   "category": ["Dessert", "Cake"],

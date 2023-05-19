@@ -6,7 +6,6 @@
   "cuisine": ["American"],
   "prepTime": 1,
   "cookTime": 2,
-  "totalTime": 3,
   "keywords": ["non-alcoholic"],
   "servings": 1,
   "category": ["Drink"],

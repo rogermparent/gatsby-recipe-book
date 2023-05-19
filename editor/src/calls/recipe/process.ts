@@ -1,9 +1,7 @@
+import slugify from "@sindresorhus/slugify";
 import { RecipeFormValues } from "core/src/components/Recipe/Form";
 
-type FormLeafValue = string | number | FileList;
-type FormObjectValue = Record<string, FormLeafValue>;
-type SingleFormValue = FormLeafValue | FormObjectValue;
-type FormValue = SingleFormValue | SingleFormValue[];
+type FormValue = RecipeFormValues[keyof RecipeFormValues];
 
 const handleEntry: (
   formData: FormData,
@@ -27,13 +25,19 @@ const handleEntry: (
   }
 };
 
+export const massageFormData = (data: RecipeFormValues): RecipeFormValues => {
+  const { slug, name } = data;
+  return {
+    ...data,
+    slug: slug || slugify(name),
+  };
+};
+
 export const buildFormData = (data: RecipeFormValues): FormData => {
   const formData = new FormData();
   const entries = Object.entries(data);
-
   for (const entry of entries) {
     handleEntry(formData, entry);
   }
-
   return formData;
 };

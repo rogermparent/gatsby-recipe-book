@@ -10,14 +10,14 @@ export const textarea = sprinkles({
 });
 
 export const fieldLabelWrapper = sprinkles({
-  fontWeight: "bold",
-  fontSize: "default",
-  fontFamily: "sans",
   padding: 1,
   display: "block",
 });
 
 export const fieldLabelHeading = sprinkles({
+  fontSize: "default",
+  fontFamily: "sans",
+  fontWeight: "bold",
   paddingY: 1,
 });
 
@@ -37,4 +37,8 @@ export const ingredientFields = sprinkles({
   display: "flex",
   flexDirection: "row",
   flexWrap: "nowrap",
+});
+
+export const list = sprinkles({
+  paddingLeft: 4,
 });

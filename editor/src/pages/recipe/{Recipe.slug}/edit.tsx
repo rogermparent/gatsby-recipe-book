@@ -3,14 +3,13 @@ import { graphql, HeadFC, navigate, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
 import {
   RecipeForm,
-  RecipeFormValues,
   initializeFormState,
 } from "core/src/components/Recipe/Form";
 import { deleteRecipe } from "../../../calls/recipe/delete";
 import { updateRecipe } from "../../../calls/recipe/update";
 import PageTitle from "core/src/components/PageTitle";
 import { Metadata } from "core/src/components/Metadata";
-import { buildFormData } from "../../../calls/recipe/process";
+import { buildFormData, massageFormData } from "../../../calls/recipe/process";
 
 export const query = graphql`
   query RecipeEdit($id: String!) {
@@ -86,7 +85,8 @@ const EditPage: React.FC<PageProps<Queries.RecipeEditQuery>> = ({ data }) => {
   const { recipe: recipeData } = data;
 
   if (recipeData) {
-    const { slug, pagePath, ...recipe } = recipeData;
+    const { pagePath, ...recipe } = recipeData;
+    const { slug } = recipeData;
     return (
       <SiteLayout>
         <PageTitle>Edit Recipe</PageTitle>
@@ -94,11 +94,12 @@ const EditPage: React.FC<PageProps<Queries.RecipeEditQuery>> = ({ data }) => {
           originalData={recipe}
           submitText="Edit Recipe"
           defaultValues={initializeFormState(recipe)}
-          onSubmit={(data) =>
-            updateRecipe(buildFormData(data), slug).then(() => {
-              navigate(pagePath as string);
-            })
-          }
+          onSubmit={async (data) => {
+            const massagedFields = massageFormData(data);
+            const formData = buildFormData(massagedFields);
+            await updateRecipe(formData, slug);
+            window.location.href = `/recipe/${massagedFields.slug}`;
+          }}
         />
         <button
           onClick={() => {
