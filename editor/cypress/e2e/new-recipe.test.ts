@@ -8,7 +8,7 @@ describe("New Recipe Page", () => {
     cy.injectAxe();
     cy.checkA11y();
   });
-  it("Should successfully create a new recipe and redirect to the index page", () => {
+  it("Should successfully create a new recipe and redirect to the created recipe", () => {
     cy.clearFixture();
     cy.visit("/new-recipe");
     cy.waitForRouteChange();
@@ -45,7 +45,7 @@ describe("New Recipe Page", () => {
     cy.waitForRouteChange();
 
     // Recipe form should redirect to home
-    cy.url().assertRoute("/");
+    cy.url().assertRoute("/recipe/created-recipe");
     cy.findByText("Created Recipe");
   });
 });
