@@ -1,8 +1,9 @@
 import React, { useRef, useState } from "react";
 import { useFieldArray } from "react-hook-form";
-import { FieldArrayProps, FieldWrapper, InputField, TextareaField } from "..";
-import { RecipeFormInstruction, RecipeFormValues } from "../../Recipe/Form";
-import * as styles from "../styles.css";
+import { RecipeFormInstruction, RecipeFormValues } from "../../../Recipe/Form";
+import { FieldArrayProps, FieldWrapper, InputField } from "../../Input";
+import * as styles from "../../styles.css";
+import { TextareaField } from "../Textarea";
 
 export function InstructionListField({
   control,
@@ -99,9 +100,7 @@ export function InstructionListField({
           </ol>
           <button
             type="button"
-            onClick={() =>
-              append({} as Queries.RecipeInstructionEditorDataFragment)
-            }
+            onClick={() => append({} as RecipeFormInstruction)}
           >
             Add Instruction
           </button>

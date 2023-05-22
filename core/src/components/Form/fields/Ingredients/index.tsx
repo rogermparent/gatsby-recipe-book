@@ -4,11 +4,11 @@ import {
   useFieldArray,
   UseFieldArrayReturn,
 } from "react-hook-form";
-import { DEFAULT_INGREDIENT_SELECTOR_ID } from "../../IngredientSelector";
-import * as styles from "../styles.css";
-import { FieldArrayProps, FieldWrapper, InputField } from "..";
-import { RecipeFormIngredient, RecipeFormValues } from "../../Recipe/Form";
+import * as styles from "../../styles.css";
 import { parseIngredient } from "parse-ingredient";
+import { RecipeFormIngredient, RecipeFormValues } from "../../../Recipe/Form";
+import { FieldArrayProps, FieldWrapper, InputField } from "../../Input";
+import { DEFAULT_INGREDIENT_SELECTOR_ID } from "../../../IngredientSelector";
 
 const makeIngredientEnterHandler: (
   fieldArray: UseFieldArrayReturn<RecipeFormValues, "ingredients">,

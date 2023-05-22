@@ -13,21 +13,17 @@ import { buildFormData, massageFormData } from "../../calls/recipe/process";
 import * as recipeFormStyles from "core/src/components/Recipe/Form/styles.css";
 
 const onSubmit = async (data: RecipeFormValues) => {
-  const { slug, ...recipe } = data;
-  console.log(buildFormData(recipe));
   const massagedFields = massageFormData(data);
   const formData = buildFormData(massagedFields);
-  await createRecipe(formData, slug);
-  window.location.href = `/recipe/${massagedFields.slug}`;
+  await createRecipe(formData, massagedFields.slug);
+  const url = `/recipe/${massagedFields.slug}`;
+  await fetch(url, { method: "HEAD" });
+  window.location.href = url;
 };
 
-const EditPage: React.FC<PageProps> = () => {
+const NewRecipePage: React.FC<PageProps> = () => {
   const form = useForm<RecipeFormValues>({});
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = form;
+  const { handleSubmit } = form;
   return (
     <SiteLayout>
       <PageTitle>New Recipe</PageTitle>
@@ -44,6 +40,6 @@ const EditPage: React.FC<PageProps> = () => {
   );
 };
 
-export default EditPage;
+export default NewRecipePage;
 
 export const Head: HeadFC = () => <Metadata title="Edit a Recipe" />;

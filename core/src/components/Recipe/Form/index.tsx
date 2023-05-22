@@ -9,18 +9,14 @@ import {
   CuisineSelectorDataList,
   DEFAULT_CUISINE_SELECTOR_ID,
 } from "../../CuisineSelector";
-import {
-  AuthorListField,
-  FieldWrapper,
-  ImageField,
-  InputField,
-  SlugField,
-  StringListField,
-  TextareaField,
-  VisualFieldWrapper,
-} from "../../Form";
-import { IngredientListField } from "../../Form/Ingredients";
-import { InstructionListField } from "../../Form/Instructions";
+import { AuthorListField } from "../../Form/fields/AuthorList";
+import { ImageField } from "../../Form/fields/Image";
+import { IngredientListField } from "../../Form/fields/Ingredients";
+import { InstructionListField } from "../../Form/fields/Instructions";
+import { SlugField } from "../../Form/fields/Slug";
+import { StringListField } from "../../Form/fields/StringList";
+import { TextareaField } from "../../Form/fields/Textarea";
+import { FieldWrapper, InputField, VisualFieldWrapper } from "../../Form/Input";
 import { IngredientSelectorDataList } from "../../IngredientSelector";
 import * as styles from "./styles.css";
 
@@ -36,15 +32,34 @@ export interface RecipeFormInstruction {
   text?: string;
 }
 
-export type RecipeFormValues = Queries.RecipeEditorDataFragment & {
+export interface RecipeFormAuthor {
+  name: string;
+}
+
+export interface RecipeFormNutrition {
+  calories: string;
+}
+
+export interface RecipeFormValues {
+  name: string;
   slug: string;
+  datePublished?: string;
+  description?: string;
+  prepTime?: number;
+  cookTime?: number;
+  totalTime?: number;
+  servings?: number;
+  servingSize?: string;
   copy?: boolean;
-  image?: string | null;
-  category?: readonly String[] | null;
-  cuisine?: readonly String[] | null;
-  ingredients?: readonly RecipeFormIngredient[];
-  instructions?: readonly RecipeFormInstruction[];
-};
+  image?: string;
+  nutrition?: RecipeFormNutrition;
+  author?: RecipeFormAuthor[];
+  keywords?: string[];
+  category?: string[];
+  cuisine?: string[];
+  ingredients?: RecipeFormIngredient[];
+  instructions?: RecipeFormInstruction[];
+}
 
 export const buildPlaceholderStrings = (
   strings: readonly string[] | null
