@@ -1,5 +1,5 @@
 import React from "react";
-import { HeadFC, PageProps } from "gatsby";
+import { HeadFC, navigate, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
 import {
   RecipeFields,
@@ -11,14 +11,15 @@ import PageTitle from "core/src/components/PageTitle";
 import { Metadata } from "core/src/components/Metadata";
 import { buildFormData, massageFormData } from "../../calls/recipe/process";
 import * as recipeFormStyles from "core/src/components/Recipe/Form/styles.css";
+import { waitForPageToExist } from "../../util/wait-for-page";
 
 const onSubmit = async (data: RecipeFormValues) => {
   const massagedFields = massageFormData(data);
   const formData = buildFormData(massagedFields);
   await createRecipe(formData, massagedFields.slug);
   const url = `/recipe/${massagedFields.slug}`;
-  await fetch(url, { method: "HEAD" });
-  window.location.href = url;
+  await waitForPageToExist(url);
+  navigate(url);
 };
 
 const NewRecipePage: React.FC<PageProps> = () => {

@@ -10,6 +10,7 @@ import { updateRecipe } from "../../../calls/recipe/update";
 import PageTitle from "core/src/components/PageTitle";
 import { Metadata } from "core/src/components/Metadata";
 import { buildFormData, massageFormData } from "../../../calls/recipe/process";
+import { waitForPageToExist } from "../../../util/wait-for-page";
 
 export const query = graphql`
   query RecipeEdit($id: String!) {
@@ -98,7 +99,9 @@ const EditPage: React.FC<PageProps<Queries.RecipeEditQuery>> = ({ data }) => {
             const massagedFields = massageFormData(data);
             const formData = buildFormData(massagedFields);
             await updateRecipe(formData, slug);
-            window.location.href = `/recipe/${massagedFields.slug}`;
+            const redirectURL = `/recipe/${massagedFields.slug}`;
+            await waitForPageToExist(redirectURL);
+            navigate(redirectURL);
           }}
         />
         <button

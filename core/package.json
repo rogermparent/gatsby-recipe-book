@@ -16,6 +16,7 @@
     "gatsby-plugin-vanilla-extract": "^4.0.1",
     "gatsby-source-filesystem": "^5.10.0",
     "gatsby-transformer-json": "^5.10.0",
+    "lodash": "^4.17.21",
     "parse-ingredient": "^0.6.0"
   },
   "devDependencies": {
