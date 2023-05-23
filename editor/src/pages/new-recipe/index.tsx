@@ -23,7 +23,9 @@ const onSubmit = async (data: RecipeFormValues) => {
 };
 
 const NewRecipePage: React.FC<PageProps> = () => {
-  const form = useForm<RecipeFormValues>({});
+  const form = useForm<RecipeFormValues>({
+    defaultValues: { datePublished: new Date().toISOString().slice(0, 10) },
+  });
   const { handleSubmit } = form;
   return (
     <SiteLayout>
