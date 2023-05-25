@@ -1,7 +1,6 @@
 import React from "react";
 import { ChangeEvent, ReactNode, Reducer, useMemo, useReducer } from "react";
 import Fraction from "fraction.js";
-import * as styles from "./styles.css";
 
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
@@ -136,7 +135,7 @@ export const Recipe = ({
   const imageData = image?.childImageSharp && getImage(image.childImageSharp);
   return (
     <div>
-      <h1 className={styles.title}>{name}</h1>
+      <h1>{name}</h1>
       {description && <p>{description}</p>}
       {imageData && <GatsbyImage image={imageData} alt="" />}
       <div>
