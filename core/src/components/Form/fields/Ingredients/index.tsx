@@ -4,7 +4,7 @@ import {
   useFieldArray,
   UseFieldArrayReturn,
 } from "react-hook-form";
-import * as styles from "../../styles.css";
+
 import { parseIngredient } from "parse-ingredient";
 import { RecipeFormIngredient, RecipeFormValues } from "../../../Recipe/Form";
 import { FieldArrayProps, FieldWrapper, InputField } from "../../Input";
@@ -49,7 +49,7 @@ export function IngredientListField({
     <FieldWrapper name={name} label={label} errors={errors}>
       {importMode ? (
         <>
-          <textarea className={styles.inputField} ref={textareaRef} />
+          <textarea ref={textareaRef} />
           <div>
             <button
               onClick={() => {
@@ -88,7 +88,7 @@ export function IngredientListField({
         </>
       ) : (
         <>
-          <ul className={styles.list}>
+          <ul>
             {fields.map((field, index) => {
               const fieldName = `${name}.${index}`;
               const highlightNextIngredient = makeIngredientEnterHandler(
@@ -97,7 +97,7 @@ export function IngredientListField({
               );
               return (
                 <li key={field.id}>
-                  <div className={styles.ingredientFields}>
+                  <div>
                     <InputField
                       register={register}
                       label="Quantity"

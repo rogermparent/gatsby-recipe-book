@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import * as styles from "../../styles.css";
+
 import { UseFormSetValue } from "react-hook-form";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { FieldProps, FieldWrapper } from "../../Input";
@@ -24,16 +24,12 @@ export function ImageField({
   return (
     <FieldWrapper label={label} errors={errors} name={name}>
       {imagePreviewURL ? (
-        <div className={styles.editorImageContainer}>
-          <img src={imagePreviewURL} className={styles.editorPreviewImage} />
+        <div>
+          <img src={imagePreviewURL} />
         </div>
       ) : !isDirty && imageData ? (
-        <div className={styles.editorImageContainer}>
-          <GatsbyImage
-            image={imageData}
-            alt=""
-            className={styles.defaultEditorPreviewImage}
-          />
+        <div>
+          <GatsbyImage image={imageData} alt="" />
         </div>
       ) : null}
       <input

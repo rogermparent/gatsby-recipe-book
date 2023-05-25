@@ -2,7 +2,6 @@ import React from "react";
 import { Link, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
 import { Recipe } from "core/src/components/Recipe";
-import * as styles from "./styles.css";
 
 export const RecipePage: React.FC<PageProps<Queries.RecipePageQuery>> = ({
   data: { recipe },
@@ -44,9 +43,7 @@ export const RecipePage: React.FC<PageProps<Queries.RecipePageQuery>> = ({
           ingredients={ingredients}
           instructions={instructions}
         />
-        <Link to="edit" className={styles.editLink}>
-          Edit
-        </Link>
+        <Link to="edit">Edit</Link>
       </SiteLayout>
     );
   }

@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { useFieldArray } from "react-hook-form";
 import { RecipeFormInstruction, RecipeFormValues } from "../../../Recipe/Form";
 import { FieldArrayProps, FieldWrapper, InputField } from "../../Input";
-import * as styles from "../../styles.css";
+
 import { TextareaField } from "../Textarea";
 
 export function InstructionListField({
@@ -22,7 +22,7 @@ export function InstructionListField({
     <FieldWrapper name={name} label={label} errors={errors}>
       {importMode ? (
         <>
-          <textarea className={styles.inputField} ref={textareaRef} />
+          <textarea ref={textareaRef} />
           <div>
             <button
               onClick={() => {
@@ -56,7 +56,7 @@ export function InstructionListField({
         </>
       ) : (
         <>
-          <ol className={styles.list}>
+          <ol>
             {fields.map((field, index) => {
               const fieldName = `${name}.${index}`;
               return (

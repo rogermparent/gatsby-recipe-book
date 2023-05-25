@@ -1,5 +1,4 @@
 import { globalStyle, style } from "@vanilla-extract/css";
-import { colors, sprinkles } from "../../styles/sprinkles.css";
 
 globalStyle("*", {
   boxSizing: "border-box",
@@ -7,49 +6,28 @@ globalStyle("*", {
 
 globalStyle("body, html", { padding: 0, margin: 0 });
 
-globalStyle("a", {
-  color: colors.cyan,
-});
-
-globalStyle("a:visited", {
-  color: colors.blue,
-});
-
-globalStyle("a:hover", {
-  color: colors.green,
-});
-
-export const wrapper = sprinkles({
-  height: "full",
-  minHeight: { default: "screen", print: "fit" },
-  color: { lightMode: "bodyLight", darkMode: "bodyDark", print: "black" },
-  background: { lightMode: "backgroundLight", darkMode: "backgroundDark" },
-});
-
-export const primaryNav = sprinkles({
-  textAlign: ["center", "left"],
-});
-
-export const mainHeading = sprinkles({
-  display: "block",
-  margin: 0,
-  padding: 2,
-  width: "full",
+export const header = style({
+  fontFamily: "sans-serif",
+  textAlign: "center",
+  fontSize: "1.25rem",
   fontWeight: "bold",
-  fontSize: "3xl",
-  textAlign: ["center", "left"],
+  padding: "0.2rem",
 });
 
-export const header = sprinkles({
-  display: { default: "block", print: "none" },
-  borderBottom: "default",
-  fontFamily: "sans",
+export const nav = style({
+  fontFamily: "sans-serif",
+  textAlign: "center",
+  position: "sticky",
+  top: 0,
+  left: 0,
+  zIndex: 2,
+  backgroundColor: "white",
+  borderBottom: "1px solid black",
+  overflow: "auto",
+  boxSizing: "border-box",
 });
 
-export const main = sprinkles({});
-
-export const homeLink = sprinkles({
-  padding: 2,
-  fontWeight: "bold",
+export const navLink = style({
   display: "inline-block",
+  padding: "0.25rem",
 });

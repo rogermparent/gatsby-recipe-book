@@ -6,7 +6,6 @@ import {
 } from "react-hook-form";
 import { RecipeFormValues } from "../../../Recipe/Form";
 import { FieldArrayProps, FieldWrapper } from "../../Input";
-import * as styles from "../../styles.css";
 
 export function StringListField({
   control,
@@ -29,17 +28,13 @@ export function StringListField({
   });
   return (
     <FieldWrapper name={name} label={label} errors={errors}>
-      <ul className={styles.list}>
+      <ul>
         {fields.map((field, index) => {
           const fieldName =
             `${name}.${index}` as FieldArrayPath<RecipeFormValues>;
           return (
             <li key={field.id}>
-              <input
-                list={list}
-                className={styles.inputField}
-                {...register(fieldName)}
-              />
+              <input list={list} {...register(fieldName)} />
               <div>
                 <button
                   type="button"
