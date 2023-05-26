@@ -10,7 +10,7 @@ import { UseFormReturn, useForm } from "react-hook-form";
 import PageTitle from "core/src/components/PageTitle";
 import { Metadata } from "core/src/components/Metadata";
 import { buildFormData, massageFormData } from "../../calls/recipe/process";
-import * as recipeFormStyles from "core/src/components/Recipe/Form/styles.css";
+
 import { waitForPageToExist } from "../../util/wait-for-page";
 
 const onSubmit = async (data: RecipeFormValues) => {
@@ -31,7 +31,7 @@ const NewRecipePage: React.FC<PageProps> = () => {
     <SiteLayout>
       <PageTitle>New Recipe</PageTitle>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className={recipeFormStyles.form}>
+        <div>
           <RecipeFields
             form={form as UseFormReturn<RecipeFormValues>}
             edit={false}

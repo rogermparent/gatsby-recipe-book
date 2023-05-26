@@ -15,6 +15,17 @@ export const query = graphql`
   }
 
   fragment RecipeListItem on Recipe {
+    image {
+      childImageSharp {
+        gatsbyImageData(
+          width: 300
+          placeholder: BLURRED
+          aspectRatio: 0.8
+          transformOptions: { cropFocus: CENTER }
+          formats: [AUTO, WEBP, AVIF]
+        )
+      }
+    }
     pagePath: gatsbyPath(filePath: "/recipe/{Recipe.slug}")
     name
     datePublished(formatString: "YYYY-MM-DD")
@@ -27,8 +38,8 @@ const IndexPage: React.FC<PageProps<Queries.RecipesIndexQuery>> = ({
   return (
     <SiteLayout>
       <PageTitle>Recipes</PageTitle>
-      <RecipeList recipes={data?.allRecipe?.nodes} />
       <Link to="/new-recipe">New Recipe</Link>
+      <RecipeList recipes={data?.allRecipe?.nodes} />
     </SiteLayout>
   );
 };

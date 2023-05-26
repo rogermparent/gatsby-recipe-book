@@ -1,6 +1,6 @@
 import React, { KeyboardEventHandler } from "react";
 import { Control, useWatch } from "react-hook-form";
-import * as styles from "../../styles.css";
+
 import slugify from "@sindresorhus/slugify";
 import { FieldProps, FieldWrapper } from "../../Input";
 import { RecipeFormValues } from "../../../Recipe/Form";
@@ -31,7 +31,6 @@ export function SlugField({
         type={type}
         id={name}
         list={list}
-        className={styles.inputField}
         placeholder={defaultSlug}
         {...register(name, { required })}
       />

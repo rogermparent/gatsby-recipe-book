@@ -1,55 +1,43 @@
 import { globalStyle, style } from "@vanilla-extract/css";
-import { colors, sprinkles } from "../../styles/sprinkles.css";
+import { vars } from "../../styles/theme.css";
+const { fonts, colors } = vars;
 
 globalStyle("*", {
+  padding: 0,
+  margin: 0,
   boxSizing: "border-box",
 });
 
-globalStyle("body, html", { padding: 0, margin: 0 });
+globalStyle("body", {
+  fontFamily: fonts.body,
+  color: colors.body,
+  backgroundColor: colors.background,
+});
+
+globalStyle("h1, h2, h3, h4, h5, h6", {
+  margin: "0.5rem 0",
+  fontFamily: fonts.heading,
+  fontWeight: "900",
+});
 
 globalStyle("a", {
-  color: colors.cyan,
+  color: colors.link,
 });
 
 globalStyle("a:visited", {
-  color: colors.blue,
+  color: colors.link_visited,
 });
 
 globalStyle("a:hover", {
-  color: colors.green,
+  color: colors.link_hover,
 });
 
-export const wrapper = sprinkles({
-  height: "full",
-  minHeight: { default: "screen", print: "fit" },
-  color: { lightMode: "bodyLight", darkMode: "bodyDark", print: "black" },
-  background: { lightMode: "backgroundLight", darkMode: "backgroundDark" },
+globalStyle("ul, ol", {
+  paddingLeft: "1.5rem",
 });
 
-export const primaryNav = sprinkles({
-  textAlign: ["center", "left"],
-});
-
-export const mainHeading = sprinkles({
-  display: "block",
-  margin: 0,
-  padding: 2,
-  width: "full",
-  fontWeight: "bold",
-  fontSize: "3xl",
-  textAlign: ["center", "left"],
-});
-
-export const header = sprinkles({
-  display: { default: "block", print: "none" },
-  borderBottom: "default",
-  fontFamily: "sans",
-});
-
-export const main = sprinkles({});
-
-export const homeLink = sprinkles({
-  padding: 2,
-  fontWeight: "bold",
-  display: "inline-block",
+export const main = style({
+  maxWidth: "1045px",
+  margin: "0 auto",
+  padding: "0.5rem",
 });

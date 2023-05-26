@@ -1,7 +1,7 @@
 import React from "react";
 import { ChangeEvent, ReactNode, Reducer, useMemo, useReducer } from "react";
 import Fraction from "fraction.js";
-import * as styles from "./styles.css";
+
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 export const Ingredient = ({
@@ -20,7 +20,7 @@ export const Ingredient = ({
       ? parsedQuantity.mul(multiplier)
       : parsedQuantity;
   return (
-    <li className={styles.ingredientsListItem}>
+    <li>
       <div>
         <label>
           <input type="checkbox" />{" "}
@@ -43,7 +43,7 @@ export const Instruction = ({
   name,
   text,
 }: Queries.RecipeInstructionDisplayDataFragment) => (
-  <li className={styles.instructionsListItem}>
+  <li>
     {name && <h3>{name}</h3>}
     {text}
   </li>
@@ -71,11 +71,11 @@ const InfoCard: React.FC<{
   title?: string;
   children: ReactNode;
   className?: string;
-}> = ({ title, children, className = styles.infoCardWrapper }) => (
+}> = ({ title, children, className }) => (
   <div className={className}>
-    <div className={styles.infoCard}>
-      {title && <div className={styles.infoCardTitle}>{title}</div>}
-      <div className={styles.infoCardBody}>{children}</div>
+    <div>
+      {title && <div>{title}</div>}
+      <div>{children}</div>
     </div>
   </div>
 );
@@ -90,9 +90,9 @@ export const Ingredients = ({
   return (
     <>
       {ingredients && (
-        <div className={styles.ingredientsSection}>
-          <h2 className={styles.ingredientsHeading}>Ingredients</h2>
-          <ul className={styles.ingredientsList}>
+        <div>
+          <h2>Ingredients</h2>
+          <ul>
             {ingredients.map(({ ingredient, quantity, unit, note }, i) => (
               <Ingredient
                 key={i}
@@ -110,7 +110,7 @@ export const Ingredients = ({
   );
 };
 
-export const Recipe = ({
+export const RecipeView = ({
   name,
   ingredients,
   instructions,
@@ -134,19 +134,17 @@ export const Recipe = ({
 
   const imageData = image?.childImageSharp && getImage(image.childImageSharp);
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>{name}</h1>
-      {description && <p className={styles.description}>{description}</p>}
-      {imageData && (
-        <GatsbyImage image={imageData} alt="" className={styles.primaryImage} />
-      )}
-      <div className={styles.infoCards}>
-        <div className={styles.infoCardGroup}>
+    <div>
+      <h1>{name}</h1>
+      {description && <p>{description}</p>}
+      {imageData && <GatsbyImage image={imageData} alt="" />}
+      <div>
+        <div>
           {prepTime && <InfoCard title="Prep Time">{prepTime}</InfoCard>}
           {cookTime && <InfoCard title="Cook Time">{cookTime}</InfoCard>}
           {totalTime && <InfoCard title="Total Time">{totalTime}</InfoCard>}
         </div>
-        <div className={styles.infoCardGroup}>
+        <div>
           {multipliedServings && (
             <InfoCard title="Servings">
               <span>{multipliedServings}</span>{" "}
@@ -154,10 +152,9 @@ export const Recipe = ({
             </InfoCard>
           )}
 
-          <label htmlFor="multiplier" className={styles.multiplier}>
+          <label htmlFor="multiplier">
             <div>Multiply</div>
             <input
-              className={styles.multiplyInput}
               id="multiplier"
               onInput={(e: ChangeEvent<HTMLInputElement>) => {
                 setMultiplier(e.target.value);
@@ -166,12 +163,12 @@ export const Recipe = ({
           </label>
         </div>
       </div>
-      <div className={styles.ingredientsAndInstructions}>
+      <div>
         <Ingredients ingredients={ingredients} multiplier={multiplier} />
         {instructions && (
           <div>
-            <h2 className={styles.instructionsHeading}>Instructions</h2>
-            <ol className={styles.instructionsList}>
+            <h2>Instructions</h2>
+            <ol>
               {instructions.map(({ name, text }, i) => (
                 <Instruction key={i} name={name} text={text} />
               ))}

@@ -7,7 +7,6 @@ import {
   UseFormRegister,
 } from "react-hook-form";
 import { RecipeFormValues } from "../../Recipe/Form";
-import * as styles from "../styles.css";
 
 export interface FieldProps {
   label?: string;
@@ -33,8 +32,8 @@ export function VisualFieldWrapper({
 }): JSX.Element {
   return (
     <div className={className}>
-      <div className={styles.fieldLabelWrapper}>
-        {label && <div className={styles.fieldLabelHeading}>{label}</div>}
+      <div>
+        {label && <div>{label}</div>}
         {children}
       </div>
     </div>
@@ -57,7 +56,7 @@ export function FieldWrapper({
   const fieldErrors = errors?.[name];
   return (
     <div className={className}>
-      <label htmlFor={name} className={styles.fieldLabelWrapper}>
+      <label htmlFor={name}>
         {fieldErrors && (
           <div>
             {fieldErrors.message
@@ -65,7 +64,7 @@ export function FieldWrapper({
               : fieldErrors.type?.toString()}
           </div>
         )}
-        {label && <div className={styles.fieldLabelHeading}>{label}</div>}
+        {label && <div>{label}</div>}
         {children}
       </label>
     </div>
@@ -81,18 +80,27 @@ export function InputField({
   type,
   list,
   onKeyDown,
+  className,
+  inputClassName,
 }: FieldProps & {
+  className?: string;
+  inputClassName?: string;
   type?: string;
   list?: string;
   onKeyDown?: KeyboardEventHandler;
 }) {
   return (
-    <FieldWrapper name={name} label={label} errors={errors}>
+    <FieldWrapper
+      name={name}
+      label={label}
+      errors={errors}
+      className={className}
+    >
       <input
+        className={inputClassName}
         type={type}
         id={name}
         list={list}
-        className={styles.inputField}
         onKeyDown={onKeyDown}
         {...register(name, { required })}
       />

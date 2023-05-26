@@ -18,7 +18,6 @@ import { StringListField } from "../../Form/fields/StringList";
 import { TextareaField } from "../../Form/fields/Textarea";
 import { FieldWrapper, InputField, VisualFieldWrapper } from "../../Form/Input";
 import { IngredientSelectorDataList } from "../../IngredientSelector";
-import * as styles from "./styles.css";
 
 export interface RecipeFormIngredient {
   ingredient: string;
@@ -221,7 +220,7 @@ export const RecipeForm: React.FC<{
   const { handleSubmit } = form;
   return (
     <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
-      <div className={styles.form}>
+      <div>
         <RecipeFields form={form} originalData={originalData} edit={true} />
         <button type="submit">{submitText}</button>
       </div>
