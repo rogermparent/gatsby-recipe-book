@@ -15,6 +15,17 @@ export const query = graphql`
   }
 
   fragment RecipeListItem on Recipe {
+    image {
+      childImageSharp {
+        gatsbyImageData(
+          width: 300
+          placeholder: BLURRED
+          aspectRatio: 0.8
+          transformOptions: { cropFocus: CENTER }
+          formats: [AUTO, WEBP, AVIF]
+        )
+      }
+    }
     pagePath: gatsbyPath(filePath: "/recipe/{Recipe.slug}")
     name
     datePublished(formatString: "YYYY-MM-DD")

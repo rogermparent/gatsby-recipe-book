@@ -110,7 +110,7 @@ export const Ingredients = ({
   );
 };
 
-export const Recipe = ({
+export const RecipeView = ({
   name,
   ingredients,
   instructions,

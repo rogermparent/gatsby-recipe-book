@@ -1,7 +1,7 @@
 import React from "react";
 import { graphql, HeadFC, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
-import { RecipeListItem } from "core/src/components/Recipe/List";
+import { RecipeList } from "core/src/components/Recipe/List";
 import PageTitle from "core/src/components/PageTitle";
 import { Metadata } from "core/src/components/Metadata";
 
@@ -28,19 +28,11 @@ const IngredientPage: React.FC<PageProps<Queries.IngredientPageQuery>> = ({
     return (
       <SiteLayout>
         <PageTitle>Recipes with ingredient: {ingredientName}</PageTitle>
-        {data.allIngredientLink.nodes.map(({ parent }) => {
-          const { pagePath, datePublished, name } =
-            parent as Queries.RecipeListItemFragment;
-          return (
-            <div key={pagePath}>
-              <RecipeListItem
-                name={name}
-                pagePath={pagePath}
-                datePublished={datePublished}
-              />
-            </div>
-          );
-        })}
+        <RecipeList
+          recipes={data.allIngredientLink.nodes.map(
+            ({ parent }) => parent as Queries.RecipeListItemFragment
+          )}
+        />
       </SiteLayout>
     );
   }

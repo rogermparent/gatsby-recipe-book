@@ -1,7 +1,7 @@
 import React from "react";
 import { graphql, HeadFC, Link, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
-import { Recipe } from "core/src/components/Recipe";
+import { RecipeView } from "core/src/components/Recipe/View";
 import { Metadata } from "core/src/components/Metadata";
 
 export const query = graphql`
@@ -16,7 +16,8 @@ export const query = graphql`
     image {
       childImageSharp {
         gatsbyImageData(
-          width: 600
+          width: 728
+          aspectRatio: 1
           placeholder: BLURRED
           formats: [AUTO, WEBP, AVIF]
         )
@@ -91,7 +92,7 @@ const RecipePage: React.FC<PageProps<Queries.RecipePageQuery>> = ({
     } = recipe;
     return (
       <SiteLayout>
-        <Recipe
+        <RecipeView
           name={name}
           author={author}
           datePublished={datePublished}
