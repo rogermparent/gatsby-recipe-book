@@ -80,14 +80,24 @@ export function InputField({
   type,
   list,
   onKeyDown,
+  className,
+  inputClassName,
 }: FieldProps & {
+  className?: string;
+  inputClassName?: string;
   type?: string;
   list?: string;
   onKeyDown?: KeyboardEventHandler;
 }) {
   return (
-    <FieldWrapper name={name} label={label} errors={errors}>
+    <FieldWrapper
+      name={name}
+      label={label}
+      errors={errors}
+      className={className}
+    >
       <input
+        className={inputClassName}
         type={type}
         id={name}
         list={list}

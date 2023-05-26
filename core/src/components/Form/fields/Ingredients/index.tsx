@@ -4,6 +4,7 @@ import {
   useFieldArray,
   UseFieldArrayReturn,
 } from "react-hook-form";
+import * as styles from "./styles.css";
 
 import { parseIngredient } from "parse-ingredient";
 import { RecipeFormIngredient, RecipeFormValues } from "../../../Recipe/Form";
@@ -96,9 +97,11 @@ export function IngredientListField({
                 index
               );
               return (
-                <li key={field.id}>
-                  <div>
+                <li key={field.id} className={styles.listItem}>
+                  <div className={styles.fields}>
                     <InputField
+                      className={styles.quantityField}
+                      inputClassName={styles.input}
                       register={register}
                       label="Quantity"
                       name={`${fieldName}.quantity` as "ingredients.0.quantity"}
@@ -106,6 +109,8 @@ export function IngredientListField({
                       onKeyDown={highlightNextIngredient}
                     />
                     <InputField
+                      className={styles.unitField}
+                      inputClassName={styles.input}
                       register={register}
                       label="Unit"
                       name={`${fieldName}.unit` as "ingredients.0.unit"}
@@ -113,6 +118,8 @@ export function IngredientListField({
                       onKeyDown={highlightNextIngredient}
                     />
                     <InputField
+                      inputClassName={styles.input}
+                      className={styles.ingredientField}
                       register={register}
                       list={DEFAULT_INGREDIENT_SELECTOR_ID}
                       label="Ingredient"
@@ -123,6 +130,8 @@ export function IngredientListField({
                       onKeyDown={highlightNextIngredient}
                     />
                     <InputField
+                      inputClassName={styles.input}
+                      className={styles.noteField}
                       register={register}
                       label="Note"
                       name={`${fieldName}.note` as "ingredients.0.note"}

@@ -38,8 +38,8 @@ const IndexPage: React.FC<PageProps<Queries.RecipesIndexQuery>> = ({
   return (
     <SiteLayout>
       <PageTitle>Recipes</PageTitle>
-      <RecipeList recipes={data?.allRecipe?.nodes} />
       <Link to="/new-recipe">New Recipe</Link>
+      <RecipeList recipes={data?.allRecipe?.nodes} />
     </SiteLayout>
   );
 };
