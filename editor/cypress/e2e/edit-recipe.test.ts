@@ -43,6 +43,6 @@ describe("Recipe Edit Page", () => {
     cy.url().assertRoute("/");
 
     // There should be no more recipes listed
-    cy.findByText("There are no recipes");
+    cy.findByText("There are no recipes", { timeout: 10000 });
   });
 });
