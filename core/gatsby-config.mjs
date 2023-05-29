@@ -15,6 +15,37 @@ const config = () => {
     },
     graphqlTypegen: true,
     plugins: [
+      {
+        resolve: "gatsby-plugin-local-search",
+        options: {
+          name: "recipes",
+          engine: "flexsearch",
+          query: `
+            {
+              allRecipe {
+                nodes {
+                  id
+                  name
+                  slug
+                  ingredients {
+                    ingredient
+                  }
+                }
+              }
+            }
+          `,
+
+          index: ["name", "ingredients"],
+
+          normalizer: ({ data }) =>
+            data.allRecipe.nodes.map(({ id, name, slug, ingredients }) => ({
+              id,
+              slug,
+              name,
+              ingredients: ingredients.map(({ ingredient }) => ingredient),
+            })),
+        },
+      },
       "gatsby-plugin-vanilla-extract",
       "gatsby-plugin-image",
       "gatsby-plugin-sitemap",

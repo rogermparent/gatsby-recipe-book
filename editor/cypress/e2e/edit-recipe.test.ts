@@ -1,7 +1,7 @@
 describe("Recipe Edit Page", () => {
   it("Should be accessible", () => {
     cy.setFixture("single");
-    cy.visit("/recipe/test-recipe/edit", {
+    cy.visit("/recipe/edit/test-recipe", {
       timeout: 10000,
     });
     cy.waitForRouteChange();
@@ -13,7 +13,7 @@ describe("Recipe Edit Page", () => {
 
   it("Can edit a recipe", () => {
     cy.setFixture("single");
-    cy.visit("/recipe/test-recipe/edit", {
+    cy.visit("/recipe/edit/test-recipe", {
       timeout: 10000,
     });
     cy.waitForRouteChange();
@@ -25,13 +25,13 @@ describe("Recipe Edit Page", () => {
     cy.waitForRouteChange();
 
     // Edit form submission should redirect to recipe page
-    cy.url().assertRoute("/recipe/test-recipe");
-    cy.get("body").findByText("Edited Test Recipe");
+    cy.url().assertRoute("/recipe/view/test-recipe");
+    cy.get("body").findByText("Edited Test Recipe", { timeout: 10000 });
   });
 
   it("Can delete a recipe", () => {
     cy.setFixture("single");
-    cy.visit("/recipe/test-recipe/edit", {
+    cy.visit("/recipe/edit/test-recipe", {
       timeout: 10000,
     });
     cy.waitForRouteChange();
@@ -43,6 +43,6 @@ describe("Recipe Edit Page", () => {
     cy.url().assertRoute("/");
 
     // There should be no more recipes listed
-    cy.findByText("There are no recipes");
+    cy.findByText("There are no recipes", { timeout: 10000 });
   });
 });

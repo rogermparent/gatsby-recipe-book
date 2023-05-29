@@ -26,7 +26,7 @@ export const query = graphql`
         )
       }
     }
-    pagePath: gatsbyPath(filePath: "/recipe/{Recipe.slug}")
+    pagePath: gatsbyPath(filePath: "/recipe/view/{Recipe.slug}")
     name
     datePublished(formatString: "YYYY-MM-DD")
   }
@@ -38,7 +38,7 @@ const IndexPage: React.FC<PageProps<Queries.RecipesIndexQuery>> = ({
   return (
     <SiteLayout>
       <PageTitle>Recipes</PageTitle>
-      <Link to="/new-recipe">New Recipe</Link>
+      <Link to="/recipe/new">New Recipe</Link>
       <RecipeList recipes={data?.allRecipe?.nodes} />
     </SiteLayout>
   );

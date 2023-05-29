@@ -16,7 +16,6 @@ export const query = graphql`
   query RecipeEdit($id: String!) {
     recipe(id: { eq: $id }) {
       slug
-      pagePath: gatsbyPath(filePath: "/recipe/{Recipe.slug}")
       ...RecipeEditorData
     }
   }
@@ -83,11 +82,10 @@ export const query = graphql`
 `;
 
 const EditPage: React.FC<PageProps<Queries.RecipeEditQuery>> = ({ data }) => {
-  const { recipe: recipeData } = data;
+  const { recipe } = data;
 
-  if (recipeData) {
-    const { pagePath, ...recipe } = recipeData;
-    const { slug } = recipeData;
+  if (recipe) {
+    const { slug } = recipe;
     return (
       <SiteLayout>
         <PageTitle>Edit Recipe</PageTitle>
@@ -99,7 +97,7 @@ const EditPage: React.FC<PageProps<Queries.RecipeEditQuery>> = ({ data }) => {
             const massagedFields = massageFormData(data);
             const formData = buildFormData(massagedFields);
             await updateRecipe(formData, slug);
-            const redirectURL = `/recipe/${massagedFields.slug}`;
+            const redirectURL = `/recipe/view/${massagedFields.slug}`;
             await waitForPageToExist(redirectURL);
             navigate(redirectURL);
           }}

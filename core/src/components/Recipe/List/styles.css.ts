@@ -1,5 +1,5 @@
 import { style } from "@vanilla-extract/css";
-import { vars } from "../../../styles/theme.css";
+import { vars, screens } from "../../../styles/theme.css";
 
 export const list = style({
   margin: "0 auto",
@@ -7,21 +7,24 @@ export const list = style({
   listStyle: "none",
   display: "flex",
   flexFlow: "row wrap",
-  justifyContent: "space-around",
+  justifyContent: "center",
 });
 
 export const listItemWrapper = style({
   padding: "0.25rem",
   width: "100%",
   "@media": {
-    "screen and (min-width: 360px)": {
+    [screens.sm]: {
       width: "50%",
     },
-    "screen and (min-width: 640px)": {
+    [screens.md]: {
       width: "33%",
     },
-    "screen and (min-width: 720px)": {
-      width: "25%",
+    [screens.lg]: {
+      width: "20%",
+    },
+    [screens.xl]: {
+      width: "16%",
     },
   },
 });

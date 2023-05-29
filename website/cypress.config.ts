@@ -17,10 +17,6 @@ module.exports = defineConfig({
     baseUrl: "http://localhost:8000",
     specPattern: "cypress/e2e",
     testIsolation: false,
-    retries: {
-      runMode: 3,
-      openMode: 2,
-    },
     setupNodeEvents(on) {
       on("task", {
         clear,

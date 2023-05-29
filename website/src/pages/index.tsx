@@ -15,7 +15,7 @@ export const query = graphql`
   }
 
   fragment RecipeListItem on Recipe {
-    pagePath: gatsbyPath(filePath: "/recipe/{Recipe.slug}")
+    pagePath: gatsbyPath(filePath: "/recipe/view/{Recipe.slug}")
     name
     datePublished(formatString: "YYYY-MM-DD")
   }
