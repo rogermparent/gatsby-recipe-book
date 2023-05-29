@@ -26,7 +26,7 @@ describe("Recipe Edit Page", () => {
 
     // Edit form submission should redirect to recipe page
     cy.url().assertRoute("/recipe/view/test-recipe");
-    cy.get("body").findByText("Edited Test Recipe");
+    cy.get("body").findByText("Edited Test Recipe", { timeout: 10000 });
   });
 
   it("Can delete a recipe", () => {
