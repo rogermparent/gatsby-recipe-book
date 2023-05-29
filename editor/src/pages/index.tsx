@@ -26,8 +26,8 @@ export const query = graphql`
         )
       }
     }
-    pagePath: gatsbyPath(filePath: "/recipe/view/{Recipe.slug}")
     name
+    slug
     datePublished(formatString: "YYYY-MM-DD")
   }
 `;

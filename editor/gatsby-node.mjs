@@ -2,6 +2,7 @@ import path from "path";
 import fs from "fs/promises";
 import setValue from "lodash/set.js";
 import { getContentDirectory } from "core/getContentDirectory.mjs";
+import { graphql } from "gatsby";
 
 const contentDirectory = getContentDirectory();
 const recipesDirectory = path.resolve(contentDirectory, "recipes");
@@ -45,16 +46,63 @@ const refreshContent = (emitter) => {
   });
 };
 
+const awaitingPageCreation = {};
+
+export const createPages = async ({ graphql, actions: { createPage } }) => {
+  const { data } = await graphql(`
+    query CreateRecipePages {
+      allRecipe {
+        nodes {
+          slug
+          id
+        }
+      }
+    }
+  `);
+  for (const { id, slug } of data.allRecipe.nodes) {
+    const viewPagePath = "/recipe/view/" + slug;
+    await createPage({
+      path: viewPagePath,
+      component: path.resolve("./src/layouts/recipe/view.tsx"),
+      context: {
+        id,
+      },
+    });
+    const editPagePath = "/recipe/edit/" + slug;
+    await createPage({
+      path: editPagePath,
+      component: path.resolve("./src/layouts/recipe/edit.tsx"),
+      context: {
+        id,
+      },
+    });
+    const awaitingResolve = awaitingPageCreation[slug];
+    if (awaitingResolve) {
+      setTimeout(awaitingResolve, 0);
+      delete awaitingPageCreation[slug];
+    }
+  }
+};
+
+const makePageCreationPromise = (slug) => {
+  const pageCreationPromise = new Promise((resolve) => {
+    awaitingPageCreation[slug] = resolve;
+  });
+  return pageCreationPromise;
+};
+
 export const onCreateDevServer = ({ app }) => {
   app.post("/api/recipes/:id", async (req, res) => {
     const { body, files } = req;
     const { data, slug } = processFormData(body, files);
     const fullFilename = path.join(recipesDirectory, `${slug}.json`);
     try {
+      const pageCreationPromise = makePageCreationPromise(slug);
       console.log("Writing", fullFilename);
       const fileContent = JSON.stringify(data, undefined, 2);
       await fs.writeFile(fullFilename, fileContent);
       refreshContent();
+      await pageCreationPromise;
       res.json({ status: "Success", fullFilename });
     } catch (e) {
       res.json({
@@ -69,13 +117,15 @@ export const onCreateDevServer = ({ app }) => {
     const { copy, slug, data } = processFormData(body, files);
     const fullFilename = path.join(recipesDirectory, `${slug}.json`);
     try {
+      const pageCreationPromise = makePageCreationPromise(slug);
       console.log("Updating", fullFilename);
       const fileContent = JSON.stringify(data, undefined, 2);
+      await fs.writeFile(fullFilename, fileContent);
       if (req.body.slug !== req.params.id && !copy) {
         await fs.unlink(path.join(recipesDirectory, `${req.params.id}.json`));
       }
-      await fs.writeFile(fullFilename, fileContent);
       refreshContent();
+      await pageCreationPromise;
       res.json({ status: "Success", fullFilename });
     } catch (e) {
       res.json({ status: "Failure", fullFilename });
