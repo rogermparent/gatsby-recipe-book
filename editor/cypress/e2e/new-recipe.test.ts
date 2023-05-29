@@ -3,14 +3,14 @@
 describe("New Recipe Page", () => {
   it("Should be accessible", () => {
     cy.clearFixture();
-    cy.visit("/new-recipe");
+    cy.visit("/recipe/new");
     cy.waitForRouteChange();
     cy.injectAxe();
     cy.checkA11y();
   });
   it("Should successfully create a new recipe and redirect to the created recipe", () => {
     cy.clearFixture();
-    cy.visit("/new-recipe");
+    cy.visit("/recipe/new");
     cy.waitForRouteChange();
 
     // Fill out recipe form
@@ -45,7 +45,7 @@ describe("New Recipe Page", () => {
     cy.waitForRouteChange();
 
     // Recipe form should redirect to home
-    cy.url().assertRoute("/recipe/created-recipe");
+    cy.url().assertRoute("/recipe/view/created-recipe");
     cy.findByText("Created Recipe");
   });
 });

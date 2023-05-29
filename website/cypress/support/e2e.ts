@@ -11,7 +11,6 @@ declare global {
       tab(): Chainable;
       clearFixture(): Chainable;
       setFixture(value: string): Chainable;
-      waitForRouteChange(): Chainable;
       assertRoute(value: string): Chainable<JQuery<HTMLElement>>;
     }
   }

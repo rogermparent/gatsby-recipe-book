@@ -18,7 +18,7 @@ module.exports = defineConfig({
     specPattern: "cypress/e2e",
     testIsolation: false,
     retries: {
-      runMode: 3,
+      runMode: 2,
       openMode: 2,
     },
     setupNodeEvents(on) {

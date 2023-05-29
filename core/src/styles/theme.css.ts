@@ -10,6 +10,13 @@ const fonts = {
   heading: "serif",
 };
 
+export const screens = {
+  sm: "screen and (min-width: 480px)",
+  md: "screen and (min-width: 640px)",
+  lg: "screen and (min-width: 720px)",
+  xl: "screen and (min-width: 1024px)",
+};
+
 export const restVars = createGlobalTheme(":root", {
   fonts,
 });

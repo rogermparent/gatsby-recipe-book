@@ -5,19 +5,19 @@ import {
   RecipeFields,
   RecipeFormValues,
 } from "core/src/components/Recipe/Form";
-import { createRecipe } from "../../calls/recipe/create";
+import { createRecipe } from "../../../calls/recipe/create";
 import { UseFormReturn, useForm } from "react-hook-form";
 import PageTitle from "core/src/components/PageTitle";
 import { Metadata } from "core/src/components/Metadata";
-import { buildFormData, massageFormData } from "../../calls/recipe/process";
+import { buildFormData, massageFormData } from "../../../calls/recipe/process";
 
-import { waitForPageToExist } from "../../util/wait-for-page";
+import { waitForPageToExist } from "../../../util/wait-for-page";
 
 const onSubmit = async (data: RecipeFormValues) => {
   const massagedFields = massageFormData(data);
   const formData = buildFormData(massagedFields);
   await createRecipe(formData, massagedFields.slug);
-  const url = `/recipe/${massagedFields.slug}`;
+  const url = `/recipe/view/${massagedFields.slug}`;
   await waitForPageToExist(url);
   navigate(url);
 };

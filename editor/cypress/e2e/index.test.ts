@@ -27,6 +27,6 @@ describe("Homepage", () => {
     cy.findByText("New Recipe").click();
     cy.waitForRouteChange();
     cy.findByText("New Recipe");
-    cy.assertRoute("/new-recipe");
+    cy.assertRoute("/recipe/new");
   });
 });

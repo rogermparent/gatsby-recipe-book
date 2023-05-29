@@ -1,7 +1,7 @@
 describe("Recipe page", () => {
   it("Should be accessible", () => {
     cy.setFixture("single");
-    cy.visit("/recipe/test-recipe", {
+    cy.visit("/recipe/view/test-recipe", {
       timeout: 10000,
     });
     cy.waitForRouteChange();

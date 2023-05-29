@@ -1,5 +1,5 @@
-import React, { ReactNode } from "react";
-import { Link } from "gatsby";
+import React, { ReactNode, useState } from "react";
+import { graphql, Link, useStaticQuery } from "gatsby";
 import * as styles from "./styles.css";
 
 const NavLink = ({ to, children }: { to: string; children: ReactNode }) => (
@@ -21,6 +21,7 @@ export const SiteHeader = () => {
         <NavLink to="/ingredients">Ingredients</NavLink>
         <NavLink to="/categories">Categories</NavLink>
         <NavLink to="/cuisines">Cuisines</NavLink>
+        <NavLink to="/recipe/search">Search</NavLink>
       </nav>
     </>
   );

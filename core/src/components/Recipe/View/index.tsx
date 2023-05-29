@@ -3,6 +3,7 @@ import { ChangeEvent, ReactNode, Reducer, useMemo, useReducer } from "react";
 import Fraction from "fraction.js";
 
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import * as styles from "./styles.css";
 
 export const Ingredient = ({
   ingredient,
@@ -72,7 +73,7 @@ const InfoCard: React.FC<{
   children: ReactNode;
   className?: string;
 }> = ({ title, children, className }) => (
-  <div className={className}>
+  <div className={className || styles.infoCard}>
     <div>
       {title && <div>{title}</div>}
       <div>{children}</div>
@@ -138,30 +139,29 @@ export const RecipeView = ({
       <h1>{name}</h1>
       {description && <p>{description}</p>}
       {imageData && <GatsbyImage image={imageData} alt="" />}
-      <div>
-        <div>
-          {prepTime && <InfoCard title="Prep Time">{prepTime}</InfoCard>}
-          {cookTime && <InfoCard title="Cook Time">{cookTime}</InfoCard>}
-          {totalTime && <InfoCard title="Total Time">{totalTime}</InfoCard>}
-        </div>
-        <div>
-          {multipliedServings && (
-            <InfoCard title="Servings">
-              <span>{multipliedServings}</span>{" "}
-              {servingSize && <span>{servingSize}</span>}
-            </InfoCard>
-          )}
+      <div className={styles.infoCards}>
+        {prepTime && <InfoCard title="Prep Time">{prepTime}</InfoCard>}
+        {cookTime && <InfoCard title="Cook Time">{cookTime}</InfoCard>}
+        {totalTime && <InfoCard title="Total Time">{totalTime}</InfoCard>}
+      </div>
+      <div className={styles.infoCards}>
+        {multipliedServings && (
+          <InfoCard title="Servings">
+            <span>{multipliedServings}</span>{" "}
+            {servingSize && <span>{servingSize}</span>}
+          </InfoCard>
+        )}
 
-          <label htmlFor="multiplier">
-            <div>Multiply</div>
-            <input
-              id="multiplier"
-              onInput={(e: ChangeEvent<HTMLInputElement>) => {
-                setMultiplier(e.target.value);
-              }}
-            />
-          </label>
-        </div>
+        <label htmlFor="multiplier" className={styles.infoCard}>
+          <div>Multiply</div>
+          <input
+            className={styles.multiplierInput}
+            id="multiplier"
+            onInput={(e: ChangeEvent<HTMLInputElement>) => {
+              setMultiplier(e.target.value);
+            }}
+          />
+        </label>
       </div>
       <div>
         <Ingredients ingredients={ingredients} multiplier={multiplier} />

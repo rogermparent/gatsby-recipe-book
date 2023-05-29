@@ -46,7 +46,7 @@ const refreshContent = (emitter) => {
 };
 
 export const onCreateDevServer = ({ app }) => {
-  app.post(async (req, res) => {
+  app.post("/api/recipes/:id", async (req, res) => {
     const { body, files } = req;
     const { data, slug } = processFormData(body, files);
     const fullFilename = path.join(recipesDirectory, `${slug}.json`);
@@ -64,7 +64,7 @@ export const onCreateDevServer = ({ app }) => {
       });
     }
   });
-  app.put(async (req, res) => {
+  app.put("/api/recipes/:id", async (req, res) => {
     const { body, files } = req;
     const { copy, slug, data } = processFormData(body, files);
     const fullFilename = path.join(recipesDirectory, `${slug}.json`);
@@ -81,7 +81,7 @@ export const onCreateDevServer = ({ app }) => {
       res.json({ status: "Failure", fullFilename });
     }
   });
-  app.delete(async (req, res) => {
+  app.delete("/api/recipes/:id", async (req, res) => {
     const fullFilename = path.join(recipesDirectory, `${req.params.id}.json`);
     try {
       console.log("Deleting", fullFilename);
