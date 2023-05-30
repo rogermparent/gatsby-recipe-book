@@ -5,12 +5,12 @@ import {
   RecipeForm,
   initializeFormState,
 } from "core/src/components/Recipe/Form";
-import { deleteRecipe } from "../../../calls/recipe/delete";
-import { updateRecipe } from "../../../calls/recipe/update";
+import { deleteRecipe } from "../../calls/recipe/delete";
+import { updateRecipe } from "../../calls/recipe/update";
 import PageTitle from "core/src/components/PageTitle";
 import { Metadata } from "core/src/components/Metadata";
-import { buildFormData, massageFormData } from "../../../calls/recipe/process";
-import { waitForPageToExist } from "../../../util/wait-for-page";
+import { buildFormData, massageFormData } from "../../calls/recipe/process";
+import { waitForPageToExist } from "../../util/wait-for-page";
 
 export const query = graphql`
   query RecipeEdit($id: String!) {

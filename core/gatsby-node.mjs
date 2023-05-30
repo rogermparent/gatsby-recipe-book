@@ -53,6 +53,7 @@ export const createSchemaCustomization = ({
         category: "[String!]!",
         cuisine: "[String!]!",
         nutrition: "RecipeNutrition",
+        pagePath: "String!",
       },
       interfaces: ["Node"],
       extensions: {
@@ -218,6 +219,7 @@ export const onCreateNode = ({
         totalTime,
         servings,
         servingSize,
+        pagePath: `/recipe/view/${slug}`,
       };
       const recipeNode = {
         ...fields,
