@@ -27,7 +27,7 @@ export const query = graphql`
       }
     }
     name
-    slug
+    pagePath
     datePublished(formatString: "YYYY-MM-DD")
   }
 `;

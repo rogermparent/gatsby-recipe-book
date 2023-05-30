@@ -4,7 +4,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import * as styles from "./styles.css";
 
 export function RecipeListItem({
-  slug,
+  pagePath,
   name,
   datePublished,
   image,
@@ -12,7 +12,7 @@ export function RecipeListItem({
   const fetchedImage = getImage(image?.childImageSharp || null);
   return (
     <li className={styles.listItemWrapper}>
-      <Link to={`/recipe/view/${slug}`} className={styles.listItem}>
+      <Link to={pagePath as string} className={styles.listItem}>
         {fetchedImage && <GatsbyImage image={fetchedImage} alt="" />}
         <div className={styles.listItemTitle}>{name}</div>
         {datePublished && (
@@ -30,10 +30,10 @@ export function RecipeList({
 }) {
   return recipes?.length ? (
     <ul className={styles.list}>
-      {recipes.map(({ slug, name, datePublished, image }) => (
+      {recipes.map(({ pagePath, name, datePublished, image }) => (
         <RecipeListItem
-          key={slug}
-          slug={slug}
+          key={pagePath}
+          pagePath={pagePath}
           name={name}
           datePublished={datePublished}
           image={image}
