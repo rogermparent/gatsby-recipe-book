@@ -19,6 +19,7 @@ describe("Recipe page", () => {
     cy.waitForRouteChange();
     cy.findByText("Edit").click();
     cy.waitForRouteChange();
-    cy.assertRoute("/recipe/view/test-recipe/edit");
+    cy.assertRoute("/recipe/edit/test-recipe");
+    cy.findByText("Edit Recipe");
   });
 });

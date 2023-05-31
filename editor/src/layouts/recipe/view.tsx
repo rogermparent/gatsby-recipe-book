@@ -12,6 +12,7 @@ export const query = graphql`
   }
 
   fragment RecipeDisplayData on Recipe {
+    slug
     name
     image {
       childImageSharp {
@@ -89,6 +90,7 @@ const RecipePage: React.FC<PageProps<Queries.RecipePageQuery>> = ({
       ingredients,
       instructions,
       image,
+      slug,
     } = recipe;
     return (
       <SiteLayout>
@@ -111,7 +113,7 @@ const RecipePage: React.FC<PageProps<Queries.RecipePageQuery>> = ({
           image={image}
         />
         <div>
-          <Link to="edit">Edit</Link>
+          <Link to={`/recipe/edit/${slug}`}>Edit</Link>
         </div>
       </SiteLayout>
     );

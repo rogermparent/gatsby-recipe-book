@@ -91,7 +91,7 @@ const EditPage: React.FC<PageProps<Queries.RecipeEditQuery>> = ({ data }) => {
         <PageTitle>Edit Recipe</PageTitle>
         <RecipeForm
           originalData={recipe}
-          submitText="Edit Recipe"
+          submitText="Submit Edit"
           defaultValues={initializeFormState(recipe)}
           onSubmit={async (data) => {
             const massagedFields = massageFormData(data);

@@ -40,7 +40,7 @@ describe("New Recipe Page", () => {
     cy.focused().should("have.attr", "name", "ingredients.1.quantity");
 
     // Submit
-    cy.findByText("Create Recipe").click();
+    cy.findByText("Submit Recipe").click();
 
     cy.waitForRouteChange();
 

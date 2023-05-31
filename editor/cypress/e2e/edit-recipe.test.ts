@@ -21,7 +21,7 @@ describe("Recipe Edit Page", () => {
 
     // Fill out and submit edit form
     cy.get("input[name=name]").clear().type("Edited Test Recipe");
-    cy.get("form").findByText("Edit Recipe").click();
+    cy.findByText("Submit Edit").click();
     cy.waitForRouteChange();
 
     // Edit form submission should redirect to recipe page

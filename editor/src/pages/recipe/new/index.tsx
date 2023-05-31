@@ -36,7 +36,7 @@ const NewRecipePage: React.FC<PageProps> = () => {
             form={form as UseFormReturn<RecipeFormValues>}
             edit={false}
           />
-          <button type="submit">Create Recipe</button>
+          <button type="submit">Submit Recipe</button>
         </div>
       </form>
     </SiteLayout>
