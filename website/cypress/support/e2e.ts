@@ -26,17 +26,17 @@ Cypress.Commands.add(`assertRoute`, (route) => {
 });
 
 Cypress.Commands.add("clearFixture", () => {
-  cy.visit("/");
-  cy.waitForRouteChange().task("clear");
-  cy.visit("/");
-  cy.waitForRouteChange();
+  cy.visit("/").waitForRouteChange();
+  cy.task("clear");
+  cy.request("POST", "/__refresh/gatsby-source-filesystem");
+  cy.visit("/").waitForRouteChange();
 });
 
 Cypress.Commands.add("setFixture", (fixtureName) => {
   cy.visit("/");
-  cy.waitForRouteChange().task("clear");
-  cy.visit("/");
-  cy.waitForRouteChange().task("setFixture", fixtureName);
+  cy.waitForRouteChange();
+  cy.task("setFixture", fixtureName);
+  cy.request("POST", "/__refresh/gatsby-source-filesystem");
   cy.visit("/");
   cy.waitForRouteChange();
 });

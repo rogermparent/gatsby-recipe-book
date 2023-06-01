@@ -14,6 +14,7 @@ describe("Homepage", () => {
     cy.setFixture("populated");
     cy.visit("/");
     cy.waitForRouteChange();
+    cy.findByText("Sloppy Rogers");
     cy.injectAxe();
     cy.checkA11y();
   });

@@ -9,7 +9,7 @@ describe("New Recipe Page", () => {
     cy.checkA11y();
   });
   it("Should successfully create a new recipe and redirect to the created recipe", () => {
-    cy.clearFixture();
+    cy.setFixture("single");
     cy.visit("/recipe/new");
     cy.waitForRouteChange();
 

@@ -22,7 +22,7 @@ module.exports = defineConfig({
         clear,
         async setFixture(fixtureName: string) {
           const fixturePath = path.resolve(fixturesPath, fixtureName);
-          await ensureDir(fixturePath);
+          await clear();
           await copy(path.resolve(fixturePath, "recipes"), recipesPath);
           await copy(path.resolve(fixturePath, "uploads"), uploadsPath);
           return null;
