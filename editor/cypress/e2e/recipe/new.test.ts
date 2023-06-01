@@ -8,18 +8,22 @@ describe("New Recipe Page", () => {
     cy.injectAxe();
     cy.checkA11y();
   });
-  it("Should successfully create a new recipe and redirect to the created recipe", () => {
+  it.only("Should successfully create a new recipe and redirect to the created recipe", () => {
+    const name = "NEWLY Created Recipe 1";
+    const slug = "newly-created-recipe-1";
+
     cy.setFixture("single");
     cy.visit("/recipe/new");
     cy.waitForRouteChange();
 
     // Fill out recipe form
-
-    // Basic fields
-    cy.findByLabelText("Slug").type("created-recipe");
-    cy.findByLabelText("Name").type("Created Recipe");
+    cy.findByLabelText("Name").type(name);
     cy.findAllByLabelText("Quantity").should("have.length", 0);
 
+    // Slug should be filled out implicitly and shown in the placeholder
+    cy.findByLabelText("Slug").should("have.attr", "placeholder", slug);
+
+    // Add ingredient
     cy.findByText("Add Ingredient").click();
     cy.findAllByLabelText("Quantity").should("have.length", 1);
     cy.focused().should("have.attr", "name", "ingredients.0.quantity");
@@ -45,7 +49,7 @@ describe("New Recipe Page", () => {
     cy.waitForRouteChange();
 
     // Recipe form should redirect to home
-    cy.url().assertRoute("/recipe/view/created-recipe");
-    cy.findByText("Created Recipe");
+    cy.url().assertRoute("/recipe/view/" + slug);
+    cy.findByText(name);
   });
 });
