@@ -1,81 +1,60 @@
 {
   "name": "Spicy & Tangy Burger Sauce",
-  "author": [],
-  "datePublished": null,
-  "description": "",
-  "prepTime": null,
-  "cookTime": null,
-  "keywords": null,
   "servings": 1,
   "servingSize": "cup",
-  "category": [],
-  "cuisine": [],
-  "nutrition": null,
   "ingredients": [
     {
       "unit": "g",
       "quantity": "105",
-      "ingredient": "mayonnaise",
-      "note": null
+      "ingredient": "mayonnaise"
     },
     {
       "unit": "g",
       "quantity": "20",
-      "ingredient": "ketchup",
-      "note": null
+      "ingredient": "ketchup"
     },
     {
       "unit": "g",
       "quantity": "20",
-      "ingredient": "mustard",
-      "note": null
+      "ingredient": "mustard"
     },
     {
       "unit": "g",
       "quantity": "20",
-      "ingredient": "sweet relish",
-      "note": null
+      "ingredient": "sweet relish"
     },
     {
-      "unit": null,
       "quantity": "1",
-      "ingredient": "chile in adobo sauce",
-      "note": null
+      "ingredient": "chile in adobo sauce"
     },
     {
       "unit": "tsp",
       "quantity": "1/4",
-      "ingredient": "smoked paprika",
-      "note": null
+      "ingredient": "smoked paprika"
     },
     {
       "unit": "tsp",
       "quantity": "1/8",
-      "ingredient": "celery salt",
-      "note": null
+      "ingredient": "celery salt"
     },
     {
       "unit": "tsp",
       "quantity": "1/8",
-      "ingredient": "kosher salt",
-      "note": null
+      "ingredient": "kosher salt"
     },
     {
       "unit": "tsp",
       "quantity": "1/4",
-      "ingredient": "black pepper",
-      "note": null
+      "ingredient": "black pepper"
     },
     {
       "unit": "g",
       "quantity": "10",
-      "ingredient": "onion",
-      "note": null
+      "ingredient": "onion"
     }
   ],
   "instructions": [
     {
-      "name": "",
       "text": "Mix everything together in a container"
     }
   ]

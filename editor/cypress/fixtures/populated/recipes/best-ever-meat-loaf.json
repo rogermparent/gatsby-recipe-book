@@ -2,19 +2,14 @@
   "name": "Best Ever Meat Loaf",
   "author": [
     {
-      "name": "Matt O",
-      "url": ""
+      "name": "Matt O"
     }
   ],
   "datePublished": "2020-03-05",
   "description": "This best ever meatloaf recipe lives up to its name. Cheese is baked into this easy meatloaf. Plus a perfect mix of ingredients to make a tasty crust.",
   "prepTime": 20,
   "cookTime": 60,
-  "keywords": null,
   "servings": 6,
-  "servingSize": null,
-  "category": [],
-  "cuisine": [],
   "nutrition": {
     "calories": "410 kcal"
   },
@@ -22,74 +17,60 @@
     {
       "unit": "cup",
       "quantity": "1/3",
-      "ingredient": "milk",
-      "note": null
+      "ingredient": "milk"
     },
     {
-      "unit": null,
       "quantity": "2",
-      "ingredient": "egg",
-      "note": null
+      "ingredient": "egg"
     },
     {
       "unit": "teaspoon",
       "quantity": "2",
-      "ingredient": "salt",
-      "note": null
+      "ingredient": "salt"
     },
     {
       "unit": "teaspoon",
       "quantity": "1/4",
-      "ingredient": "black pepper",
-      "note": null
+      "ingredient": "black pepper"
     },
     {
       "unit": "slices",
       "quantity": "3",
-      "ingredient": "bread",
-      "note": null
+      "ingredient": "bread"
     },
     {
       "unit": "pounds",
       "quantity": "1.5",
-      "ingredient": "ground beef",
-      "note": null
+      "ingredient": "ground beef"
     },
     {
-      "unit": null,
       "quantity": "1",
-      "ingredient": "onion",
-      "note": null
+      "ingredient": "onion"
     },
     {
       "unit": "cup",
       "quantity": "1",
-      "ingredient": "cheddar",
-      "note": null
+      "ingredient": "cheddar"
     },
     {
       "unit": "cup",
       "quantity": "1/2",
-      "ingredient": "carrot",
-      "note": null
+      "ingredient": "carrot"
     },
     {
       "unit": "cup",
       "quantity": "1/4",
-      "ingredient": "brown sugar",
-      "note": null
+      "ingredient": "brown sugar"
     },
     {
       "unit": "cup",
       "quantity": "1/4",
-      "ingredient": "ketchup",
-      "note": null
+      "ingredient": "ketchup"
     },
     {
       "unit": "tablespoon",
       "quantity": "1",
-      "ingredient": "mustard",
-      "note": null
+      "ingredient": "mustard"
     }
   ],
   "instructions": [
