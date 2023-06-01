@@ -8,7 +8,7 @@ describe("New Recipe Page", () => {
     cy.injectAxe();
     cy.checkA11y();
   });
-  it.only("Should successfully create a new recipe and redirect to the created recipe", () => {
+  it("Should successfully create a new recipe and redirect to the created recipe", () => {
     const name = "NEWLY Created Recipe 1";
     const slug = "newly-created-recipe-1";
 
