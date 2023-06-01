@@ -1,16 +1,7 @@
 {
   "name": "Test Recipe",
-  "author": [],
-  "datePublished": null,
-  "description": "",
-  "prepTime": null,
-  "cookTime": null,
-  "keywords": null,
   "servings": 1,
   "servingSize": "cup",
-  "category": [],
-  "cuisine": [],
-  "nutrition": null,
   "ingredients": [
     {
       "unit": "g",
@@ -24,7 +15,6 @@
   ],
   "instructions": [
     {
-      "name": "",
       "text": "Mix everything together in a container"
     }
   ]
