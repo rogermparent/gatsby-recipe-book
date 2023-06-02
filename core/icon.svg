@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" focusable="false" data-darkreader-mode="filter">
+  <head xmlns=""><style id="dark-reader-style" class="darkreader">@media screen {
+
+/* Leading rule */
+html {
+  -webkit-filter: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxmaWx0ZXIgaWQ9ImRhcmstcmVhZGVyLWZpbHRlciIgc3R5bGU9ImNvbG9yLWludGVycG9sYXRpb24tZmlsdGVyczogc1JHQjsiPjxmZUNvbG9yTWF0cml4IHR5cGU9Im1hdHJpeCIgdmFsdWVzPSItMC4yMDEgLTAuMTc5IC0wLjQ3MyAwLjAwMCAwLjkxNiAtMC4zNDIgLTAuMDAzIC0wLjQzNCAwLjAwMCAwLjgzNSAtMC4yOTEgLTAuMTU5IC0wLjE5NCAwLjAwMCAwLjY5MSAwLjAwMCAwLjAwMCAwLjAwMCAxLjAwMCAwLjAwMCIgLz48L2ZpbHRlcj48L3N2Zz4=#dark-reader-filter) !important;
+  filter: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxmaWx0ZXIgaWQ9ImRhcmstcmVhZGVyLWZpbHRlciIgc3R5bGU9ImNvbG9yLWludGVycG9sYXRpb24tZmlsdGVyczogc1JHQjsiPjxmZUNvbG9yTWF0cml4IHR5cGU9Im1hdHJpeCIgdmFsdWVzPSItMC4yMDEgLTAuMTc5IC0wLjQ3MyAwLjAwMCAwLjkxNiAtMC4zNDIgLTAuMDAzIC0wLjQzNCAwLjAwMCAwLjgzNSAtMC4yOTEgLTAuMTU5IC0wLjE5NCAwLjAwMCAwLjY5MSAwLjAwMCAwLjAwMCAwLjAwMCAxLjAwMCAwLjAwMCIgLz48L2ZpbHRlcj48L3N2Zz4=#dark-reader-filter) !important;
+}
+
+/* Reverse rule */
+img,
+video,
+:not(object):not(body)&gt;embed,
+object,
+svg image,
+[style*="background:url"],
+[style*="background-image:url"],
+[style*="background: url"],
+[style*="background-image: url"],
+[background],
+twitterwidget,
+.sr-reader,
+.sr-backdrop,
+iframe:fullscreen,
+[class="opinary-iframe"] {
+  -webkit-filter: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxmaWx0ZXIgaWQ9ImRhcmstcmVhZGVyLWZpbHRlciIgc3R5bGU9ImNvbG9yLWludGVycG9sYXRpb24tZmlsdGVyczogc1JHQjsiPjxmZUNvbG9yTWF0cml4IHR5cGU9Im1hdHJpeCIgdmFsdWVzPSIwLjMzMyAtMC42NjcgLTAuNjY3IDAuMDAwIDEuMDAwIC0wLjY2NyAwLjMzMyAtMC42NjcgMC4wMDAgMS4wMDAgLTAuNjY3IC0wLjY2NyAwLjMzMyAwLjAwMCAxLjAwMCAwLjAwMCAwLjAwMCAwLjAwMCAxLjAwMCAwLjAwMCIgLz48L2ZpbHRlcj48L3N2Zz4=#dark-reader-filter) !important;
+  filter: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxmaWx0ZXIgaWQ9ImRhcmstcmVhZGVyLWZpbHRlciIgc3R5bGU9ImNvbG9yLWludGVycG9sYXRpb24tZmlsdGVyczogc1JHQjsiPjxmZUNvbG9yTWF0cml4IHR5cGU9Im1hdHJpeCIgdmFsdWVzPSIwLjMzMyAtMC42NjcgLTAuNjY3IDAuMDAwIDEuMDAwIC0wLjY2NyAwLjMzMyAtMC42NjcgMC4wMDAgMS4wMDAgLTAuNjY3IC0wLjY2NyAwLjMzMyAwLjAwMCAxLjAwMCAwLjAwMCAwLjAwMCAwLjAwMCAxLjAwMCAwLjAwMCIgLz48L2ZpbHRlcj48L3N2Zz4=#dark-reader-filter) !important;
+}
+[style*="background:url"] *,
+[style*="background-image:url"] *,
+[style*="background: url"] *,
+[style*="background-image: url"] *,
+input,
+[background] *,
+img[src^="https://s0.wp.com/latex.php"],
+twitterwidget .NaturalImage-image {
+  -webkit-filter: none !important;
+  filter: none !important;
+}
+.compatibility-with-darkreader-below-4-3-3 {
+  background: white !important;
+}
+
+/* Text contrast */
+html {
+  text-shadow: 0 0 0 !important;
+}
+
+/* Full screen */
+:-webkit-full-screen, :-webkit-full-screen * {
+  -webkit-filter: none !important;
+  filter: none !important;
+}
+:-moz-full-screen, :-moz-full-screen * {
+  -webkit-filter: none !important;
+  filter: none !important;
+}
+:fullscreen, :fullscreen * {
+  -webkit-filter: none !important;
+  filter: none !important;
+}
+
+/* Page background */
+html {
+  background: rgb(255,255,255) !important;
+}
+
+/* Custom rules */
+.compatibility-with-darkreader-below-4-3-3 {
+    background: white !important;
+}
+
+}</style></head><title>
+    Gatsby
+  </title>
+  <circle cx="14" cy="14" r="14" fill="#639"/>
+  <path fill="#fff" d="M6.2 21.8C4.1 19.7 3 16.9 3 14.2L13.9 25c-2.8-.1-5.6-1.1-7.7-3.2zm10.2 2.9L3.3 11.6C4.4 6.7 8.8 3 14 3c3.7 0 6.9 1.8 8.9 4.5l-1.5 1.3C19.7 6.5 17 5 14 5c-3.9 0-7.2 2.5-8.5 6L17 22.5c2.9-1 5.1-3.5 5.8-6.5H18v-2h7c0 5.2-3.7 9.6-8.6 10.7z"/>
+</svg>

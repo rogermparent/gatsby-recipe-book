@@ -16,6 +16,21 @@ const config = () => {
     graphqlTypegen: true,
     plugins: [
       {
+        resolve: "gatsby-plugin-manifest",
+        options: {
+          icon: "../core/icon.svg",
+          cache_busting_mode: "none",
+        },
+      },
+      {
+        resolve: "gatsby-plugin-offline",
+        options: {
+          workboxConfig: {
+            globPatterns: ["**/icon-path*"],
+          },
+        },
+      },
+      {
         resolve: "gatsby-plugin-local-search",
         options: {
           name: "recipes",
