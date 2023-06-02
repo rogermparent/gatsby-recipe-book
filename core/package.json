@@ -13,6 +13,8 @@
     "@vanilla-extract/css": "^1.11.0",
     "@vanilla-extract/webpack-plugin": "^2.2.0",
     "gatsby-plugin-local-search": "^2.0.1",
+    "gatsby-plugin-manifest": "^5.10.0",
+    "gatsby-plugin-offline": "^6.10.0",
     "gatsby-plugin-vanilla-extract": "^4.0.1",
     "gatsby-source-filesystem": "^5.10.0",
     "gatsby-transformer-json": "^5.10.0",
