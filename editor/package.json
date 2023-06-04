@@ -26,6 +26,7 @@
     "gatsby-plugin-local-search": "^2.0.1",
     "gatsby-plugin-manifest": "^5.10.0",
     "gatsby-plugin-offline": "^6.10.0",
+    "gatsby-plugin-taxonomies": "^0.0.1",
     "gatsby-plugin-vanilla-extract": "^4.0.1",
     "gatsby-source-filesystem": "^5.10.0",
     "gatsby-transformer-json": "^5.10.0",

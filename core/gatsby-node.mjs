@@ -11,23 +11,13 @@ export const onPreInit = async () => {
   await uploadsDirPromise;
 };
 
-export const createSchemaCustomization = ({
-  actions: { createTypes, createFieldExtension },
-  schema,
-}) => {
-  const buildLinkType = (name) =>
-    schema.buildObjectType({
-      name,
-      fields: {
-        value: "String!",
-        slug: "String!",
-      },
-      interfaces: ["Node"],
-      extensions: {
-        infer: false,
-      },
-    });
+const makeTerm = (value) => ({ value: value, slug: slugify(value) });
 
+export const createSchemaCustomization = (api) => {
+  const {
+    actions: { createTypes, createFieldExtension },
+    schema,
+  } = api;
   createTypes([
     schema.buildObjectType({
       name: "Recipe",
@@ -60,9 +50,6 @@ export const createSchemaCustomization = ({
         infer: false,
       },
     }),
-    buildLinkType("IngredientLink"),
-    buildLinkType("CategoryLink"),
-    buildLinkType("CuisineLink"),
     schema.buildObjectType({
       name: "RecipeAuthor",
       fields: {
@@ -160,49 +147,14 @@ const formatDuration = (minutesNumber) => {
     .join(" ");
 };
 
-const createTaxonomyLinkNodes = (
-  {
-    node,
-    createNodeId,
-    createContentDigest,
-    actions: { createNode, createParentChildLink },
-  },
-  { terms, type }
-) => {
-  if (terms) {
-    for (const value of terms) {
-      const termSlug = slugify(value);
-      const idSeed = `${type} >>> ${termSlug} >>> ${value}`;
-      const fields = {
-        value,
-        slug: termSlug,
-      };
-      const taxonomyTermNode = {
-        ...fields,
-        id: createNodeId(idSeed),
-        parent: node.id,
-        internal: {
-          type,
-          contentDigest: createContentDigest(fields),
-        },
-      };
-      createNode(taxonomyTermNode);
-      createParentChildLink({
-        parent: node,
-        child: taxonomyTermNode,
-      });
-    }
-  }
-};
-
 export const onCreateNode = (api) => {
-  const {
-    node,
-    getNode,
-    createNodeId,
-    actions: { createNode, createParentChildLink },
-  } = api;
+  const { node } = api;
   if (node.internal.type === "RecipesJson") {
+    const {
+      getNode,
+      createNodeId,
+      actions: { createNode, createParentChildLink },
+    } = api;
     const {
       internal: { contentDigest },
       parent,
@@ -256,6 +208,7 @@ export const onCreateNode = (api) => {
         servingSize,
         pagePath: `/recipe/view/${slug}`,
       };
+
       const recipeNode = {
         ...fields,
         id: createNodeId(idSeed),
@@ -270,19 +223,6 @@ export const onCreateNode = (api) => {
       createParentChildLink({
         parent: fileNode,
         child: recipeNode,
-      });
-
-      createTaxonomyLinkNodes(api, {
-        terms: ingredients?.map(({ ingredient }) => ingredient),
-        type: "IngredientLink",
-      });
-      createTaxonomyLinkNodes(api, {
-        terms: category,
-        type: "CategoryLink",
-      });
-      createTaxonomyLinkNodes(api, {
-        terms: cuisine,
-        type: "CuisineLink",
       });
     }
   }

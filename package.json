@@ -73,6 +73,7 @@
   "workspaces": [
     "editor",
     "website",
-    "core"
+    "core",
+    "gatsby-plugin-taxonomies"
   ]
 }
