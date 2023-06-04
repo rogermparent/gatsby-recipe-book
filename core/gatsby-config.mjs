@@ -23,6 +23,25 @@ const config = () => {
         },
       },
       {
+        resolve: "gatsby-plugin-taxonomies",
+        options: {
+          taxonomies: {
+            Ingredient: {
+              Recipe: {
+                field: "ingredients",
+                map: "ingredient",
+              },
+            },
+            Category: {
+              Recipe: "category",
+            },
+            Cuisine: {
+              Recipe: "cuisine",
+            },
+          },
+        },
+      },
+      {
         resolve: "gatsby-plugin-offline",
         options: {
           workboxConfig: {

@@ -103,15 +103,23 @@
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
   "include": [
+    "./gatsby-plugin-taxonomies/src/**/*",
+    "./gatsby-plugin-taxonomies/gatsby-node.d.mts",
+    "./gatsby-plugin-taxonomies/gatsby-node.ts",
+    "./gatsby-plugin-taxonomies/gatsby-config.ts",
+    "./gatsby-plugin-taxonomies/plugins/**/*",
     "./core/src/**/*",
+    "./core/gatsby-node.d.mts",
     "./core/gatsby-node.ts",
     "./core/gatsby-config.ts",
     "./core/plugins/**/*",
     "./editor/src/**/*",
+    "./editor/gatsby-node.d.mts",
     "./editor/gatsby-node.ts",
     "./editor/gatsby-config.ts",
     "./editor/plugins/**/*",
     "./website/src/**/*",
+    "./website/gatsby-node.d.mts",
     "./website/gatsby-node.ts",
     "./website/gatsby-config.ts",
     "./website/plugins/**/*"
