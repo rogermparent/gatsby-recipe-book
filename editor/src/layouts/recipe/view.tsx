@@ -3,6 +3,7 @@ import { graphql, HeadFC, Link, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
 import { RecipeView } from "core/src/components/Recipe/View";
 import { Metadata } from "core/src/components/Metadata";
+import * as styles from "./styles.css";
 
 export const query = graphql`
   query RecipePage($id: String!) {
@@ -113,7 +114,9 @@ const RecipePage: React.FC<PageProps<Queries.RecipePageQuery>> = ({
           image={image}
         />
         <div>
-          <Link to={`/recipe/edit/${slug}`}>Edit</Link>
+          <Link className={styles.editLink} to={`/recipe/edit/${slug}`}>
+            Edit
+          </Link>
         </div>
       </SiteLayout>
     );

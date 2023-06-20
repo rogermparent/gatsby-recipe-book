@@ -1,5 +1,5 @@
-import React, { ReactNode, useState } from "react";
-import { graphql, Link, useStaticQuery } from "gatsby";
+import React, { ReactNode } from "react";
+import { Link } from "gatsby";
 import * as styles from "./styles.css";
 
 const NavLink = ({ to, children }: { to: string; children: ReactNode }) => (

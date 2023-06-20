@@ -138,7 +138,9 @@ export const RecipeView = ({
     <div>
       <h1>{name}</h1>
       {description && <p>{description}</p>}
-      {imageData && <GatsbyImage image={imageData} alt="" />}
+      {imageData && (
+        <GatsbyImage image={imageData} alt="" className={styles.image} />
+      )}
       <div className={styles.infoCards}>
         {prepTime && <InfoCard title="Prep Time">{prepTime}</InfoCard>}
         {cookTime && <InfoCard title="Cook Time">{cookTime}</InfoCard>}
@@ -152,7 +154,7 @@ export const RecipeView = ({
           </InfoCard>
         )}
 
-        <label htmlFor="multiplier" className={styles.infoCard}>
+        <label htmlFor="multiplier" className={styles.multiplierInfoCard}>
           <div>Multiply</div>
           <input
             className={styles.multiplierInput}
