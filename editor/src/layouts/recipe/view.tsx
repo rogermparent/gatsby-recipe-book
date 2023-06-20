@@ -71,56 +71,61 @@ export const query = graphql`
 `;
 
 const RecipePage: React.FC<PageProps<Queries.RecipePageQuery>> = ({
-  data: { recipe },
+  data,
+  location,
 }) => {
-  if (recipe) {
-    const {
-      name,
-      author,
-      datePublished,
-      description,
-      prepTime,
-      cookTime,
-      totalTime,
-      keywords,
-      servings,
-      servingSize,
-      category,
-      cuisine,
-      nutrition,
-      ingredients,
-      instructions,
-      image,
-      slug,
-    } = recipe;
-    return (
-      <SiteLayout>
-        <RecipeView
-          name={name}
-          author={author}
-          datePublished={datePublished}
-          description={description}
-          prepTime={prepTime}
-          cookTime={cookTime}
-          totalTime={totalTime}
-          keywords={keywords}
-          servings={servings}
-          servingSize={servingSize}
-          category={category}
-          cuisine={cuisine}
-          nutrition={nutrition}
-          ingredients={ingredients}
-          instructions={instructions}
-          image={image}
-        />
-        <div>
-          <Link className={styles.editLink} to={`/recipe/edit/${slug}`}>
-            Edit
-          </Link>
-        </div>
-      </SiteLayout>
-    );
+  if (data) {
+    const { recipe } = data;
+    if (recipe) {
+      const {
+        name,
+        author,
+        datePublished,
+        description,
+        prepTime,
+        cookTime,
+        totalTime,
+        keywords,
+        servings,
+        servingSize,
+        category,
+        cuisine,
+        nutrition,
+        ingredients,
+        instructions,
+        image,
+        slug,
+      } = recipe;
+      return (
+        <SiteLayout>
+          <RecipeView
+            name={name}
+            author={author}
+            datePublished={datePublished}
+            description={description}
+            prepTime={prepTime}
+            cookTime={cookTime}
+            totalTime={totalTime}
+            keywords={keywords}
+            servings={servings}
+            servingSize={servingSize}
+            category={category}
+            cuisine={cuisine}
+            nutrition={nutrition}
+            ingredients={ingredients}
+            instructions={instructions}
+            image={image}
+          />
+          <div>
+            <Link className={styles.editLink} to={`/recipe/edit/${slug}`}>
+              Edit
+            </Link>
+          </div>
+        </SiteLayout>
+      );
+    }
   }
+  // Reload the window if no data is given
   return null;
 };
 

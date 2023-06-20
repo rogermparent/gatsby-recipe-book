@@ -59,28 +59,40 @@ export const createPages = async ({ graphql, actions: { createPage } }) => {
       }
     }
   `);
-  for (const { id, slug } of data.allRecipe.nodes) {
-    const viewPagePath = "/recipe/view/" + slug;
-    await createPage({
-      path: viewPagePath,
-      component: path.resolve("./src/layouts/recipe/view.tsx"),
-      context: {
-        id,
-      },
-    });
-    const editPagePath = "/recipe/edit/" + slug;
-    await createPage({
-      path: editPagePath,
-      component: path.resolve("./src/layouts/recipe/edit.tsx"),
-      context: {
-        id,
-      },
-    });
-    const awaitingResolve = awaitingPageCreation[slug];
-    if (awaitingResolve) {
-      awaitingResolve();
-      delete awaitingPageCreation[slug];
+  if (data.allRecipe.nodes.length > 0) {
+    for (const { id, slug } of data.allRecipe.nodes) {
+      const viewPagePath = "/recipe/view/" + slug;
+      await createPage({
+        path: viewPagePath,
+        component: path.resolve("./src/layouts/recipe/view.tsx"),
+        context: {
+          id,
+        },
+      });
+      const editPagePath = "/recipe/edit/" + slug;
+      await createPage({
+        path: editPagePath,
+        component: path.resolve("./src/layouts/recipe/edit.tsx"),
+        context: {
+          id,
+        },
+      });
+      const awaitingResolve = awaitingPageCreation[slug];
+      if (awaitingResolve) {
+        awaitingResolve();
+        delete awaitingPageCreation[slug];
+      }
     }
+  } else {
+    // Work around an issue where the page component isn't loaded into the app when making the first recipe
+    await createPage({
+      path: "/recipe/view/",
+      component: path.resolve("./src/layouts/recipe/view.tsx"),
+    });
+    await createPage({
+      path: "/recipe/edit/",
+      component: path.resolve("./src/layouts/recipe/edit.tsx"),
+    });
   }
 };
 

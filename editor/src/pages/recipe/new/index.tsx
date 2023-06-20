@@ -19,8 +19,7 @@ const onSubmit = async (data: RecipeFormValues) => {
   await createRecipe(formData, massagedFields.slug);
   const url = `/recipe/view/${massagedFields.slug}`;
   await waitForPageToExist(url);
-  // Use a native page change because some pages may not be present
-  window.location.href = url;
+  navigate(url);
 };
 
 const NewRecipePage: React.FC<PageProps> = () => {
