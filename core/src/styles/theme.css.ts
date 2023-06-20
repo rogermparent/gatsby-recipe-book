@@ -5,6 +5,10 @@ import {
 } from "@vanilla-extract/css";
 import { colors, lightMode } from "./colors.css";
 
+export const hideOnPrint = {
+  "@media": { print: { display: "none" } },
+};
+
 const fonts = {
   body: "sans-serif",
   heading: "serif",
