@@ -25,7 +25,6 @@ describe("Recipe Edit Page", () => {
     // Fill out and submit edit form
     cy.get("input[name=name]").clear().type(newTitle);
     cy.findByText("Submit Edit").click();
-    cy.waitForRouteChange();
 
     // Edit form submission should redirect to recipe page
     cy.url().assertRoute("/recipe/view/test-recipe");
@@ -56,7 +55,6 @@ describe("Recipe Edit Page", () => {
     cy.findByLabelText("Slug").clear();
     cy.findByLabelText("Copy").click();
     cy.findByText("Submit Edit").click();
-    cy.waitForRouteChange();
 
     // Edit form submission should redirect to recipe page
     cy.url().assertRoute("/recipe/view/" + newSlug);
@@ -79,7 +77,7 @@ describe("Recipe Edit Page", () => {
     cy.waitForRouteChange();
     cy.findAllByText("Edit Recipe");
 
-    cy.findByText("Delete").click().waitForRouteChange();
+    cy.findByText("Delete").click();
 
     // Recipe deletion should redirect to home
     cy.url().assertRoute("/");
