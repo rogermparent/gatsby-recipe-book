@@ -88,6 +88,7 @@ describe("New Recipe Page", () => {
     // Submit
     cy.findByText("Submit Recipe").click();
 
+    cy.waitForRouteChange();
     // Recipe form should redirect to the new recipe
     cy.url().assertRoute("/recipe/view/" + slug);
     cy.get("body").findByText(name);
