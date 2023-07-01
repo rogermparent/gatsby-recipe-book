@@ -1,0 +1,116 @@
+{
+  "name": "Pulled Pork",
+  "datePublished": "2023-06-23",
+  "prepTime": 30,
+  "cookTime": 300,
+  "totalTime": 330,
+  "ingredients": [
+    {
+      "unit": "lb",
+      "quantity": "4",
+      "ingredient": "pork butt",
+      "note": "shoulder or other cuts also work"
+    },
+    {
+      "unit": "tbsp",
+      "quantity": "3",
+      "ingredient": "brown sugar",
+      "note": "packed"
+    },
+    {
+      "unit": "tbsp",
+      "quantity": "1",
+      "ingredient": "kosher salt"
+    },
+    {
+      "unit": "tbsp",
+      "quantity": "1",
+      "ingredient": "smoked paprika"
+    },
+    {
+      "unit": "tsp",
+      "quantity": "1",
+      "ingredient": "garlic powder"
+    },
+    {
+      "unit": "tsp",
+      "quantity": "1",
+      "ingredient": "onion powder"
+    },
+    {
+      "unit": "tsp",
+      "quantity": "1",
+      "ingredient": "ground cumin"
+    },
+    {
+      "ingredient": "black pepper",
+      "note": "freshly ground"
+    },
+    {
+      "unit": "tbsp",
+      "quantity": "2",
+      "ingredient": "vegetable oil"
+    },
+    {
+      "unit": "oz",
+      "quantity": "12",
+      "ingredient": "beer"
+    },
+    {
+      "unit": "cup",
+      "quantity": "1/2",
+      "ingredient": "ketchup"
+    },
+    {
+      "unit": "c",
+      "quantity": "1/4",
+      "ingredient": "apple cider vinegar"
+    },
+    {
+      "unit": "c",
+      "quantity": "1/2",
+      "ingredient": "dijon mustard"
+    },
+    {
+      "unit": "c",
+      "quantity": "1/4",
+      "ingredient": "packed brown sugar"
+    },
+    {
+      "unit": "tbsp",
+      "quantity": "2",
+      "ingredient": "Worcestershire sauce"
+    },
+    {
+      "ingredient": "Buns",
+      "note": "for serving"
+    }
+  ],
+  "instructions": [
+    {
+      "text": "Make pork: Preheat oven to 300°. Trim excess fat from pork and cut into large pieces to fit in a large Dutch oven."
+    },
+    {
+      "text": "In a small bowl, combine brown sugar, salt, paprika, garlic powder, onion powder, and cumin, then season with black pepper. Rub all over pork. (This can be done the night before.)"
+    },
+    {
+      "text": "In a large Dutch oven over medium high heat, heat oil. Working in batches, add pork and sear on all sides. (Spices can burn quickly so don’t let it go for too long!)"
+    },
+    {
+      "text": "Pour beer around pork and cover with lid. Transfer to oven and cook until pork is beginning to turn tender, about 3 hours. Remove lid and cook until pork is very tender and pulls apart easily with a fork, 1 to 2 hours more."
+    },
+    {
+      "text": "Remove pork from Dutch oven and let rest while you prepare barbecue sauce."
+    },
+    {
+      "text": "Make barbecue sauce: To the pan drippings in the Dutch oven, whisk in ketchup, apple cider vinegar, mustard, brown sugar and Worcestershire. Over medium-high heat, bring mixture to a boil. Reduce heat, and simmer until thickened slightly, about 5 minutes."
+    },
+    {
+      "text": "Shred pork using two forks. Toss shredded meat with about half the barbecue sauce."
+    },
+    {
+      "text": "Serve warm with buns and more barbecue sauce."
+    }
+  ],
+  "image": "20230623_162536.jpg"
+}

@@ -1,0 +1,76 @@
+{
+  "name": "Masa Harina Cornbread",
+  "datePublished": "2023-06-23",
+  "ingredients": [
+    {
+      "unit": "cup",
+      "quantity": "1/2",
+      "ingredient": "unsalted butter",
+      "note": "1 stick"
+    },
+    {
+      "unit": "grams",
+      "quantity": "106",
+      "ingredient": "all-purpose flour",
+      "note": "about 3/4 cup, plus more for dusting"
+    },
+    {
+      "unit": "grams",
+      "quantity": "155",
+      "ingredient": "masa harina",
+      "note": "about 1 1/4 cups"
+    },
+    {
+      "unit": "grams",
+      "quantity": "52",
+      "ingredient": "granulated sugar",
+      "note": "about 1/4 cup"
+    },
+    {
+      "unit": "tablespoon",
+      "quantity": "1",
+      "ingredient": "baking powder"
+    },
+    {
+      "unit": "teaspoon",
+      "quantity": "1",
+      "ingredient": "salt",
+      "note": "fine"
+    },
+    {
+      "unit": "cup",
+      "quantity": "2",
+      "ingredient": "milk",
+      "note": "whole"
+    },
+    {
+      "quantity": "2",
+      "ingredient": "eggs",
+      "note": "large"
+    }
+  ],
+  "instructions": [
+    {
+      "text": "Preheat oven to 425ºF. Place the butter in a 9x9-inch square glass baking dish or 10 inch cast iron pan and put in the oven to melt. Keep an eye on it to make sure it doesn't burn."
+    },
+    {
+      "text": "In a medium bowl, whisk together the dry ingredients."
+    },
+    {
+      "text": "Make a well in the dry ingredients. Add eggs and whisk well, and then add milk. Gradually add melted butter to the milk mixture, making sure to leave about 2 tablespoons in the bottom of the baking dish."
+    },
+    {
+      "text": "Mix the batter just until the flour is all moistened."
+    },
+    {
+      "text": "Scrape the batter into whatever you're cooking in and spread it out with a spatula."
+    },
+    {
+      "text": "Bake for 20–25 minutes, or until the edges are golden brown and a toothpick inserted in the center comes out clean."
+    },
+    {
+      "text": "Serve hot with butter and maple syrup."
+    }
+  ],
+  "image": "IMG20230623134426.jpg"
+}

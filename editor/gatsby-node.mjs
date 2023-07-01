@@ -119,12 +119,14 @@ export const onCreateDevServer = ({ app, emitter }) => {
     const slugChanged = req.body.slug !== req.params.id;
     try {
       console.log("Updating", fullFilename);
+      const pageCreationPromise = makePageCreationPromise(slug);
       const fileContent = JSON.stringify(data, undefined, 2);
       await fs.writeFile(fullFilename, fileContent);
       if (slugChanged && !copy) {
         await fs.unlink(path.join(recipesDirectory, `${req.params.id}.json`));
       }
       refreshContent(emitter);
+      await pageCreationPromise;
       res.json({ status: "Success" });
     } catch (e) {
       res.json({ status: "Failure" });

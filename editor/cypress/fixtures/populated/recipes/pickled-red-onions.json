@@ -1,0 +1,53 @@
+{
+  "name": "Pickled Red Onions",
+  "datePublished": "2023-06-27",
+  "description": "https://www.gimmesomeoven.com/quick-pickled-red-onions/",
+  "ingredients": [
+    {
+      "unit": "large",
+      "quantity": "1",
+      "ingredient": "red onion",
+      "note": "peeled and very thinly sliced"
+    },
+    {
+      "unit": "cup",
+      "quantity": "3/4",
+      "ingredient": "apple cider vinegar"
+    },
+    {
+      "unit": "cup",
+      "quantity": "1/4",
+      "ingredient": "water"
+    },
+    {
+      "unit": "teaspoon",
+      "quantity": "1",
+      "ingredient": "fine sea salt"
+    },
+    {
+      "unit": "tablespoons",
+      "quantity": "1",
+      "ingredient": "sugar",
+      "note": "adjust for preference, and possibly sub honey or maple syrup"
+    }
+  ],
+  "instructions": [
+    {
+      "name": "Heat the vinegar mixture",
+      "text": "In a small saucepan, stir together the vinegar, water, salt and your desired amount of sweetener. Cook over medium-high heat until the mixture reaches a simmer. (Or alternately, you can heat the mixture in the microwave.)"
+    },
+    {
+      "name": "Combine in a jar",
+      "text": "Place the thinly-sliced onions in a mason jar. Pour the hot vinegar mixture over the onions, screw on the lid, and shake the onions briefly until they are evenly coated with the vinegar mixture."
+    },
+    {
+      "name": "Marinate",
+      "text": "Let the onions marinate for 30 minutes. (You may need to press the onions down with a spoon so that they are all submerged under the vinegar mixture.)"
+    },
+    {
+      "name": "Serve",
+      "text": "Serve immediately, or refrigerate the onions in a sealed container for up to 2 weeks."
+    }
+  ],
+  "image": "IMG20230626233121.jpg"
+}

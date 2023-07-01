@@ -47,8 +47,8 @@ describe("New Recipe Page", () => {
     cy.findByText("Submit Recipe").click();
 
     // Recipe form should redirect to the new recipe
-    cy.url().assertRoute("/recipe/view/" + slug);
     cy.get("body").findByText(name);
+    cy.url().assertRoute("/recipe/view/" + slug);
   });
   it("Should successfully create the first recipe", () => {
     const name = "NEWLY Created Recipe 1";
@@ -87,9 +87,8 @@ describe("New Recipe Page", () => {
 
     // Submit
     cy.findByText("Submit Recipe").click();
-
     // Recipe form should redirect to the new recipe
-    cy.url().assertRoute("/recipe/view/" + slug);
     cy.get("body").findByText(name);
+    cy.url().assertRoute("/recipe/view/" + slug);
   });
 });
