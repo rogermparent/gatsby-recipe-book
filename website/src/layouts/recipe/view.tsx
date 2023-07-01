@@ -1,5 +1,5 @@
 import React from "react";
-import { graphql, HeadFC, Link, PageProps } from "gatsby";
+import { graphql, HeadFC, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
 import { RecipeView } from "core/src/components/Recipe/View";
 import { Metadata } from "core/src/components/Metadata";
@@ -90,7 +90,6 @@ const RecipePage: React.FC<PageProps<Queries.RecipePageQuery>> = ({
       ingredients,
       instructions,
       image,
-      slug,
     } = recipe;
     return (
       <SiteLayout>
@@ -112,9 +111,6 @@ const RecipePage: React.FC<PageProps<Queries.RecipePageQuery>> = ({
           instructions={instructions}
           image={image}
         />
-        <div>
-          <Link to={`/recipe/edit/${slug}`}>Edit</Link>
-        </div>
       </SiteLayout>
     );
   }
