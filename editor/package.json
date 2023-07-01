@@ -12,7 +12,7 @@
     "typecheck": "tsc --noEmit",
     "test-develop": "CYPRESS_SUPPORT=y ENABLE_GATSBY_REFRESH_ENDPOINT=true gatsby develop",
     "cy:open": "cypress open",
-    "cy:run": "cypress run",
+    "cy:run": "cypress run --browser firefox",
     "test:e2e": "start-server-and-test test-develop http://localhost:8000 cy:open",
     "test:e2e:run": "start-server-and-test test-develop http://localhost:8000 cy:run"
   },

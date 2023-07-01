@@ -1,0 +1,98 @@
+{
+  "name": "Baked Mac and Cheese",
+  "datePublished": "2023-06-19",
+  "ingredients": [
+    {
+      "unit": "oz",
+      "quantity": "16",
+      "ingredient": "dry macaroni"
+    },
+    {
+      "unit": "tbsp",
+      "quantity": "8",
+      "ingredient": "butter"
+    },
+    {
+      "unit": "cup",
+      "quantity": "1/4",
+      "ingredient": "flour"
+    },
+    {
+      "unit": "cup",
+      "quantity": "4",
+      "ingredient": "milk"
+    },
+    {
+      "unit": "tbsp",
+      "quantity": "1.5",
+      "ingredient": "dry mustard"
+    },
+    {
+      "unit": "tsp",
+      "quantity": "1/2",
+      "ingredient": "cayenne pepper"
+    },
+    {
+      "unit": "cup",
+      "quantity": "1/2",
+      "ingredient": "sour cream"
+    },
+    {
+      "unit": "cup",
+      "quantity": "1",
+      "ingredient": "parmesan"
+    },
+    {
+      "unit": "cup",
+      "quantity": "3",
+      "ingredient": "shredded cheese"
+    },
+    {
+      "ingredient": "breadcrumbs"
+    },
+    {
+      "unit": "cup",
+      "quantity": "1/2",
+      "ingredient": "parmesan",
+      "note": "for topping"
+    },
+    {
+      "ingredient": "salt",
+      "note": "for the pasta and seasoning the sauce"
+    }
+  ],
+  "instructions": [
+    {
+      "name": "Cook the macaroni",
+      "text": "Prepare your macaroni according to box directions.\r\n\r\nAlternatively, pour freshly boiled water over the macaroni and salt in a bowl, stir, then and let that sit while you prepare the rest of the recipe (roughly 20 minutes, but it's not strict)."
+    },
+    {
+      "name": "Prepare the roux",
+      "text": "Melt butter in a saucepan, then slowly add the flour while consistently whisking."
+    },
+    {
+      "text": "Pour the milk into the roux, whisking to combine."
+    },
+    {
+      "text": "Whisk mustard, cayenne into the sauce, and salt to taste. Err on the side of oversalted because the cheese will dilute it a bit."
+    },
+    {
+      "name": "Prepare other ingredients",
+      "text": "Add sour cream, parmesan, and shredded cheese into a baking dish."
+    },
+    {
+      "name": "Assemble",
+      "text": "Drain your pasta (if you haven't already) and add to in the baking dish."
+    },
+    {
+      "text": "Pour sauce into baking dish, giving a quick mix to combine."
+    },
+    {
+      "text": "Top the dish with breadcrumbs and topping parmesan."
+    },
+    {
+      "text": "Bake at 350F for 30 minutes, then let cool a bit before slicing."
+    }
+  ],
+  "image": "IMG20230623175545.jpg"
+}

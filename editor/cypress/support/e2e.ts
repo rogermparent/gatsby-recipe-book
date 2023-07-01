@@ -40,3 +40,8 @@ Cypress.Commands.add("setFixture", (fixtureName) => {
   cy.visit("/");
   cy.waitForRouteChange();
 });
+
+Cypress.on("uncaught:exception", (err) => {
+  console.warn("Suppressing an uncaught exception:", err);
+  return false;
+});

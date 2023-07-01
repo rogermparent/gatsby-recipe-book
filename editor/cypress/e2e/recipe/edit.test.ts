@@ -25,11 +25,10 @@ describe("Recipe Edit Page", () => {
     // Fill out and submit edit form
     cy.get("input[name=name]").clear().type(newTitle);
     cy.findByText("Submit Edit").click();
-    cy.waitForRouteChange();
 
     // Edit form submission should redirect to recipe page
-    cy.url().assertRoute("/recipe/view/test-recipe");
     cy.get("body").findByText(newTitle, { timeout: 10000 });
+    cy.url().assertRoute("/recipe/view/test-recipe");
 
     // Only the new recipe should exist
 
@@ -56,11 +55,10 @@ describe("Recipe Edit Page", () => {
     cy.findByLabelText("Slug").clear();
     cy.findByLabelText("Copy").click();
     cy.findByText("Submit Edit").click();
-    cy.waitForRouteChange();
 
     // Edit form submission should redirect to recipe page
-    cy.url().assertRoute("/recipe/view/" + newSlug);
     cy.get("body").findByText(newTitle, { timeout: 10000 });
+    cy.url().assertRoute("/recipe/view/" + newSlug);
 
     // The original recipe and new recipe should both exist
 
@@ -79,12 +77,10 @@ describe("Recipe Edit Page", () => {
     cy.waitForRouteChange();
     cy.findAllByText("Edit Recipe");
 
-    cy.findByText("Delete").click().waitForRouteChange();
+    cy.findByText("Delete").click();
 
-    // Recipe deletion should redirect to home
-    cy.url().assertRoute("/");
-
-    // There should be no more recipes listed
+    // We should be on the homepage seeing a message about there being no recipes
     cy.findByText("There are no recipes", { timeout: 10000 });
+    cy.url().assertRoute("/");
   });
 });

@@ -1,0 +1,55 @@
+{
+  "name": "Savory Baked Beans",
+  "datePublished": "2023-05-31",
+  "description": "Adapted from https://newengland.com/food/side-dishes/baked-beans/\r\n\r\nMost of the flavor comes from salt pork, unlike many baked beans recipes that can be cloying. Can be adapted for many cooking methods, including on the stovetop in a dutch oven.",
+  "prepTime": 30,
+  "cookTime": 360,
+  "totalTime": 390,
+  "ingredients": [
+    {
+      "unit": "pound",
+      "quantity": "2",
+      "ingredient": "dry beans",
+      "note": "navy beans, soldier beans, Great Northern beans, yellow eyed peas"
+    },
+    {
+      "unit": "oz",
+      "quantity": "12",
+      "ingredient": "salt pork"
+    },
+    {
+      "unit": "tablespoons",
+      "quantity": "4",
+      "ingredient": "molasses"
+    },
+    {
+      "unit": "tablespoons",
+      "quantity": "4",
+      "ingredient": "maple syrup",
+      "note": "or another sweetener"
+    },
+    {
+      "unit": "tablespoon",
+      "quantity": "1",
+      "ingredient": "salt",
+      "note": "adjust for taste"
+    },
+    {
+      "unit": "teaspoon",
+      "quantity": "2",
+      "ingredient": "dry mustard"
+    }
+  ],
+  "instructions": [
+    {
+      "text": "Wash the beans in a colander or strainer; pick over the beans to remove any pebbles or debris. Put in a large saucepan and add water to cover the beans by an inch. Soak overnight."
+    },
+    {
+      "text": "In the morning, bring the beans to a boil. Boil until the skins break when you blow across a few beans on a spoon. Place a layer of beans in the bottom of a crockery bean pot. Score the salt pork, cutting through the pork but leaving the rind intact. Place about 1/2 pound of the salt pork in the pot. Add most of the remaining beans and water. Place the remaining 1/4 pound of salt pork in the pot. Cover with the remaining beans. Add the molasses, brown sugar, salt, and mustard. Cover with additional water. Place the lid on the pot."
+    },
+    {
+      "text": "Bake in a 300 degrees F oven for at least 6 hours, adding water as needed. You may want to use a drip pan under the pot in the oven."
+    }
+  ],
+  "image": "beans.jpg"
+}

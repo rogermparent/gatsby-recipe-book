@@ -1,5 +1,5 @@
 import React from "react";
-import { graphql, HeadFC, navigate, PageProps } from "gatsby";
+import { graphql, HeadFC, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
 import {
   RecipeForm,
@@ -99,7 +99,7 @@ const EditPage: React.FC<PageProps<Queries.RecipeEditQuery>> = ({ data }) => {
             await updateRecipe(formData, slug);
             const redirectURL = `/recipe/view/${massagedFields.slug}`;
             await waitForPageToExist(redirectURL);
-            navigate(redirectURL);
+            window.location.href = redirectURL;
           }}
         />
         <button
