@@ -15,11 +15,20 @@ const config = () => {
     },
     graphqlTypegen: true,
     plugins: [
+      "gatsby-plugin-netlify",
       {
         resolve: "gatsby-plugin-manifest",
         options: {
           icon: "../core/icon.svg",
           cache_busting_mode: "none",
+        },
+      },
+      {
+        resolve: "gatsby-plugin-offline",
+        options: {
+          workboxConfig: {
+            globPatterns: ["**/icon-path*"],
+          },
         },
       },
       {
@@ -38,14 +47,6 @@ const config = () => {
             Cuisine: {
               Recipe: "cuisine",
             },
-          },
-        },
-      },
-      {
-        resolve: "gatsby-plugin-offline",
-        options: {
-          workboxConfig: {
-            globPatterns: ["**/icon-path*"],
           },
         },
       },
