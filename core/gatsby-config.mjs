@@ -8,10 +8,9 @@ const contentDirectory = getContentDirectory();
 
 const config = () => {
   return {
-    trailingSlash: "never",
     siteMetadata: {
       title: "Recipe Book",
-      siteUrl: "https://www.yourdomain.tld",
+      siteUrl: "https://recipes.rogermparent.dev",
     },
     graphqlTypegen: true,
     plugins: [
