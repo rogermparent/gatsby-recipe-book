@@ -1,5 +1,5 @@
 import { defineConfig } from "cypress";
-import { copy, emptyDir, ensureDir } from "fs-extra";
+import { copy, emptyDir } from "fs-extra";
 import path from "path";
 
 const recipesPath = path.resolve("test", "recipes");

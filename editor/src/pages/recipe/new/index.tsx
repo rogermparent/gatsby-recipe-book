@@ -1,5 +1,5 @@
 import React from "react";
-import { HeadFC, navigate, PageProps } from "gatsby";
+import { HeadFC, PageProps } from "gatsby";
 import SiteLayout from "core/src/components/SiteLayout";
 import {
   RecipeFields,
